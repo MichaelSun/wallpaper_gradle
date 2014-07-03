@@ -3,14 +3,14 @@ package com.michael.wallpaper.helper;
 import android.content.Context;
 import com.jesson.android.internet.InternetUtils;
 import com.jesson.android.internet.core.NetWorkException;
+import com.michael.wallpaper.AppConfig;
+import com.michael.wallpaper.api.series.GetSeriesListRequest;
+import com.michael.wallpaper.api.series.GetSeriesListResponse;
 import com.michael.wallpaper.dao.model.DaoSession;
 import com.michael.wallpaper.dao.model.Series;
 import com.michael.wallpaper.dao.model.SeriesDao;
 import com.michael.wallpaper.dao.utils.DaoUtils;
 import com.michael.wallpaper.event.SeriesUpdatedEvent;
-import com.michael.wallpaper.AppConfig;
-import com.michael.wallpaper.api.series.GetSeriesListRequest;
-import com.michael.wallpaper.api.series.GetSeriesListResponse;
 import de.greenrobot.event.EventBus;
 
 import java.util.ArrayList;
@@ -91,16 +91,18 @@ public class SeriesHelper {
             Series series13 = new Series(13, "校花");
             list.add(series13);
         } else {
-            Series series11 = new Series(11, "明星美女");
+            Series series11 = new Series(1001, "兰博基尼");
             list.add(series11);
-            Series series12 = new Series(12, "甜素纯");
+            Series series12 = new Series(1002, "宝马");
             list.add(series12);
-            Series series13 = new Series(13, "古典美女");
+            Series series13 = new Series(1003, "玛莎拉蒂");
             list.add(series13);
-            Series series14 = new Series(14, "校花");
+            Series series14 = new Series(1004, "奔驰");
             list.add(series14);
-            Series series1 = new Series(1, "性感美女");
-            list.add(series1);
+            Series series15 = new Series(1005, "法拉利");
+            list.add(series15);
+            Series series16 = new Series(1006, "迈凯轮");
+            list.add(series16);
         }
 
         return list;
@@ -115,8 +117,8 @@ public class SeriesHelper {
 //            list.add(suggest);
 //        }
 
-        Series seriesMore = new Series(-2, "隐藏美女");
-        list.add(seriesMore);
+//        Series seriesMore = new Series(-2, "隐藏");
+//        list.add(seriesMore);
 
         Series seriesApp = new Series(-3, "更多应用");
         list.add(seriesApp);

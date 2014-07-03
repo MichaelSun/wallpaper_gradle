@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import cn.domob.android.ads.DomobAdView;
 import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
 import com.google.ads.AdView;
@@ -71,9 +72,7 @@ public class MainActivity extends BaseActivity
     public void onResume() {
         super.onResume();
 
-        if (interstitial.isReady()) {
-            interstitial.show();
-        }
+        tryToShwoSplashAd();
     }
 
     @Override
@@ -157,13 +156,20 @@ public class MainActivity extends BaseActivity
     }
 
     private void initBannerAd() {
-        mAdView = new AdView(this, AdSize.BANNER, "a15368dc3248e7e");
-        RelativeLayout layout = (RelativeLayout) findViewById(R.id.ad_content);
-        // Add the adView to it
-        layout.addView(mAdView, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
-                                                                   RelativeLayout.LayoutParams.WRAP_CONTENT));
-        // Initiate a generic request to load it with an ad
-        mAdView.loadAd(new AdRequest());
+        if (AppConfig.GOOLE_AD_ENABLE) {
+            mAdView = new AdView(this, AdSize.BANNER, "a15368dc3248e7e");
+            RelativeLayout layout = (RelativeLayout) findViewById(R.id.ad_content);
+            // Add the adView to it
+            layout.addView(mAdView, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
+                                                                       RelativeLayout.LayoutParams.WRAP_CONTENT));
+            // Initiate a generic request to load it with an ad
+            mAdView.loadAd(new AdRequest());
+        } else if (AppConfig.DOMOD_AD_ENABLE) {
+            DomobAdView adview = new DomobAdView(this, "56OJwdKYuNBxYMSZ84", "16TLuqyaApjpsNUE2ljOxxds");
+            RelativeLayout layout = (RelativeLayout) findViewById(R.id.ad_content);
+            layout.addView(adview, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
+                                                                       RelativeLayout.LayoutParams.WRAP_CONTENT));
+        }
     }
 
     private void initInterstitialAd() {
@@ -177,18 +183,8 @@ public class MainActivity extends BaseActivity
     public void onRefresh() {
         mRefreshTime += 1;
         if (mRefreshTime % 5 == 0) {
-            if (interstitial.isReady()) {
-                interstitial.show();
-            }
+            tryToShwoSplashAd();
         }
-
-//        if (mSeries != null) {
-//            HashMap<String, String> map = new HashMap<String, String>();
-//            map.put("type", String.valueOf(mSeries.getType()));
-//            map.put("title", mSeries.getTitle());
-//            map.put("mode", String.valueOf(AppConfig.SERIES_MODE));
-//            MobclickAgent.onEvent(this, "Refresh", map);
-//        }
     }
 
     private void showWallInfoDialog(int currentUserPoint) {

@@ -54,7 +54,7 @@ public class BelleHelper {
                             if (response.belles != null) {
                                 List<LocalBelle> localBelles = new ArrayList<LocalBelle>();
                                 for (Belle belle : response.belles) {
-                                    LocalBelle localBelle = new LocalBelle(belle.id, belle.time, belle.type, belle.url);
+                                    LocalBelle localBelle = new LocalBelle(belle.id, belle.time, belle.type, belle.url, belle.rawUrl);
                                     localBelles.add(localBelle);
                                 }
                                 dao.insertOrReplaceInTx(localBelles);
@@ -103,7 +103,7 @@ public class BelleHelper {
                         if (response.belles != null) {
                             List<LocalBelle> localBelles = new ArrayList<LocalBelle>();
                             for (Belle belle : response.belles) {
-                                LocalBelle localBelle = new LocalBelle(belle.id, belle.time, belle.type, belle.url);
+                                LocalBelle localBelle = new LocalBelle(belle.id, belle.time, belle.type, belle.url, belle.rawUrl);
                                 localBelles.add(localBelle);
                             }
                             dao.insertOrReplaceInTx(localBelles);
@@ -142,7 +142,7 @@ public class BelleHelper {
                 if (localList != null) {
                     belles = new ArrayList<Belle>();
                     for (LocalBelle localBelle : localList) {
-                        Belle belle = new Belle(localBelle.getId(), localBelle.getTime(), localBelle.getType(), localBelle.getUrl());
+                        Belle belle = new Belle(localBelle.getId(), localBelle.getTime(), localBelle.getType(), localBelle.getUrl(), localBelle.getRawUrl());
                         belles.add(belle);
                     }
                 }

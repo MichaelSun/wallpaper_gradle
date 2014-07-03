@@ -4,15 +4,12 @@ package com.michael.wallpaper.dao.model;
 
 // KEEP INCLUDES - put your custom includes here
 // KEEP INCLUDES END
-
 /**
  * Entity mapped to table COLLECTED_BELLE.
  */
 public class CollectedBelle {
 
-    /**
-     * Not-null value.
-     */
+    /** Not-null value. */
     private String url;
     private long time;
 
@@ -31,16 +28,12 @@ public class CollectedBelle {
         this.time = time;
     }
 
-    /**
-     * Not-null value.
-     */
+    /** Not-null value. */
     public String getUrl() {
         return url;
     }
 
-    /**
-     * Not-null value; ensure this value is available before it is saved to the database.
-     */
+    /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setUrl(String url) {
         this.url = url;
     }

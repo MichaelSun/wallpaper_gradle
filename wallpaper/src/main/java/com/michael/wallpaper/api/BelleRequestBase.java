@@ -12,7 +12,7 @@ import com.jesson.android.internet.core.annotations.UseHttps;
  */
 public class BelleRequestBase<T> extends RequestBase<T> {
 
-    public static final String BASE_API_URL = "http://sexybelle.duapp.com/";
+    public static final String BASE_API_URL = "http://mmpicture.duapp.com/";
     public static final String APP_ID = "29560";
 
     private static final String KEY_METHOD = "method";

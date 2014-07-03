@@ -216,7 +216,7 @@ public class CardPhotoStreamFragment extends Fragment implements OnRefreshListen
         List<CollectedBelle> collectedBelles = helper.loadAll();
         if (collectedBelles != null) {
             for (CollectedBelle collectedBelle : collectedBelles) {
-                Belle belle = new Belle(0, collectedBelle.getTime(), -1, collectedBelle.getUrl());
+                Belle belle = new Belle(0, collectedBelle.getTime(), -1, collectedBelle.getUrl(), null);
                 belles.add(belle);
             }
         }

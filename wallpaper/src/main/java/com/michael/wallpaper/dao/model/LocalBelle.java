@@ -4,7 +4,6 @@ package com.michael.wallpaper.dao.model;
 
 // KEEP INCLUDES - put your custom includes here
 // KEEP INCLUDES END
-
 /**
  * Entity mapped to table LOCAL_BELLE.
  */
@@ -13,10 +12,9 @@ public class LocalBelle {
     private long id;
     private long time;
     private int type;
-    /**
-     * Not-null value.
-     */
+    /** Not-null value. */
     private String url;
+    private String rawUrl;
 
     // KEEP FIELDS - put your custom fields here
     // KEEP FIELDS END
@@ -24,11 +22,12 @@ public class LocalBelle {
     public LocalBelle() {
     }
 
-    public LocalBelle(long id, long time, int type, String url) {
+    public LocalBelle(long id, long time, int type, String url, String rawUrl) {
         this.id = id;
         this.time = time;
         this.type = type;
         this.url = url;
+        this.rawUrl = rawUrl;
     }
 
     public long getId() {
@@ -55,18 +54,22 @@ public class LocalBelle {
         this.type = type;
     }
 
-    /**
-     * Not-null value.
-     */
+    /** Not-null value. */
     public String getUrl() {
         return url;
     }
 
-    /**
-     * Not-null value; ensure this value is available before it is saved to the database.
-     */
+    /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getRawUrl() {
+        return rawUrl;
+    }
+
+    public void setRawUrl(String rawUrl) {
+        this.rawUrl = rawUrl;
     }
 
     // KEEP METHODS - put your custom methods here

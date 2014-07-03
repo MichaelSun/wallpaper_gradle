@@ -16,6 +16,12 @@ public class Belle {
     @JsonProperty("type")
     public int type;
 
+    @JsonProperty("url")
+    public String url;
+
+    @JsonProperty("rawUrl")
+    public String rawUrl;
+
     @Override
     public String toString() {
         return "Belle{" +
@@ -23,20 +29,19 @@ public class Belle {
                    ", time=" + time +
                    ", type=" + type +
                    ", url='" + url + '\'' +
+                   ", rawUrl='" + rawUrl + '\'' +
                    '}';
     }
-
-    @JsonProperty("url")
-    public String url;
 
     public Belle() {
 
     }
 
-    public Belle(long id, long time, int type, String url) {
+    public Belle(long id, long time, int type, String url, String rawUrl) {
         this.id = id;
         this.time = time;
         this.type = type;
         this.url = url;
+        this.rawUrl = rawUrl;
     }
 }

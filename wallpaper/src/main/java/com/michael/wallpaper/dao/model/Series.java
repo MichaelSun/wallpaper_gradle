@@ -4,16 +4,13 @@ package com.michael.wallpaper.dao.model;
 
 // KEEP INCLUDES - put your custom includes here
 // KEEP INCLUDES END
-
 /**
  * Entity mapped to table SERIES.
  */
 public class Series implements java.io.Serializable {
 
     private int type;
-    /**
-     * Not-null value.
-     */
+    /** Not-null value. */
     private String title;
 
     // KEEP FIELDS - put your custom fields here
@@ -35,16 +32,12 @@ public class Series implements java.io.Serializable {
         this.type = type;
     }
 
-    /**
-     * Not-null value.
-     */
+    /** Not-null value. */
     public String getTitle() {
         return title;
     }
 
-    /**
-     * Not-null value; ensure this value is available before it is saved to the database.
-     */
+    /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setTitle(String title) {
         this.title = title;
     }

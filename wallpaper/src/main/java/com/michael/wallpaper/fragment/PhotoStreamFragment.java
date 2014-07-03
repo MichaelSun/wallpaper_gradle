@@ -115,7 +115,11 @@ public class PhotoStreamFragment extends Fragment implements OnRefreshListener {
                 for (Belle belle : mBelles) {
                     uriList.add(belle.url);
                 }
-                GalleryActivity.startViewLarge(getActivity(), mSeries.getTitle(), uriList, i);
+                ArrayList<String> rawUrlList = new ArrayList<String>();
+                for (Belle belle : mBelles) {
+                    rawUrlList.add(belle.rawUrl);
+                }
+                GalleryActivity.startViewLarge(getActivity(), mSeries.getTitle(), uriList, rawUrlList, i);
             }
         });
 
@@ -195,7 +199,7 @@ public class PhotoStreamFragment extends Fragment implements OnRefreshListener {
         List<CollectedBelle> collectedBelles = helper.loadAll();
         if (collectedBelles != null) {
             for (CollectedBelle collectedBelle : collectedBelles) {
-                Belle belle = new Belle(0, collectedBelle.getTime(), -1, collectedBelle.getUrl());
+                Belle belle = new Belle(0, collectedBelle.getTime(), -1, collectedBelle.getUrl(), null);
                 belles.add(belle);
             }
         }

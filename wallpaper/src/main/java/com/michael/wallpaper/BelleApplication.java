@@ -11,13 +11,19 @@ import android.support.v4.content.LocalBroadcastManager;
 import com.jesson.android.Jess;
 import com.jesson.android.internet.InternetUtils;
 import com.jesson.android.utils.DeviceInfo;
+import com.jesson.android.utils.UtilsRuntime;
 import com.jesson.android.widget.Toaster;
 import com.michael.wallpaper.setting.Setting;
 import com.michael.wallpaper.utils.AppRuntime;
+import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
+import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import net.youmi.android.AdManager;
+
+import java.io.File;
 
 /**
  * Created by zhangdi on 14-3-4.
@@ -27,6 +33,12 @@ public class BelleApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        AppRuntime.RAW_URL_CACHE_DIR = "/sdcard/." + UtilsRuntime.getPackageName(getApplicationContext()) + "/rawCache/";
+        File dirCheck = new File(AppRuntime.RAW_URL_CACHE_DIR);
+        if (!dirCheck.exists()) {
+            dirCheck.mkdirs();
+        }
 
         Jess.init(this);
         Jess.DEBUG = AppConfig.DEBUG;
@@ -44,7 +56,7 @@ public class BelleApplication extends Application {
     }
 
     private void initYoumi() {
-        AdManager.getInstance(getApplicationContext()).init("6142d65763827912", "b398417544f954ee", false);
+        AdManager.getInstance(getApplicationContext()).init("859ff840b668c633", "87ed892bb7f8c34a", false);
     }
 
     private void initSeriesModel() {
@@ -67,17 +79,20 @@ public class BelleApplication extends Application {
     }
 
     private void initImageLoader() {
+        File cache = new File("/sdcard/." + UtilsRuntime.getPackageName(getApplicationContext()) + "/imagecache");
         ImageLoaderConfiguration.Builder builder = new ImageLoaderConfiguration.Builder(this)
                                                        .threadPoolSize(8)
                                                        .denyCacheImageMultipleSizesInMemory()
                                                        .memoryCacheSize(DeviceInfo.MEM_SIZE / 16 * 1024 * 1024)
-                                                       .discCacheSize(50 * 1024 * 1024)
-                                                       .discCacheFileCount(100)
+                                                       .memoryCache(new WeakMemoryCache())
+                                                       .diskCache(new UnlimitedDiscCache(cache))
                                                        .defaultDisplayImageOptions(new DisplayImageOptions.Builder()
                                                                                        .resetViewBeforeLoading(true)
                                                                                        .cacheInMemory(true)
-                                                                                       .cacheOnDisc(true)
-                                                                                       .considerExifParams(true)
+                                                                                       .cacheOnDisk(true)
+//                                                                                       .considerExifParams(true)
+                                                                                       .imageScaleType(ImageScaleType.EXACTLY)
+//                                                                                       .displayer(new RoundedBitmapDisplayer(8))
                                                                                        .build());
         if (AppConfig.DEBUG) {
             builder.writeDebugLogs();

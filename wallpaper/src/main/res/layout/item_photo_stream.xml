@@ -5,12 +5,16 @@
                 android:layout_height="wrap_content"
                 android:padding="3dp">
 
-    <com.michael.wallpaper.views.SquareImageView
+    <com.makeramen.RoundedImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/photo"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="180dp"
         android:scaleType="centerCrop"
-        android:background="@color/white"/>
+        app:corner_radius="3dip"
+        app:border_width="1dip"
+        app:border_color="#333333"
+        app:mutate_background="true"/>
 
     <ProgressBar
         android:id="@+id/progressBar"

@@ -1,5 +1,6 @@
 package com.michael.wallpaper.activity;
 
+import android.app.ProgressDialog;
 import android.app.WallpaperManager;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -17,24 +18,30 @@ import android.view.MenuItem;
 import android.widget.RelativeLayout;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
+import com.github.johnpersano.supertoasts.SuperActivityToast;
 import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
 import com.google.ads.AdView;
 import com.jesson.android.widget.Toaster;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.RangeFileAsyncHttpResponseHandler;
+import com.michael.wallpaper.AppConfig;
 import com.michael.wallpaper.R;
 import com.michael.wallpaper.adapter.GalleryAdapter;
 import com.michael.wallpaper.helper.CollectHelper;
+import com.michael.wallpaper.utils.AppRuntime;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import org.apache.http.Header;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class GalleryActivity extends BaseActivity {
 
     private static final String EXTRA_TITLE = "title";
     private static final String EXTRA_PHOTO_URI_LIST = "photo_uri_list";
+    private static final String EXTRA_PHOTO_RAW_URI_LIST = "photo_raw_uri_list";
     private static final String EXTRA_POSITION = "position";
 
     private TextView mPaginationTv;
@@ -44,6 +51,7 @@ public class GalleryActivity extends BaseActivity {
     private GalleryAdapter mPagerAdapter;
 
     private ArrayList<String> mPhotoUriList;
+    private ArrayList<String> mPhotoRawUrlList;
     private String mTitle;
     private int mPosition;
     private int mSwitchCount = 0;
@@ -51,6 +59,8 @@ public class GalleryActivity extends BaseActivity {
     private Intent mShareIntent;
 
     private CollectHelper mCollectHelper;
+
+    private ProgressDialog mProgressDialog;
 
 //    private InterstitialAd iad;
 
@@ -63,27 +73,27 @@ public class GalleryActivity extends BaseActivity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            HashMap<String, String> map = new HashMap<String, String>();
-            map.put("title", mTitle);
+//            HashMap<String, String> map = new HashMap<String, String>();
+//            map.put("title", mTitle);
             switch (msg.what) {
                 case WHAT_SAVE_SUCCESS:
                     Toaster.show(GalleryActivity.this, R.string.save_gallery_success);
-                    map.put("ifSuccess", "success");
+//                    map.put("ifSuccess", "success");
 //                    MobclickAgent.onEvent(GalleryActivity.this, "SaveGallery", map);
                     break;
                 case WHAT_SAVE_FAIL:
                     Toaster.show(GalleryActivity.this, R.string.save_gallery_fail);
-                    map.put("ifSuccess", "fail");
+//                    map.put("ifSuccess", "fail");
 //                    MobclickAgent.onEvent(GalleryActivity.this, "SaveGallery", map);
                     break;
                 case WHAT_WALLPAPER_SUCCESS:
                     Toaster.show(GalleryActivity.this, R.string.set_wallpaper_success);
-                    map.put("ifSuccess", "success");
+//                    map.put("ifSuccess", "success");
 //                    MobclickAgent.onEvent(GalleryActivity.this, "Wallpaper", map);
                     break;
                 case WHAT_WALLPAPER_FAIL:
-                    Toaster.show(GalleryActivity.this, R.string.set_wallpaper_success);
-                    map.put("ifSuccess", "fail");
+                    Toaster.show(GalleryActivity.this, R.string.set_wallpaper_fail);
+//                    map.put("ifSuccess", "fail");
 //                    MobclickAgent.onEvent(GalleryActivity.this, "Wallpaper", map);
                     break;
             }
@@ -94,10 +104,11 @@ public class GalleryActivity extends BaseActivity {
         }
     };
 
-    public static void startViewLarge(Context context, String title, ArrayList<String> uriList, int position) {
+    public static void startViewLarge(Context context, String title, ArrayList<String> uriList, ArrayList<String> rawUrlList, int position) {
         Intent intent = new Intent(context, GalleryActivity.class);
         intent.putExtra(EXTRA_TITLE, title);
         intent.putStringArrayListExtra(EXTRA_PHOTO_URI_LIST, uriList);
+        intent.putStringArrayListExtra(EXTRA_PHOTO_RAW_URI_LIST, rawUrlList);
         intent.putExtra(EXTRA_POSITION, position);
         context.startActivity(intent);
 
@@ -109,16 +120,22 @@ public class GalleryActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_large);
 
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+
         this.initSplashAd();
 
         initBanner();
 
         if (savedInstanceState != null) {
             mPhotoUriList = savedInstanceState.getStringArrayList(EXTRA_PHOTO_URI_LIST);
+            mPhotoRawUrlList = savedInstanceState.getStringArrayList(EXTRA_PHOTO_RAW_URI_LIST);
             mTitle = savedInstanceState.getString(EXTRA_TITLE);
             mPosition = savedInstanceState.getInt(EXTRA_POSITION);
         } else {
             mPhotoUriList = getIntent().getStringArrayListExtra(EXTRA_PHOTO_URI_LIST);
+            mPhotoRawUrlList = getIntent().getStringArrayListExtra(EXTRA_PHOTO_RAW_URI_LIST);
             mTitle = getIntent().getStringExtra(EXTRA_TITLE);
             mPosition = getIntent().getIntExtra(EXTRA_POSITION, 0);
         }
@@ -190,13 +207,15 @@ public class GalleryActivity extends BaseActivity {
     }
 
     private void initBanner() {
-        mAdView = new AdView(this, AdSize.BANNER, "a15368dc3248e7e");
-        RelativeLayout layout = (RelativeLayout) findViewById(R.id.ad_content);
-        // Add the adView to it
-        layout.addView(mAdView, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
-                                                                          RelativeLayout.LayoutParams.WRAP_CONTENT));
-        // Initiate a generic request to load it with an ad
-        mAdView.loadAd(new AdRequest());
+        if (AppConfig.GOOLE_AD_ENABLE) {
+            mAdView = new AdView(this, AdSize.BANNER, "a15368dc3248e7e");
+            RelativeLayout layout = (RelativeLayout) findViewById(R.id.ad_content);
+            // Add the adView to it
+            layout.addView(mAdView, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
+                                                                       RelativeLayout.LayoutParams.WRAP_CONTENT));
+            // Initiate a generic request to load it with an ad
+            mAdView.loadAd(new AdRequest());
+        }
     }
 
     @Override
@@ -209,8 +228,11 @@ public class GalleryActivity extends BaseActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putStringArrayList(EXTRA_PHOTO_URI_LIST, mPhotoUriList);
+        outState.putStringArrayList(EXTRA_PHOTO_RAW_URI_LIST, mPhotoRawUrlList);
         outState.putString(EXTRA_TITLE, mTitle);
         outState.putInt(EXTRA_POSITION, mPosition);
+
+        SuperActivityToast.onSaveState(outState);
     }
 
     @Override
@@ -287,17 +309,54 @@ public class GalleryActivity extends BaseActivity {
         return null;
     }
 
+    private void localSaveImage(String url) {
+        try {
+            File file = new File(AppRuntime.RAW_URL_CACHE_DIR + url.hashCode());
+            if (file != null && file.exists()) {
+                ContentResolver cr = getContentResolver();
+                String uri = MediaStore.Images.Media.insertImage(cr, file.getAbsolutePath(), "belle" + url, "belle" + url);
+
+                String data = null;
+                String[] projection = {MediaStore.Images.Media.DATA};
+                Cursor cursor = getContentResolver().query(Uri.parse(uri), projection, null, null, null);
+                if (cursor != null) {
+                    int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                    cursor.moveToFirst();
+                    data = cursor.getString(column_index);
+                    cursor.close();
+                }
+                if (data != null) {
+                    sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(data))));
+                    mHandler.sendEmptyMessage(WHAT_SAVE_SUCCESS);
+                    return;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } catch (OutOfMemoryError error) {
+            error.printStackTrace();
+            System.gc();
+        }
+
+        mHandler.sendEmptyMessage(WHAT_SAVE_FAIL);
+    }
+
     private void saveToGallery() {
         new Thread() {
             @Override
             public void run() {
-                String url = mPhotoUriList.get(mPosition);
-                if (!TextUtils.isEmpty(url)) {
+                if (mPhotoRawUrlList.size() <= mPosition) {
+                    mHandler.sendEmptyMessage(WHAT_SAVE_FAIL);
+                    return;
+                }
+
+                final String rawUrl = mPhotoRawUrlList.get(mPosition);
+                if (!TextUtils.isEmpty(rawUrl)) {
                     try {
-                        File file = ImageLoader.getInstance().getDiscCache().get(url);
+                        File file = new File(AppRuntime.RAW_URL_CACHE_DIR + rawUrl.hashCode());
                         if (file != null && file.exists()) {
                             ContentResolver cr = getContentResolver();
-                            String uri = MediaStore.Images.Media.insertImage(cr, file.getAbsolutePath(), "belle" + url, "belle" + url);
+                            String uri = MediaStore.Images.Media.insertImage(cr, file.getAbsolutePath(), "belle" + rawUrl, "belle" + rawUrl);
 
                             String data = null;
                             String[] projection = {MediaStore.Images.Media.DATA};
@@ -313,6 +372,41 @@ public class GalleryActivity extends BaseActivity {
                                 mHandler.sendEmptyMessage(WHAT_SAVE_SUCCESS);
                                 return;
                             }
+                        } else {
+                            mHandler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    String downloadCachePath = AppRuntime.RAW_URL_CACHE_DIR + rawUrl.hashCode();
+                                    //file not exist
+                                    mProgressDialog.setMessage("正在下载大图，请稍后...");
+                                    mProgressDialog.show();
+                                    AsyncHttpClient client = new AsyncHttpClient();
+                                    client.get(rawUrl, new RangeFileAsyncHttpResponseHandler(new File(downloadCachePath)) {
+                                        @Override
+                                        public void onFailure(int i, Header[] headers, Throwable throwable, File file) {
+                                            mHandler.post(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    mProgressDialog.dismiss();
+                                                }
+                                            });
+                                        }
+
+                                        @Override
+                                        public void onSuccess(int i, Header[] headers, File file) {
+                                            mHandler.post(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    mProgressDialog.dismiss();
+                                                }
+                                            });
+                                            localSaveImage(rawUrl);
+                                        }
+                                    });
+                                }
+                            });
+
+                            return;
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -330,9 +424,15 @@ public class GalleryActivity extends BaseActivity {
         new Thread() {
             @Override
             public void run() {
-                String url = mPhotoUriList.get(mPosition);
-                if (!TextUtils.isEmpty(url)) {
-                    File file = ImageLoader.getInstance().getDiscCache().get(url);
+                if (mPhotoRawUrlList.size() <= mPosition) {
+                    mHandler.sendEmptyMessage(WHAT_WALLPAPER_FAIL);
+                    return;
+                }
+
+                String rawUrl = mPhotoRawUrlList.get(mPosition);
+                if (!TextUtils.isEmpty(rawUrl)) {
+                    String downloadCachePath = AppRuntime.RAW_URL_CACHE_DIR + rawUrl.hashCode();
+                    File file = new File(downloadCachePath);
                     if (file != null && file.exists()) {
                         WallpaperManager wallpaperManager = WallpaperManager.getInstance(GalleryActivity.this);
                         try {
