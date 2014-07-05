@@ -52,10 +52,7 @@
 				<dict>
 					<key>fileNames</key>
 					<array>
-						<string>~/BaiduPan/百度云同步盘/wallpaper/tmp/device-2014-07-03-151619_tn_480.png</string>
-						<string>~/BaiduPan/百度云同步盘/wallpaper/tmp/device-2014-07-03-151700_tn_480.png</string>
-						<string>~/BaiduPan/百度云同步盘/wallpaper/tmp/device-2014-07-03-151729_tn_480.png</string>
-						<string>~/BaiduPan/百度云同步盘/wallpaper/tmp/device-2014-07-03-151750_tn_480.png</string>
+						<string>~/github/wallpaper/screenshot/1080p/ic_launcher.png</string>
 					</array>
 				</dict>
 				<key>BundleIdentifier</key>
@@ -167,7 +164,7 @@
 					<key>replaceExisting</key>
 					<false/>
 					<key>toDirectory</key>
-					<string>~/BaiduPan/百度云同步盘/wallpaper/tmp</string>
+					<string>~/Desktop</string>
 				</dict>
 				<key>BundleIdentifier</key>
 				<string>com.apple.Automator.CopyFiles</string>
@@ -303,7 +300,7 @@
 					<dict>
 						<key>tokenizedValue</key>
 						<array>
-							<string>_tn_800</string>
+							<string>512</string>
 						</array>
 					</dict>
 					<key>textToFind</key>
@@ -365,7 +362,7 @@
 					<key>startingNumber</key>
 					<integer>1</integer>
 					<key>textInput</key>
-					<string>_tn_800</string>
+					<string>512</string>
 					<key>textToFind</key>
 					<string></string>
 					<key>useLeadingZeros</key>
@@ -764,11 +761,11 @@
 					<key>percentageValue</key>
 					<integer>50</integer>
 					<key>scaleMethod</key>
-					<integer>1</integer>
+					<integer>0</integer>
 					<key>scaleValue</key>
 					<integer>0</integer>
 					<key>sizeValue</key>
-					<integer>480</integer>
+					<integer>512</integer>
 				</dict>
 				<key>BundleIdentifier</key>
 				<string>com.apple.Automator.ScaleImage</string>
