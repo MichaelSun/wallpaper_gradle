@@ -58,7 +58,7 @@ public class BelleApplication extends Application {
     }
 
     private void initYoumi() {
-        AdManager.getInstance(getApplicationContext()).init("859ff840b668c633", "87ed892bb7f8c34a", false);
+        AdManager.getInstance(getApplicationContext()).init("9fa5ad90d57082ce", "375f8fffe03aa816", false);
     }
 
     private void initSeriesModel() {

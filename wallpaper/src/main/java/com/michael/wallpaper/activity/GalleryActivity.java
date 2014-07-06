@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.widget.RelativeLayout;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
+import cn.domob.android.ads.DomobAdView;
 import com.github.johnpersano.supertoasts.SuperActivityToast;
 import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
@@ -203,6 +204,11 @@ public class GalleryActivity extends BaseActivity {
                                                                        RelativeLayout.LayoutParams.WRAP_CONTENT));
             // Initiate a generic request to load it with an ad
             mAdView.loadAd(new AdRequest());
+        } else if (AppConfig.DOMOD_AD_ENABLE) {
+            DomobAdView adview = new DomobAdView(this, "56OJwdKYuNB/ECRykc", "16TLuqyaApjJ1NUEzQfGknUs");
+            RelativeLayout layout = (RelativeLayout) findViewById(R.id.ad_content);
+            layout.addView(adview, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
+                                                                      RelativeLayout.LayoutParams.WRAP_CONTENT));
         }
     }
 

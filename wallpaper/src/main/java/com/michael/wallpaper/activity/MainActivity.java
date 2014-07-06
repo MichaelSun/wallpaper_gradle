@@ -170,7 +170,7 @@ public class MainActivity extends BaseActivity
             // Initiate a generic request to load it with an ad
             mAdView.loadAd(new AdRequest());
         } else if (AppConfig.DOMOD_AD_ENABLE) {
-            DomobAdView adview = new DomobAdView(this, "56OJwdKYuNBxYMSZ84", "16TLuqyaApjpsNUE2ljOxxds");
+            DomobAdView adview = new DomobAdView(this, "56OJwdKYuNB/ECRykc", "16TLuqyaApjJ1NUEzQfGknUs");
             RelativeLayout layout = (RelativeLayout) findViewById(R.id.ad_content);
             layout.addView(adview, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
                                                                        RelativeLayout.LayoutParams.WRAP_CONTENT));

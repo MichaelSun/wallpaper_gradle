@@ -45,7 +45,7 @@ public class BaseActivity extends Activity {
             // 开始加载插页式广告。
             interstitial.loadAd(adRequest);
         } else if (AppConfig.DOMOD_AD_ENABLE) {
-            mDomobInterstitialAd = new DomobInterstitialAd(this, "56OJwdKYuNBxYMSZ84", "16TLuqyaApjpsNUE6s-l6czz", DomobInterstitialAd.INTERSITIAL_SIZE_FULL_SCREEN);
+            mDomobInterstitialAd = new DomobInterstitialAd(this, "56OJwdKYuNB/ECRykc", "16TLuqyaApjJ1NUEzQfGknUs", DomobInterstitialAd.INTERSITIAL_SIZE_FULL_SCREEN);
             mDomobInterstitialAd.loadInterstitialAd();
         }
     }
