@@ -73,34 +73,22 @@ public class GalleryActivity extends BaseActivity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-//            HashMap<String, String> map = new HashMap<String, String>();
-//            map.put("title", mTitle);
             switch (msg.what) {
                 case WHAT_SAVE_SUCCESS:
                     Toaster.show(GalleryActivity.this, R.string.save_gallery_success);
-//                    map.put("ifSuccess", "success");
-//                    MobclickAgent.onEvent(GalleryActivity.this, "SaveGallery", map);
                     break;
                 case WHAT_SAVE_FAIL:
                     Toaster.show(GalleryActivity.this, R.string.save_gallery_fail);
-//                    map.put("ifSuccess", "fail");
-//                    MobclickAgent.onEvent(GalleryActivity.this, "SaveGallery", map);
                     break;
                 case WHAT_WALLPAPER_SUCCESS:
                     Toaster.show(GalleryActivity.this, R.string.set_wallpaper_success);
-//                    map.put("ifSuccess", "success");
-//                    MobclickAgent.onEvent(GalleryActivity.this, "Wallpaper", map);
                     break;
                 case WHAT_WALLPAPER_FAIL:
                     Toaster.show(GalleryActivity.this, R.string.set_wallpaper_fail);
-//                    map.put("ifSuccess", "fail");
-//                    MobclickAgent.onEvent(GalleryActivity.this, "Wallpaper", map);
                     break;
             }
 
-            if (interstitial.isReady()) {
-                interstitial.show();
-            }
+            tryToShwoSplashAd();
         }
     };
 

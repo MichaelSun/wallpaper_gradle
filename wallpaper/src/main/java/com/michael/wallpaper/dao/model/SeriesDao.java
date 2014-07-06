@@ -25,6 +25,8 @@ public class SeriesDao extends AbstractDao<Series, Void> {
     public static class Properties {
         public final static Property Type = new Property(0, int.class, "type", false, "TYPE");
         public final static Property Title = new Property(1, String.class, "title", false, "TITLE");
+        public final static Property Category = new Property(2, String.class, "category", false, "CATEGORY");
+        public final static Property Property = new Property(3, Integer.class, "property", false, "PROPERTY");
     };
 
 
@@ -41,7 +43,9 @@ public class SeriesDao extends AbstractDao<Series, Void> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'SERIES' (" + //
                 "'TYPE' INTEGER NOT NULL ," + // 0: type
-                "'TITLE' TEXT NOT NULL );"); // 1: title
+                "'TITLE' TEXT NOT NULL ," + // 1: title
+                "'CATEGORY' TEXT," + // 2: category
+                "'PROPERTY' INTEGER);"); // 3: property
     }
 
     /** Drops the underlying database table. */
@@ -56,6 +60,16 @@ public class SeriesDao extends AbstractDao<Series, Void> {
         stmt.clearBindings();
         stmt.bindLong(1, entity.getType());
         stmt.bindString(2, entity.getTitle());
+ 
+        String category = entity.getCategory();
+        if (category != null) {
+            stmt.bindString(3, category);
+        }
+ 
+        Integer property = entity.getProperty();
+        if (property != null) {
+            stmt.bindLong(4, property);
+        }
     }
 
     /** @inheritdoc */
@@ -69,7 +83,9 @@ public class SeriesDao extends AbstractDao<Series, Void> {
     public Series readEntity(Cursor cursor, int offset) {
         Series entity = new Series( //
             cursor.getInt(offset + 0), // type
-            cursor.getString(offset + 1) // title
+            cursor.getString(offset + 1), // title
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // category
+            cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3) // property
         );
         return entity;
     }
@@ -79,6 +95,8 @@ public class SeriesDao extends AbstractDao<Series, Void> {
     public void readEntity(Cursor cursor, Series entity, int offset) {
         entity.setType(cursor.getInt(offset + 0));
         entity.setTitle(cursor.getString(offset + 1));
+        entity.setCategory(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setProperty(cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3));
      }
     
     /** @inheritdoc */

@@ -3,6 +3,9 @@ package com.michael.wallpaper.helper;
 import android.content.Context;
 import com.jesson.android.internet.InternetUtils;
 import com.jesson.android.internet.core.NetWorkException;
+import com.michael.wallpaper.AppConfig;
+import com.michael.wallpaper.api.baidu.BaiduListRequest;
+import com.michael.wallpaper.api.baidu.BaiduListResponse;
 import com.michael.wallpaper.api.belle.*;
 import com.michael.wallpaper.dao.model.DaoSession;
 import com.michael.wallpaper.dao.model.LocalBelle;
@@ -11,6 +14,7 @@ import com.michael.wallpaper.dao.utils.DaoUtils;
 import com.michael.wallpaper.event.GetBelleListEvent;
 import com.michael.wallpaper.event.NetworkErrorEvent;
 import com.michael.wallpaper.event.ServerErrorEvent;
+import com.michael.wallpaper.utils.AppRuntime;
 import de.greenrobot.event.EventBus;
 
 import java.util.ArrayList;
@@ -54,7 +58,7 @@ public class BelleHelper {
                             if (response.belles != null) {
                                 List<LocalBelle> localBelles = new ArrayList<LocalBelle>();
                                 for (Belle belle : response.belles) {
-                                    LocalBelle localBelle = new LocalBelle(belle.id, belle.time, belle.type, belle.url, belle.rawUrl);
+                                    LocalBelle localBelle = new LocalBelle(belle.id, belle.time, belle.type, belle.desc, belle.url, belle.rawUrl);
                                     localBelles.add(localBelle);
                                 }
                                 dao.insertOrReplaceInTx(localBelles);
@@ -80,55 +84,114 @@ public class BelleHelper {
      * @param type
      * @param count
      */
-    public void randomGetBelleListFromServer(final int type, final int count) {
+    public void randomGetBelleListFromServer(final int type, final int startNum, final int count, final String category, final String title) {
         new Thread() {
             @Override
             public void run() {
-                try {
-                    long startTime = System.currentTimeMillis();
-
-                    RandomGetBelleListRequest request = new RandomGetBelleListRequest();
-                    request.type = type;
-                    request.count = count;
-                    RandomGetBelleListResponse response = InternetUtils.request(mContext, request);
-                    if (response != null) {
-                        GetBelleListEvent event = new GetBelleListEvent();
-                        event.belles = response.belles;
-                        event.type = GetBelleListEvent.TYPE_SERVER_RANDOM;
-                        // update local database
-                        LocalBelleDao dao = mSession.getLocalBelleDao();
-                        // delete old
-                        dao.queryBuilder().where(LocalBelleDao.Properties.Type.eq(type)).buildDelete().forCurrentThread().executeDeleteWithoutDetachingEntities();
-                        // insert new
-                        if (response.belles != null) {
-                            List<LocalBelle> localBelles = new ArrayList<LocalBelle>();
-                            for (Belle belle : response.belles) {
-                                LocalBelle localBelle = new LocalBelle(belle.id, belle.time, belle.type, belle.url, belle.rawUrl);
-                                localBelles.add(localBelle);
-                            }
-                            dao.insertOrReplaceInTx(localBelles);
-                        }
-
-                        long endTime = System.currentTimeMillis();
-                        long delay = 1000 - (endTime - startTime);
-                        if (delay > 0) {
-                            try {
-                                Thread.sleep(delay);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        EventBus.getDefault().post(event);
-                    } else {
-                        EventBus.getDefault().post(new ServerErrorEvent());
-                    }
-                } catch (NetWorkException e) {
-                    e.printStackTrace();
-                    EventBus.getDefault().post(new NetworkErrorEvent(e));
+                if (AppRuntime.PACKAGE_NAME.endsWith(AppConfig.BAIDU_SOURCE_MM_PACKAGE_NAME)) {
+                    getBaiduItems(startNum, count, category, title);
+                } else if (AppRuntime.PACKAGE_NAME.endsWith(AppConfig.CAR_PACKAGE_NAME)) {
+                    getNoramlItems(type, count);
                 }
             }
         }.start();
+    }
 
+    private void getNoramlItems(int type, int count) {
+        try {
+            long startTime = System.currentTimeMillis();
+
+            RandomGetBelleListRequest request = new RandomGetBelleListRequest();
+            request.type = type;
+            request.count = count;
+            RandomGetBelleListResponse response = InternetUtils.request(mContext, request);
+            if (response != null) {
+                GetBelleListEvent event = new GetBelleListEvent();
+                event.belles = response.belles;
+                event.type = GetBelleListEvent.TYPE_SERVER_RANDOM;
+                event.hasMore = false;
+                // update local database
+                LocalBelleDao dao = mSession.getLocalBelleDao();
+                // delete old
+                dao.queryBuilder().where(LocalBelleDao.Properties.Type.eq(type)).buildDelete().forCurrentThread().executeDeleteWithoutDetachingEntities();
+                // insert new
+                if (response.belles != null) {
+                    List<LocalBelle> localBelles = new ArrayList<LocalBelle>();
+                    for (Belle belle : response.belles) {
+                        LocalBelle localBelle = new LocalBelle(belle.id, belle.time, belle.type, belle.desc, belle.url, belle.rawUrl);
+                        localBelles.add(localBelle);
+                    }
+                    dao.insertOrReplaceInTx(localBelles);
+                }
+
+                long endTime = System.currentTimeMillis();
+                long delay = 1000 - (endTime - startTime);
+                if (delay > 0) {
+                    try {
+                        Thread.sleep(delay);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                EventBus.getDefault().post(event);
+            } else {
+                EventBus.getDefault().post(new ServerErrorEvent());
+            }
+        } catch (NetWorkException e) {
+            e.printStackTrace();
+            EventBus.getDefault().post(new NetworkErrorEvent(e));
+        }
+    }
+
+    private void getBaiduItems(int pageNum, int pageCount, String category, String title) {
+        try {
+            BaiduListRequest request = new BaiduListRequest(pageNum, pageCount, category, title);
+            BaiduListResponse response = InternetUtils.request(mContext, request);
+            if (response != null) {
+
+//                Log.d("BellWallpaper", "data response = " + response.toString());
+
+                long startTime = System.currentTimeMillis();
+
+                List<Belle> belles = BaiduListResponse.makeBellesFromBaiduItem(response.baiduItems);
+                GetBelleListEvent event = new GetBelleListEvent();
+                event.belles = belles;
+                event.hasMore = response.totalNum > (response.start_index + response.return_number);
+                event.pageCount = response.return_number;
+                event.startIndex = response.start_index;
+                event.type = GetBelleListEvent.TYPE_SERVER_RANDOM;
+                // update local database
+                LocalBelleDao dao = mSession.getLocalBelleDao();
+                // delete old
+                dao.queryBuilder().where(LocalBelleDao.Properties.Type.eq(2000)).buildDelete().forCurrentThread().executeDeleteWithoutDetachingEntities();
+                // insert new
+                if (event.belles != null) {
+                    List<LocalBelle> localBelles = new ArrayList<LocalBelle>();
+                    for (Belle belle : event.belles) {
+                        LocalBelle localBelle = new LocalBelle(belle.id, belle.time, title.hashCode(), belle.desc, belle.url, belle.rawUrl);
+                        localBelles.add(localBelle);
+                    }
+                    dao.insertOrReplaceInTx(localBelles);
+                }
+
+                long endTime = System.currentTimeMillis();
+                long delay = 1000 - (endTime - startTime);
+                if (delay > 0) {
+                    try {
+                        Thread.sleep(delay);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                EventBus.getDefault().post(event);
+            } else {
+                EventBus.getDefault().post(new ServerErrorEvent());
+//                Log.d("BellWallpaper", "data response = null");
+            }
+        } catch (NetWorkException e) {
+            e.printStackTrace();
+            EventBus.getDefault().post(new NetworkErrorEvent(e));
+        }
     }
 
     public void getBelleListFromLocal(final int type) {
@@ -142,7 +205,7 @@ public class BelleHelper {
                 if (localList != null) {
                     belles = new ArrayList<Belle>();
                     for (LocalBelle localBelle : localList) {
-                        Belle belle = new Belle(localBelle.getId(), localBelle.getTime(), localBelle.getType(), localBelle.getUrl(), localBelle.getRawUrl());
+                        Belle belle = new Belle(localBelle.getId(), localBelle.getTime(), localBelle.getType(), null, localBelle.getUrl(), localBelle.getRawUrl());
                         belles.add(belle);
                     }
                 }

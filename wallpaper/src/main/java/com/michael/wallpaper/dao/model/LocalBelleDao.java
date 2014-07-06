@@ -26,8 +26,9 @@ public class LocalBelleDao extends AbstractDao<LocalBelle, Void> {
         public final static Property Id = new Property(0, long.class, "id", false, "ID");
         public final static Property Time = new Property(1, long.class, "time", false, "TIME");
         public final static Property Type = new Property(2, int.class, "type", false, "TYPE");
-        public final static Property Url = new Property(3, String.class, "url", false, "URL");
-        public final static Property RawUrl = new Property(4, String.class, "rawUrl", false, "RAW_URL");
+        public final static Property Desc = new Property(3, String.class, "desc", false, "DESC");
+        public final static Property Url = new Property(4, String.class, "url", false, "URL");
+        public final static Property RawUrl = new Property(5, String.class, "rawUrl", false, "RAW_URL");
     };
 
 
@@ -46,8 +47,9 @@ public class LocalBelleDao extends AbstractDao<LocalBelle, Void> {
                 "'ID' INTEGER NOT NULL ," + // 0: id
                 "'TIME' INTEGER NOT NULL ," + // 1: time
                 "'TYPE' INTEGER NOT NULL ," + // 2: type
-                "'URL' TEXT NOT NULL ," + // 3: url
-                "'RAW_URL' TEXT);"); // 4: rawUrl
+                "'DESC' TEXT," + // 3: desc
+                "'URL' TEXT NOT NULL ," + // 4: url
+                "'RAW_URL' TEXT);"); // 5: rawUrl
     }
 
     /** Drops the underlying database table. */
@@ -63,11 +65,16 @@ public class LocalBelleDao extends AbstractDao<LocalBelle, Void> {
         stmt.bindLong(1, entity.getId());
         stmt.bindLong(2, entity.getTime());
         stmt.bindLong(3, entity.getType());
-        stmt.bindString(4, entity.getUrl());
+ 
+        String desc = entity.getDesc();
+        if (desc != null) {
+            stmt.bindString(4, desc);
+        }
+        stmt.bindString(5, entity.getUrl());
  
         String rawUrl = entity.getRawUrl();
         if (rawUrl != null) {
-            stmt.bindString(5, rawUrl);
+            stmt.bindString(6, rawUrl);
         }
     }
 
@@ -84,8 +91,9 @@ public class LocalBelleDao extends AbstractDao<LocalBelle, Void> {
             cursor.getLong(offset + 0), // id
             cursor.getLong(offset + 1), // time
             cursor.getInt(offset + 2), // type
-            cursor.getString(offset + 3), // url
-            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // rawUrl
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // desc
+            cursor.getString(offset + 4), // url
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // rawUrl
         );
         return entity;
     }
@@ -96,8 +104,9 @@ public class LocalBelleDao extends AbstractDao<LocalBelle, Void> {
         entity.setId(cursor.getLong(offset + 0));
         entity.setTime(cursor.getLong(offset + 1));
         entity.setType(cursor.getInt(offset + 2));
-        entity.setUrl(cursor.getString(offset + 3));
-        entity.setRawUrl(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setDesc(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setUrl(cursor.getString(offset + 4));
+        entity.setRawUrl(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
      }
     
     /** @inheritdoc */

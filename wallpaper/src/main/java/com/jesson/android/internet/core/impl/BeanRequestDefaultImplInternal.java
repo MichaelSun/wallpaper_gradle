@@ -4,22 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
-import android.text.TextUtils;
-
 import com.jesson.android.Jess;
 import com.jesson.android.internet.InternetUtils;
-import com.jesson.android.internet.core.BeanRequestInterface;
-import com.jesson.android.internet.core.HttpClientInterface;
-import com.jesson.android.internet.core.HttpConnectHookListener;
-import com.jesson.android.internet.core.InternetConfig;
-import com.jesson.android.internet.core.InternetStringUtils;
-import com.jesson.android.internet.core.JsonUtils;
-import com.jesson.android.internet.core.MultipartHttpEntity;
-import com.jesson.android.internet.core.NetWorkException;
-import com.jesson.android.internet.core.RequestBase;
-import com.jesson.android.internet.core.RequestEntity;
+import com.jesson.android.internet.core.*;
 import com.jesson.android.utils.StringUtils;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -27,12 +15,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.Vector;
+import java.util.*;
 
 class BeanRequestDefaultImplInternal implements BeanRequestInterface {
 
@@ -335,23 +318,23 @@ class BeanRequestDefaultImplInternal implements BeanRequestInterface {
         T ret = null;
         try {
             //先检查是否是错误的数据结构
-            if (!request.getHandleErrorSelf()) {
-                JsonErrorResponse errorResponse = JsonUtils.parseError(response);
-                if (errorResponse != null) {
-                    if (!ignore) {
-                        if (mHttpHookListener != null) {
-                            if (errorResponse.errorCode != 0
-                                    && !TextUtils.isEmpty(errorResponse.errorMsg)) {
-                                //the response is a server error response
-                                mHttpHookListener.onHttpConnectError(errorResponse.errorCode, errorResponse.errorMsg, request);
-                            }
-                        } else {
-                            sendAPIErrorLocal(errorResponse, api_url);
-                        }
-                    }
-                    return null;
-                }
-            }
+//            if (!request.getHandleErrorSelf()) {
+//                JsonErrorResponse errorResponse = JsonUtils.parseError(response);
+//                if (errorResponse != null) {
+//                    if (!ignore) {
+//                        if (mHttpHookListener != null) {
+//                            if (errorResponse.errorCode != 0
+//                                    && !TextUtils.isEmpty(errorResponse.errorMsg)) {
+//                                //the response is a server error response
+//                                mHttpHookListener.onHttpConnectError(errorResponse.errorCode, errorResponse.errorMsg, request);
+//                            }
+//                        } else {
+//                            sendAPIErrorLocal(errorResponse, api_url);
+//                        }
+//                    }
+//                    return null;
+//                }
+//            }
 
             ret = JsonUtils.parse(response, request.getGenericType());
             if (DEBUG) {

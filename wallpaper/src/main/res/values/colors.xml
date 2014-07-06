@@ -131,4 +131,11 @@
     <color name="share_edit_text_color">#FF666666</color>
     <color name="shaer_background_color">#FFF3F3F3</color>
 
+    <integer-array name="gplus_colors">
+        <item>@color/logo_color</item>
+        <item>@color/widget_post_disable</item>
+        <item>@color/logo_color</item>
+        <item>@color/widget_post_disable</item>
+    </integer-array>
+
 </resources>

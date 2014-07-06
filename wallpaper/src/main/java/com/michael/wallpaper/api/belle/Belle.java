@@ -16,6 +16,9 @@ public class Belle {
     @JsonProperty("type")
     public int type;
 
+    @JsonProperty("desc")
+    public String desc;
+
     @JsonProperty("url")
     public String url;
 
@@ -28,19 +31,20 @@ public class Belle {
                    "id=" + id +
                    ", time=" + time +
                    ", type=" + type +
+                   ", desc='" + desc + '\'' +
                    ", url='" + url + '\'' +
                    ", rawUrl='" + rawUrl + '\'' +
                    '}';
     }
 
     public Belle() {
-
     }
 
-    public Belle(long id, long time, int type, String url, String rawUrl) {
+    public Belle(long id, long time, int type, String desc, String url, String rawUrl) {
         this.id = id;
         this.time = time;
         this.type = type;
+        this.desc = desc;
         this.url = url;
         this.rawUrl = rawUrl;
     }

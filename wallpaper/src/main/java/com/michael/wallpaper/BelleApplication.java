@@ -40,6 +40,8 @@ public class BelleApplication extends Application {
             dirCheck.mkdirs();
         }
 
+        AppRuntime.PACKAGE_NAME = getPackageName();
+
         Jess.init(this);
         Jess.DEBUG = AppConfig.DEBUG;
 

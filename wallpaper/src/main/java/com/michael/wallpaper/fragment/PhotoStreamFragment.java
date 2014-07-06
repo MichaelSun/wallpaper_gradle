@@ -51,6 +51,10 @@ public class PhotoStreamFragment extends Fragment implements OnRefreshListener {
 
     private static final int PAGE_COUNT = 50;
 
+    private int mPageStartIndex;
+
+    private GetBelleListEvent mGetBelleListEvent;
+
     public static PhotoStreamFragment newInstance(Series series) {
         PhotoStreamFragment fragment = new PhotoStreamFragment();
         Bundle args = new Bundle();
@@ -91,7 +95,6 @@ public class PhotoStreamFragment extends Fragment implements OnRefreshListener {
         ActionBarPullToRefresh.SetupWizard setupWizard = ActionBarPullToRefresh.from(getActivity())
                                                              .allChildrenArePullable()
                                                              .listener(this);
-
         if (mSeries.getType() >= 0) {
             setupWizard.allChildrenArePullable();
         } else if (mSeries.getType() == -1) {
@@ -138,7 +141,12 @@ public class PhotoStreamFragment extends Fragment implements OnRefreshListener {
 
     @Override
     public void onRefreshStarted(View view) {
-        mBelleHelper.randomGetBelleListFromServer(mSeries.getType(), PAGE_COUNT);
+        if (mGetBelleListEvent != null && mGetBelleListEvent.hasMore) {
+            mPageStartIndex = mPageStartIndex + PAGE_COUNT;
+        } else {
+            mPageStartIndex = 0;
+        }
+        mBelleHelper.randomGetBelleListFromServer(mSeries.getType(), mPageStartIndex, PAGE_COUNT, mSeries.getCategory(), mSeries.getTitle());
         ((MainActivity) getActivity()).onRefresh();
     }
 
@@ -146,8 +154,13 @@ public class PhotoStreamFragment extends Fragment implements OnRefreshListener {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_refresh) {
             if (!mPullToRefreshLayout.isRefreshing()) {
+                if (mGetBelleListEvent != null && mGetBelleListEvent.hasMore) {
+                    mPageStartIndex = mPageStartIndex + PAGE_COUNT;
+                } else {
+                    mPageStartIndex = 0;
+                }
                 mPullToRefreshLayout.setRefreshing(true);
-                mBelleHelper.randomGetBelleListFromServer(mSeries.getType(), PAGE_COUNT);
+                mBelleHelper.randomGetBelleListFromServer(mSeries.getType(), mPageStartIndex, PAGE_COUNT, mSeries.getCategory(), mSeries.getTitle());
                 ((MainActivity) getActivity()).onRefresh();
             }
             return true;
@@ -156,6 +169,7 @@ public class PhotoStreamFragment extends Fragment implements OnRefreshListener {
     }
 
     public void onEventMainThread(GetBelleListEvent event) {
+        mGetBelleListEvent = event;
         if (event.type == GetBelleListEvent.TYPE_SERVER_RANDOM) {
             mBelles.clear();
             if (event.belles != null) {
@@ -173,8 +187,10 @@ public class PhotoStreamFragment extends Fragment implements OnRefreshListener {
             // load from server
             if (mBelles.size() == 0) {
                 if (!mPullToRefreshLayout.isRefreshing()) {
+                    mGetBelleListEvent = null;
+                    mPageStartIndex = 0;
                     mPullToRefreshLayout.setRefreshing(true);
-                    mBelleHelper.randomGetBelleListFromServer(mSeries.getType(), PAGE_COUNT);
+                    mBelleHelper.randomGetBelleListFromServer(mSeries.getType(), mPageStartIndex, PAGE_COUNT, mSeries.getCategory(), mSeries.getTitle());
                     ((MainActivity) getActivity()).onRefresh();
                 }
             }
@@ -199,7 +215,7 @@ public class PhotoStreamFragment extends Fragment implements OnRefreshListener {
         List<CollectedBelle> collectedBelles = helper.loadAll();
         if (collectedBelles != null) {
             for (CollectedBelle collectedBelle : collectedBelles) {
-                Belle belle = new Belle(0, collectedBelle.getTime(), -1, collectedBelle.getUrl(), null);
+                Belle belle = new Belle(0, collectedBelle.getTime(), -1, null, collectedBelle.getUrl(), null);
                 belles.add(belle);
             }
         }

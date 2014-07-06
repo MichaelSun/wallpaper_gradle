@@ -58,13 +58,10 @@ public class MainActivity extends BaseActivity
         initInterstitialAd();
         initAppWall();
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment)
-                                        getFragmentManager().findFragmentById(R.id.navigation_drawer);
+        mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
-
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
-
         OffersManager.getInstance(getApplicationContext()).onAppLaunch();
     }
 
@@ -78,8 +75,6 @@ public class MainActivity extends BaseActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        MobclickAgent.flush(getApplication());
-
         OffersManager.getInstance(getApplicationContext()).onAppExit();
     }
 
@@ -104,6 +99,16 @@ public class MainActivity extends BaseActivity
                 Toaster.show(getApplicationContext(), "开启隐藏成功，请退出应用重新进入");
             }
         } else {
+            //检查是否积分已购
+            if (mSeries.getProperty() == 0) {
+                //隐藏属性
+                int point = PointsManager.getInstance(this).queryPoints();
+                if (point < 60) {
+                    showWallInfoDialog(point);
+                    return;
+                }
+            }
+
             // update the main content by replacing fragments
             FragmentManager fragmentManager = getFragmentManager();
             String tag = String.valueOf(mSeries.getType());

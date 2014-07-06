@@ -32,7 +32,8 @@ public class PhotoStreamAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return mBelles == null ? 0 : mBelles.size();
+        int count = (mBelles == null ? 0 : mBelles.size());
+        return count;
     }
 
     @Override

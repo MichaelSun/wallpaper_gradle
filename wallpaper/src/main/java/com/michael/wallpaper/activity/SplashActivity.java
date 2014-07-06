@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.KeyEvent;
-import android.widget.FrameLayout;
 import com.michael.wallpaper.R;
 import com.michael.wallpaper.helper.SeriesHelper;
 
@@ -30,27 +29,6 @@ public class SplashActivity extends BaseActivity {
 
         SeriesHelper.getInstance().syncSeries(this);
 
-        FrameLayout container = (FrameLayout) findViewById(R.id.splash_container);
-//        new SplashAd(this, container, AppConfig.GDT_AD_APPID, AppConfig.GDT_AD_SPLASH_POSID,
-//                        new SplashAdListener() {
-//                            @Override
-//                            public void onAdPresent() {
-//                                Logger.i(TAG, "splash ad present");
-//                            }
-//
-//                            @Override
-//                            public void onAdFailed(int arg0) {
-//                                Logger.i(TAG, "splash ad fail " + arg0);
-//                                enterMain();
-//                            }
-//
-//                            @Override
-//                            public void onAdDismissed() {
-//                                Logger.i(TAG, "splash ad dismiss");
-//                                enterMain();
-//                            }
-//                        }
-//        );
         enterMain();
     }
 

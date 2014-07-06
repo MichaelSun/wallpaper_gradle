@@ -18,6 +18,12 @@ public class GetBelleListEvent {
 
     public boolean hasMore;
 
+    public int startIndex;
+
+    public int pageCount;
+
+    public int totalNum;
+
     public List<Belle> belles;
 
     @Override
@@ -25,8 +31,10 @@ public class GetBelleListEvent {
         return "GetBelleListEvent{" +
                    "type=" + type +
                    ", hasMore=" + hasMore +
+                   ", startIndex=" + startIndex +
+                   ", pageCount=" + pageCount +
+                   ", totalNum=" + totalNum +
                    ", belles=" + belles +
                    '}';
     }
-
 }

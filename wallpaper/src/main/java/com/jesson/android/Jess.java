@@ -1,9 +1,7 @@
 package com.jesson.android;
 
 import android.content.Context;
-
 import com.jesson.android.utils.DeviceInfo;
-import com.jesson.android.utils.Environment;
 import com.jesson.android.utils.Logger;
 
 /**
@@ -18,8 +16,7 @@ public class Jess {
     }
 
     public static void LOGD(String msg) {
-        String tag = Environment.getCurrentStackMethodName();
-        Logger.d(tag, msg);
+        Logger.d("com.michael", msg);
     }
 
 }

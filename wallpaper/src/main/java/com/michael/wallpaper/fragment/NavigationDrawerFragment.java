@@ -114,8 +114,7 @@ public class NavigationDrawerFragment extends Fragment {
         for (int i = 0; i < mSeriesList.size(); i++) {
             titles[i] = mSeriesList.get(i).getTitle();
         }
-        mDrawerListView.setAdapter(new ArrayAdapter<String>(
-                                                               getActionBar().getThemedContext(),
+        mDrawerListView.setAdapter(new ArrayAdapter<String>(getActionBar().getThemedContext(),
                                                                R.layout.drawer_list_item,
                                                                R.id.text,
                                                                titles));
@@ -294,8 +293,7 @@ public class NavigationDrawerFragment extends Fragment {
             titles[i] = mSeriesList.get(i).getTitle();
         }
         mCurrentSelectedPosition = 0;
-        mDrawerListView.setAdapter(new ArrayAdapter<String>(
-                                                               getActionBar().getThemedContext(),
+        mDrawerListView.setAdapter(new ArrayAdapter<String>(getActionBar().getThemedContext(),
                                                                R.layout.drawer_list_item,
                                                                R.id.text,
                                                                titles));

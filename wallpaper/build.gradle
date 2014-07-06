@@ -19,8 +19,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 19
-        versionCode 1
-        versionName "1.0"
+        versionCode 1022
+        versionName "2.2"
     }
 
     signingConfigs {
@@ -46,7 +46,8 @@ android {
 
     productFlavors {
         baidu {
-            packageName = 'com.michael.carwall'
+//            packageName = 'com.michael.carwall'
+            packageName = 'com.michael.wallpaper.baidumm'
         }
     }
 }

@@ -17,6 +17,8 @@ public class AppRuntime {
 
     public static String RAW_URL_CACHE_DIR = "/sdcard/";
 
+    public static String PACKAGE_NAME = "";
+
     public static String makeRawUrl(String url) {
         if (TextUtils.isEmpty(url)) {
             return null;

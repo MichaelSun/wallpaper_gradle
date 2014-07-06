@@ -12,6 +12,7 @@ public class LocalBelle {
     private long id;
     private long time;
     private int type;
+    private String desc;
     /** Not-null value. */
     private String url;
     private String rawUrl;
@@ -22,10 +23,11 @@ public class LocalBelle {
     public LocalBelle() {
     }
 
-    public LocalBelle(long id, long time, int type, String url, String rawUrl) {
+    public LocalBelle(long id, long time, int type, String desc, String url, String rawUrl) {
         this.id = id;
         this.time = time;
         this.type = type;
+        this.desc = desc;
         this.url = url;
         this.rawUrl = rawUrl;
     }
@@ -52,6 +54,14 @@ public class LocalBelle {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     /** Not-null value. */
