@@ -22,6 +22,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import net.youmi.android.AdManager;
+import net.youmi.android.spot.SpotManager;
 
 import java.io.File;
 
@@ -48,7 +49,6 @@ public class BelleApplication extends Application {
 
         Jess.init(this);
         Jess.DEBUG = AppConfig.DEBUG;
-
 
         initImageLoader();
 

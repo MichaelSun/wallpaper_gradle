@@ -24,6 +24,7 @@ import com.michael.wallpaper.helper.SeriesHelper;
 import com.michael.wallpaper.setting.Setting;
 import net.youmi.android.offers.OffersManager;
 import net.youmi.android.offers.PointsManager;
+import net.youmi.android.spot.SpotManager;
 
 import java.util.List;
 
@@ -51,6 +52,8 @@ public class MainActivity extends BaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+//        SpotManager.getInstance(this).loadSpotAds();
+
         initBannerAd();
         initInterstitialAd();
         initAppWall();
@@ -67,6 +70,8 @@ public class MainActivity extends BaseActivity
         super.onResume();
 
         tryToShwoSplashAd();
+
+//        SpotManager.getInstance(this).showSpotAds(this);
     }
 
     @Override
@@ -126,6 +131,7 @@ public class MainActivity extends BaseActivity
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
+        actionBar.setIcon(getIconResByPackageName());
     }
 
     @Override

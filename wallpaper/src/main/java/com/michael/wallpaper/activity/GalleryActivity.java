@@ -29,6 +29,7 @@ import com.michael.wallpaper.adapter.GalleryAdapter;
 import com.michael.wallpaper.helper.CollectHelper;
 import com.michael.wallpaper.utils.AppRuntime;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import net.youmi.android.spot.SpotManager;
 import org.apache.http.Header;
 
 import java.io.File;
@@ -127,6 +128,7 @@ public class GalleryActivity extends BaseActivity {
         }
 
         getActionBar().setTitle(mTitle);
+        getActionBar().setIcon(getIconResByPackageName());
         mShareIntent = getDefaultIntent();
 
         mPaginationTv = (TextView) findViewById(R.id.pagination);
@@ -180,6 +182,12 @@ public class GalleryActivity extends BaseActivity {
             layout.addView(adview, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
                                                                       RelativeLayout.LayoutParams.WRAP_CONTENT));
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+//        SpotManager.getInstance(this).showSpotAds(this);
     }
 
     @Override
