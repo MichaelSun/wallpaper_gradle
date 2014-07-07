@@ -16,5 +16,12 @@ public class AppConfig {
     //pacakgeName list
     public static final String BAIDU_SOURCE_MM_PACKAGE_NAME = "com.michael.wallpaper.baidumm";
     public static final String CAR_PACKAGE_NAME = "com.michael.carwall";
+    public static final String MM_WALLPAPER_PACKAGE_NAMMME = "com.michael.wallpaper";
+
+    public static final String YOUMI_APIKEY = "9fa5ad90d57082ce";
+    public static final String YOUMI_SECRETKEY = "375f8fffe03aa816";
+
+    public static final String DOMOD_PUBLISH_KEY = "56OJwdKYuNB/ECRykc";
+    public static final String DOMOD_PLACEMENT_KEY = "16TLuqyaApjJ1NUEzQfGknUs";
 
 }

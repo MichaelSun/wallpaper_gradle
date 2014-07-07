@@ -106,49 +106,27 @@ public class SeriesHelper {
             list.add(series15);
             Series series16 = new Series(1006, "迈凯轮", null, 1);
             list.add(series16);
+        } else {
+            list.add(new Series(1, "性感美女", null, 1));
+            list.add(new Series(2, "岛国女友", null, 1));
+            list.add(new Series(3, "丝袜美腿", null, 1));
+            list.add(new Series(4, "有沟必火", null, 1));
+            list.add(new Series(5, "有沟必火", null, 1));
+            list.add(new Series(11, "明星美女", null, 1));
+            list.add(new Series(12, "甜素纯", null, 1));
+            list.add(new Series(13, "校花", null, 1));
         }
-
-//        if (AppConfig.SERIES_MODE == 1) {
-//            Series series1 = new Series(1, "性感美女");
-//            list.add(series1);
-//            Series series2 = new Series(2, "岛国女友");
-//            list.add(series2);
-//            Series series3 = new Series(3, "丝袜美腿");
-//            list.add(series3);
-//            Series series4 = new Series(4, "有沟必火");
-//            list.add(series4);
-//            Series series5 = new Series(5, "有沟必火");
-//            list.add(series5);
-//            Series series11 = new Series(11, "明星美女");
-//            list.add(series11);
-//            Series series12 = new Series(12, "甜素纯");
-//            list.add(series12);
-//            Series series13 = new Series(13, "校花");
-//            list.add(series13);
-//        } else {
-//            Series series11 = new Series(1001, "兰博基尼");
-//            list.add(series11);
-//            Series series12 = new Series(1002, "宝马");
-//            list.add(series12);
-//            Series series13 = new Series(1003, "玛莎拉蒂");
-//            list.add(series13);
-//            Series series14 = new Series(1004, "奔驰");
-//            list.add(series14);
-//            Series series15 = new Series(1005, "法拉利");
-//            list.add(series15);
-//            Series series16 = new Series(1006, "迈凯轮");
-//            list.add(series16);
-//        }
 
         return list;
     }
 
     private List<Series> localSeries() {
         List<Series> list = new ArrayList<Series>();
-        Series collect = new Series(-1, "我的收藏", "本地", 1);
-        list.add(collect);
-        Series seriesApp = new Series(-3, "更多应用", "本地", 0);
-        list.add(seriesApp);
+        list.add(new Series(-1, "我的收藏", "本地", 1));
+        if (AppConfig.MM_WALLPAPER_PACKAGE_NAMMME.endsWith(AppRuntime.PACKAGE_NAME)) {
+            list.add(new Series(-2, "隐藏美女", "本地", 1));
+        }
+        list.add(new Series(-3, "更多应用", "本地", 0));
 
         return list;
     }

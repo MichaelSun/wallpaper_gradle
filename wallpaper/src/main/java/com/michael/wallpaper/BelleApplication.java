@@ -45,7 +45,6 @@ public class BelleApplication extends Application {
         Jess.init(this);
         Jess.DEBUG = AppConfig.DEBUG;
 
-        initSeriesModel();
 
         initImageLoader();
 
@@ -58,16 +57,7 @@ public class BelleApplication extends Application {
     }
 
     private void initYoumi() {
-        AdManager.getInstance(getApplicationContext()).init("9fa5ad90d57082ce", "375f8fffe03aa816", false);
-    }
-
-    private void initSeriesModel() {
-//        String channel = getMetaData("UMENG_CHANNEL");
-//        if (channel != null && "google".equals(channel)) {
-//            AppConfig.SERIES_MODE = 1;
-//        } else {
-//            AppConfig.SERIES_MODE = 2;
-//        }
+        AdManager.getInstance(getApplicationContext()).init(AppConfig.YOUMI_APIKEY, AppConfig.YOUMI_SECRETKEY, false);
     }
 
     private String getMetaData(String key) {

@@ -45,9 +45,16 @@ android {
     }
 
     productFlavors {
-        baidu {
-//            packageName = 'com.michael.carwall'
+        MMWallpaper {
+            packageName = 'com.michael.wallpaper'
+        }
+
+        BaiduMM {
             packageName = 'com.michael.wallpaper.baidumm'
+        }
+
+        BaiduMingXing {
+            packageName = 'com.michael.wallpaper.baidumx'
         }
     }
 }
@@ -64,4 +71,73 @@ dependencies {
     compile 'com.github.johnpersano:supertoasts:1.3.4@aar'
     compile 'com.github.gabrielemariotti.cards:library:1.7.3'
     compile fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+android.applicationVariants.all { variant ->
+    def flavor = "debug"
+    if (variant.productFlavors.size() > 0) {
+        flavor = variant.productFlavors[0].name
+    }
+
+    def label = '@string/app_name'
+    if (flavor == 'MMWallpaper') {
+        label = '@string/app_name_wallpaper'
+    }
+    def icon = '@drawable/ic_launcher'
+    if (flavor == 'MMWallpaper') {
+        icon = '@drawable/ic_wallpaper'
+    }
+
+    variant.processResources.doFirst {
+        def youmi_apikey = ''
+        def youmi_seckey = ''
+        def domod_pubkey = ''
+        def domod_replacekey = ''
+        if (flavor == 'MMWallpaper') {
+            youmi_apikey = '6142d65763827912'
+            youmi_seckey = 'b398417544f954ee'
+            domod_pubkey = '56OJwdKYuNB/ECRykc'
+            domod_replacekey = '16TLuqyaApjJ1NUEzQfGknUs'
+        }
+
+        def file = new File("${projectDir}/src/main/java/com/michael/wallpaper/AppConfig.java");
+        def text = file.getText("UTF-8")
+        def src = "YOUMI_APIKEY = \"9fa5ad90d57082ce\""
+        def replace = "YOUMI_APIKEY = \"${youmi_apikey}\""
+        text = text.replaceAll(src, replace)
+        file.write(text, "UTF-8")
+
+        src = "YOUMI_SECRETKEY = \"375f8fffe03aa816\";"
+        replace = "YOUMI_SECRETKEY = \"${youmi_seckey}\";"
+        text = text.replaceAll(src, replace)
+        file.write(text, "UTF-8")
+
+        src = "DOMOD_PUBLISH_KEY = \"56OJwdKYuNB/ECRykc\";"
+        replace = "DOMOD_PUBLISH_KEY = \"${domod_pubkey}\";"
+        text = text.replaceAll(src, replace)
+        file.write(text, "UTF-8")
+
+        src = "DOMOD_PLACEMENT_KEY = \"16TLuqyaApjJ1NUEzQfGknUs\";"
+        replace = "DOMOD_PLACEMENT_KEY = \"${domod_replacekey}\";"
+        text = text.replaceAll(src, replace)
+        file.write(text, "UTF-8")
+    }
+
+    variant.processManifest.doLast {
+        copy {
+            from("${buildDir}/manifests") {
+                include "${variant.dirName}/AndroidManifest.xml"
+            }
+            into("${buildDir}/manifests/$variant.name")
+
+            filter {
+                String line -> line.replaceAll("@string/app_name", "${label}")
+            }
+            filter {
+                String line -> line.replaceAll("@drawable/ic_launcher", "${icon}")
+            }
+
+            variant.processResources.manifestFile = file("${buildDir}/manifests/${variant.name}/${variant.dirName}/AndroidManifest.xml")
+        }
+    }
 }

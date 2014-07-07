@@ -20,9 +20,6 @@ import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import cn.domob.android.ads.DomobAdView;
 import com.github.johnpersano.supertoasts.SuperActivityToast;
-import com.google.ads.AdRequest;
-import com.google.ads.AdSize;
-import com.google.ads.AdView;
 import com.jesson.android.widget.Toaster;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RangeFileAsyncHttpResponseHandler;
@@ -173,39 +170,12 @@ public class GalleryActivity extends BaseActivity {
         mPaginationTv.setText((mPosition + 1) + "/" + mPagerAdapter.getCount());
 
         mCollectHelper = new CollectHelper(this);
-//
-//        iad = new InterstitialAd(this, AppConfig.GDT_AD_APPID, AppConfig.GDT_AD_INTERSTITIAL_POSID);
-//        iad.setAdListener(new InterstitialAdListener() {
-//            @Override
-//            public void onFail() {
-//
-//            }
-//
-//            @Override
-//            public void onBack() {
-//
-//            }
-//
-//            @Override
-//            public void onAdReceive() {
-//                iad.closePopupWindow();
-//                iad.show();
-//            }
-//        });
-
     }
 
     private void initBanner() {
         if (AppConfig.GOOLE_AD_ENABLE) {
-            mAdView = new AdView(this, AdSize.BANNER, "a15368dc3248e7e");
-            RelativeLayout layout = (RelativeLayout) findViewById(R.id.ad_content);
-            // Add the adView to it
-            layout.addView(mAdView, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
-                                                                       RelativeLayout.LayoutParams.WRAP_CONTENT));
-            // Initiate a generic request to load it with an ad
-            mAdView.loadAd(new AdRequest());
         } else if (AppConfig.DOMOD_AD_ENABLE) {
-            DomobAdView adview = new DomobAdView(this, "56OJwdKYuNB/ECRykc", "16TLuqyaApjJ1NUEzQfGknUs");
+            DomobAdView adview = new DomobAdView(this, AppConfig.DOMOD_PUBLISH_KEY, AppConfig.DOMOD_PLACEMENT_KEY);
             RelativeLayout layout = (RelativeLayout) findViewById(R.id.ad_content);
             layout.addView(adview, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
                                                                       RelativeLayout.LayoutParams.WRAP_CONTENT));

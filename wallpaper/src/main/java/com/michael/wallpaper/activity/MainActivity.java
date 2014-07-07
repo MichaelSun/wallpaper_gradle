@@ -14,9 +14,6 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import cn.domob.android.ads.DomobAdView;
-import com.google.ads.AdRequest;
-import com.google.ads.AdSize;
-import com.google.ads.AdView;
 import com.jesson.android.widget.Toaster;
 import com.michael.wallpaper.AppConfig;
 import com.michael.wallpaper.R;
@@ -153,8 +150,6 @@ public class MainActivity extends BaseActivity
             startActivity(new Intent(this, SettingActivity.class));
             return true;
         } else if (item.getItemId() == R.id.action_feedback) {
-//            FeedbackAgent agent = new FeedbackAgent(this);
-//            agent.startFeedbackActivity();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -162,15 +157,8 @@ public class MainActivity extends BaseActivity
 
     private void initBannerAd() {
         if (AppConfig.GOOLE_AD_ENABLE) {
-            mAdView = new AdView(this, AdSize.BANNER, "a15368dc3248e7e");
-            RelativeLayout layout = (RelativeLayout) findViewById(R.id.ad_content);
-            // Add the adView to it
-            layout.addView(mAdView, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
-                                                                       RelativeLayout.LayoutParams.WRAP_CONTENT));
-            // Initiate a generic request to load it with an ad
-            mAdView.loadAd(new AdRequest());
         } else if (AppConfig.DOMOD_AD_ENABLE) {
-            DomobAdView adview = new DomobAdView(this, "56OJwdKYuNB/ECRykc", "16TLuqyaApjJ1NUEzQfGknUs");
+            DomobAdView adview = new DomobAdView(this, AppConfig.DOMOD_PUBLISH_KEY, AppConfig.DOMOD_PLACEMENT_KEY);
             RelativeLayout layout = (RelativeLayout) findViewById(R.id.ad_content);
             layout.addView(adview, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
                                                                        RelativeLayout.LayoutParams.WRAP_CONTENT));

@@ -1,6 +1,7 @@
 package com.michael.wallpaper.helper;
 
 import android.content.Context;
+import android.text.TextUtils;
 import com.jesson.android.internet.InternetUtils;
 import com.jesson.android.internet.core.NetWorkException;
 import com.michael.wallpaper.AppConfig;
@@ -118,6 +119,9 @@ public class BelleHelper {
                 if (response.belles != null) {
                     List<LocalBelle> localBelles = new ArrayList<LocalBelle>();
                     for (Belle belle : response.belles) {
+                        if (TextUtils.isEmpty(belle.rawUrl)) {
+                            belle.rawUrl = belle.url;
+                        }
                         LocalBelle localBelle = new LocalBelle(belle.id, belle.time, belle.type, belle.desc, belle.url, belle.rawUrl);
                         localBelles.add(localBelle);
                     }
