@@ -41,6 +41,10 @@ public class BelleApplication extends Application {
         }
 
         AppRuntime.PACKAGE_NAME = getPackageName();
+        if (AppRuntime.PACKAGE_NAME.endsWith(AppConfig.MM_WALLPAPER_PACKAGE_NAMMME)) {
+            //美女壁纸
+            AppConfig.SERIES_MODE = 2;
+        }
 
         Jess.init(this);
         Jess.DEBUG = AppConfig.DEBUG;

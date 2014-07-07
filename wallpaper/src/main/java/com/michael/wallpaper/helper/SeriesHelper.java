@@ -106,7 +106,7 @@ public class SeriesHelper {
             list.add(series15);
             Series series16 = new Series(1006, "迈凯轮", null, 1);
             list.add(series16);
-        } else {
+        } else if (AppConfig.MM_WALLPAPER_PACKAGE_NAMMME.endsWith(AppRuntime.PACKAGE_NAME)) {
             list.add(new Series(1, "性感美女", null, 1));
             list.add(new Series(2, "岛国女友", null, 1));
             list.add(new Series(3, "丝袜美腿", null, 1));

@@ -96,28 +96,28 @@ android.applicationVariants.all { variant ->
         if (flavor == 'MMWallpaper') {
             youmi_apikey = '6142d65763827912'
             youmi_seckey = 'b398417544f954ee'
-            domod_pubkey = '56OJwdKYuNB/ECRykc'
-            domod_replacekey = '16TLuqyaApjJ1NUEzQfGknUs'
+            domod_pubkey = '56OJwdKYuNBjYRcFyA'
+            domod_replacekey = '16TLuqyaApjUsNUE8qiTDk5z'
         }
 
         def file = new File("${projectDir}/src/main/java/com/michael/wallpaper/AppConfig.java");
         def text = file.getText("UTF-8")
-        def src = "YOUMI_APIKEY = \"9fa5ad90d57082ce\""
+        def src = "YOUMI_APIKEY = \".*\""
         def replace = "YOUMI_APIKEY = \"${youmi_apikey}\""
         text = text.replaceAll(src, replace)
         file.write(text, "UTF-8")
 
-        src = "YOUMI_SECRETKEY = \"375f8fffe03aa816\";"
+        src = "YOUMI_SECRETKEY = \".*\";"
         replace = "YOUMI_SECRETKEY = \"${youmi_seckey}\";"
         text = text.replaceAll(src, replace)
         file.write(text, "UTF-8")
 
-        src = "DOMOD_PUBLISH_KEY = \"56OJwdKYuNB/ECRykc\";"
+        src = "DOMOD_PUBLISH_KEY = \".*\";"
         replace = "DOMOD_PUBLISH_KEY = \"${domod_pubkey}\";"
         text = text.replaceAll(src, replace)
         file.write(text, "UTF-8")
 
-        src = "DOMOD_PLACEMENT_KEY = \"16TLuqyaApjJ1NUEzQfGknUs\";"
+        src = "DOMOD_PLACEMENT_KEY = \".*\";"
         replace = "DOMOD_PLACEMENT_KEY = \"${domod_replacekey}\";"
         text = text.replaceAll(src, replace)
         file.write(text, "UTF-8")
