@@ -1,7 +1,9 @@
 package com.michael.wallpaper.activity;
 
 import android.app.Activity;
+import cn.domob.android.ads.DomobAdManager;
 import cn.domob.android.ads.DomobInterstitialAd;
+import cn.domob.android.ads.DomobInterstitialAdListener;
 import com.michael.wallpaper.AppConfig;
 import com.michael.wallpaper.R;
 import com.michael.wallpaper.utils.AppRuntime;
@@ -43,7 +45,49 @@ public class BaseActivity extends Activity {
     protected void initSplashAd() {
         if (AppConfig.GOOLE_AD_ENABLE) {
         } else if (AppConfig.DOMOD_AD_ENABLE) {
-            mDomobInterstitialAd = new DomobInterstitialAd(this, AppConfig.DOMOD_PUBLISH_KEY, AppConfig.DOMOD_PLACEMENT_KEY, DomobInterstitialAd.INTERSITIAL_SIZE_FULL_SCREEN);
+            mDomobInterstitialAd = new DomobInterstitialAd(this, AppConfig.DOMOD_PUBLISH_KEY, AppConfig.DOMOD_INSTER_KEY, DomobInterstitialAd.INTERSITIAL_SIZE_FULL_SCREEN);
+            mDomobInterstitialAd.setInterstitialAdListener(new DomobInterstitialAdListener() {
+                @Override
+                public void onInterstitialAdReady() {
+
+                }
+
+                @Override
+                public void onInterstitialAdFailed(DomobAdManager.ErrorCode errorCode) {
+
+                }
+
+                @Override
+                public void onInterstitialAdPresent() {
+
+                }
+
+                @Override
+                public void onInterstitialAdDismiss() {
+                    mDomobInterstitialAd.loadInterstitialAd();
+                }
+
+                @Override
+                public void onLandingPageOpen() {
+
+                }
+
+                @Override
+                public void onLandingPageClose() {
+
+                }
+
+                @Override
+                public void onInterstitialAdLeaveApplication() {
+
+                }
+
+                @Override
+                public void onInterstitialAdClicked(DomobInterstitialAd domobInterstitialAd) {
+
+                }
+            });
+
             mDomobInterstitialAd.loadInterstitialAd();
         }
     }
@@ -51,9 +95,9 @@ public class BaseActivity extends Activity {
     protected void tryToShwoSplashAd() {
         if (AppConfig.GOOLE_AD_ENABLE) {
         } else if (AppConfig.DOMOD_AD_ENABLE) {
-//            if (mDomobInterstitialAd != null && mDomobInterstitialAd.isInterstitialAdReady()) {
-//                mDomobInterstitialAd.showInterstitialAd(this);
-//            }
+            if (mDomobInterstitialAd != null && mDomobInterstitialAd.isInterstitialAdReady()) {
+                mDomobInterstitialAd.showInterstitialAd(this);
+            }
         }
     }
 

@@ -56,6 +56,10 @@ android {
         BaiduMingXing {
             packageName = 'com.michael.wallpaper.baidumx'
         }
+        
+        BaidduCar {
+            packageName = 'com.michael.carwall'
+        }
     }
 }
 
@@ -82,10 +86,18 @@ android.applicationVariants.all { variant ->
     def label = '@string/app_name'
     if (flavor == 'MMWallpaper') {
         label = '@string/app_name_wallpaper'
+    } else if (flavor == 'BaidduCar') {
+        label = '@string/app_name_car'
+    } else if (flavor == 'BaiduMM') {
+        label = '@string/app_name'
     }
     def icon = '@drawable/ic_launcher'
     if (flavor == 'MMWallpaper') {
         icon = '@drawable/ic_wallpaper'
+    } else if (flavor == 'BaidduCar') {
+        icon = '@drawable/ic_lanucher_car'
+    } else if (flavor == 'BaiduMM') {
+        icon = '@drawable/ic_launcher'
     }
 
     variant.processResources.doFirst {
@@ -93,12 +105,26 @@ android.applicationVariants.all { variant ->
         def youmi_seckey = ''
         def domod_pubkey = ''
         def domod_replacekey = ''
+        def domod_insterkey = ''
         if (flavor == 'MMWallpaper') {
             youmi_apikey = '6142d65763827912'
             youmi_seckey = 'b398417544f954ee'
             domod_pubkey = '56OJwdKYuNBjYRcFyA'
             domod_replacekey = '16TLuqyaApjUsNUE8qiTDk5z'
-        }
+            domod_insterkey = '16TLuqyaApjUsNUE8BiPMA1s'
+        } else if (flavor == 'BaidduCar') {
+            youmi_apikey = '859ff840b668c633'
+            youmi_seckey = '87ed892bb7f8c34a'
+            domod_pubkey = '56OJwdKYuNBxYMSZ84'
+            domod_replacekey = '16TLuqyaApjpsNUE2ljOxxds'
+            domod_insterkey = '16TLuqyaApjpsNUE6s-l6czz'
+        } else if (flavor == 'BaiduMM') {
+            youmi_apikey = '9fa5ad90d57082ce'
+            youmi_seckey = '375f8fffe03aa816'
+            domod_pubkey = '56OJwdKYuNB/ECRykc'
+            domod_replacekey = '16TLuqyaApjJ1NUEzQfGknUs'
+            domod_insterkey = '16TLuqyaApjJ1NUEK2Nkolxk'
+        } 
 
         def file = new File("${projectDir}/src/main/java/com/michael/wallpaper/AppConfig.java");
         def text = file.getText("UTF-8")
@@ -121,6 +147,12 @@ android.applicationVariants.all { variant ->
         replace = "DOMOD_PLACEMENT_KEY = \"${domod_replacekey}\";"
         text = text.replaceAll(src, replace)
         file.write(text, "UTF-8")
+
+        src = "DOMOD_INSTER_KEY = \".*\";"
+        replace = "DOMOD_INSTER_KEY = \"${domod_insterkey}\";"
+        text = text.replaceAll(src, replace)
+        file.write(text, "UTF-8")
+
     }
 
     variant.processManifest.doLast {
