@@ -22,6 +22,16 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.GET_TASKS"/>
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_LOGS"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+
     <application
         android:name=".BelleApplication"
         android:allowBackup="true"
@@ -88,6 +98,12 @@
             android:name="net.youmi.android.offers.OffersReceiver"
             android:exported="false">
         </receiver>
+
+        <!-- 友盟统计 -->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="53bc037856240bcf79105585">
+        </meta-data>
 
         <!-- youmi channel --><!--<meta-data android:name="YOUMI_CHANNEL"--><!--android:value="这里替换为非负整数的渠道号" >--><!--</meta-data>-->
 

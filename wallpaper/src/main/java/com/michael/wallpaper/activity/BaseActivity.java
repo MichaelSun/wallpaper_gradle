@@ -7,6 +7,7 @@ import cn.domob.android.ads.DomobInterstitialAdListener;
 import com.michael.wallpaper.AppConfig;
 import com.michael.wallpaper.R;
 import com.michael.wallpaper.utils.AppRuntime;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * Created by zhangdi on 14-3-5.
@@ -18,11 +19,15 @@ public class BaseActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        MobclickAgent.onResume(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+
+        MobclickAgent.onPause(this);
     }
 
     @Override

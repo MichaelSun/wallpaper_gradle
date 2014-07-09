@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,9 +23,9 @@ import com.michael.wallpaper.fragment.NavigationDrawerFragment;
 import com.michael.wallpaper.fragment.PhotoStreamFragment;
 import com.michael.wallpaper.helper.SeriesHelper;
 import com.michael.wallpaper.setting.Setting;
+import com.umeng.analytics.MobclickAgent;
 import net.youmi.android.offers.OffersManager;
 import net.youmi.android.offers.PointsManager;
-import net.youmi.android.spot.SpotManager;
 
 import java.util.List;
 
@@ -45,6 +46,8 @@ public class MainActivity extends BaseActivity
 
     private Series mSeries;
 
+    private boolean mOpenWall;
+
 //    private InterstitialAd iad;
 
     @Override
@@ -52,7 +55,7 @@ public class MainActivity extends BaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        SpotManager.getInstance(this).loadSpotAds();
+        MobclickAgent.updateOnlineConfig(this.getApplicationContext());
 
         initBannerAd();
         initInterstitialAd();
@@ -63,15 +66,26 @@ public class MainActivity extends BaseActivity
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
         OffersManager.getInstance(getApplicationContext()).onAppLaunch();
+
+        String data = MobclickAgent.getConfigParams(this.getApplicationContext(), "open_wall");
+        if (!TextUtils.isEmpty(data) && data.endsWith("true")) {
+            mOpenWall = true;
+        } else {
+            mOpenWall = false;
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-
         tryToShwoSplashAd();
 
-//        SpotManager.getInstance(this).showSpotAds(this);
+        String data = MobclickAgent.getConfigParams(this.getApplicationContext(), "open_wall");
+        if (!TextUtils.isEmpty(data) && data.endsWith("true")) {
+            mOpenWall = true;
+        } else {
+            mOpenWall = false;
+        }
     }
 
     @Override
@@ -102,7 +116,7 @@ public class MainActivity extends BaseActivity
             }
         } else {
             //检查是否积分已购
-            if (mSeries.getProperty() == 0) {
+            if (mOpenWall && mSeries.getProperty() == 0) {
                 //隐藏属性
                 int point = PointsManager.getInstance(this).queryPoints();
                 if (point < 60) {
