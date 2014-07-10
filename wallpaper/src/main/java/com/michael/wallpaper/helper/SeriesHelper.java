@@ -42,7 +42,8 @@ public class SeriesHelper {
         }
         mSeriesList.addAll(localSeries());
 
-        if (AppConfig.BAIDU_SOURCE_MM_PACKAGE_NAME.endsWith(AppRuntime.PACKAGE_NAME)) {
+        if (AppConfig.BAIDU_SOURCE_MM_PACKAGE_NAME.endsWith(AppRuntime.PACKAGE_NAME)
+            || AppConfig.CAR_PACKAGE_NAME.endsWith(AppRuntime.PACKAGE_NAME)) {
             EventBus.getDefault().post(new SeriesUpdatedEvent());
             return;
         }
@@ -94,18 +95,21 @@ public class SeriesHelper {
             list.add(new Series("素颜".hashCode(), "素颜", "美女", 0));
             list.add(new Series("高雅大气很有范".hashCode(), "高雅大气很有范", "美女", 0));
         } else if (AppConfig.CAR_PACKAGE_NAME.endsWith(AppRuntime.PACKAGE_NAME)) {
-            Series series11 = new Series(1001, "兰博基尼", null, 1);
-            list.add(series11);
-            Series series12 = new Series(1002, "宝马", null, 1);
-            list.add(series12);
-            Series series13 = new Series(1003, "玛莎拉蒂", null, 1);
-            list.add(series13);
-            Series series14 = new Series(1004, "奔驰", null, 1);
-            list.add(series14);
-            Series series15 = new Series(1005, "法拉利", null, 1);
-            list.add(series15);
-            Series series16 = new Series(1006, "迈凯轮", null, 1);
-            list.add(series16);
+            list.add(new Series("名车".hashCode(), "名车", "汽车", 1));
+            list.add(new Series("汽车图解".hashCode(), "汽车图解", "汽车", 1));
+            list.add(new Series("高清壁纸".hashCode(), "高清壁纸", "汽车", 1));
+            list.add(new Series("跑车".hashCode(), "跑车", "汽车", 1));
+            list.add(new Series("法拉利".hashCode(), "法拉利", "汽车", 1));
+            list.add(new Series("玛莎拉蒂".hashCode(), "玛莎拉蒂", "汽车", 1));
+            list.add(new Series("兰博基尼".hashCode(), "兰博基尼", "汽车", 1));
+            list.add(new Series("保时捷".hashCode(), "保时捷", "汽车", 0));
+            list.add(new Series("宝马".hashCode(), "宝马", "汽车", 0));
+            list.add(new Series("概念车".hashCode(), "概念车", "汽车", 0));
+            list.add(new Series("奔驰".hashCode(), "奔驰", "汽车", 0));
+            list.add(new Series("阿斯顿.马丁".hashCode(), "阿斯顿.马丁", "汽车", 0));
+            list.add(new Series("老爷车".hashCode(), "老爷车", "汽车", 0));
+            list.add(new Series("SUV越野车".hashCode(), "SUV越野车", "汽车", 0));
+            list.add(new Series("北京车展".hashCode(), "北京车展", "汽车", 0));
         } else if (AppConfig.MM_WALLPAPER_PACKAGE_NAMMME.endsWith(AppRuntime.PACKAGE_NAME)) {
             list.add(new Series(1, "性感美女", null, 1));
             list.add(new Series(2, "岛国女友", null, 1));

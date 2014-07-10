@@ -15,10 +15,12 @@ import android.view.*;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import com.michael.wallpaper.AppConfig;
 import com.michael.wallpaper.R;
 import com.michael.wallpaper.dao.model.Series;
 import com.michael.wallpaper.event.SeriesUpdatedEvent;
 import com.michael.wallpaper.helper.SeriesHelper;
+import com.michael.wallpaper.utils.AppRuntime;
 import de.greenrobot.event.EventBus;
 
 import java.util.List;
@@ -269,7 +271,19 @@ public class NavigationDrawerFragment extends Fragment {
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setTitle(R.string.app_name);
+        actionBar.setTitle(getTitleNameByPackageName());
+    }
+
+    protected String getTitleNameByPackageName() {
+        if (AppRuntime.PACKAGE_NAME.endsWith(AppConfig.BAIDU_SOURCE_MM_PACKAGE_NAME)) {
+            return getString(R.string.app_name);
+        } else if (AppRuntime.PACKAGE_NAME.endsWith(AppConfig.CAR_PACKAGE_NAME)) {
+            return getString(R.string.app_name_car);
+        } else if (AppRuntime.PACKAGE_NAME.endsWith(AppConfig.MM_WALLPAPER_PACKAGE_NAMMME)) {
+            return getString(R.string.app_name_wallpaper);
+        }
+
+        return getString(R.string.app_name);
     }
 
     private ActionBar getActionBar() {

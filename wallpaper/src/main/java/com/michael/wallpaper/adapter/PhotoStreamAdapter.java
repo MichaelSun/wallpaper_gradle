@@ -2,12 +2,14 @@ package com.michael.wallpaper.adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import com.michael.wallpaper.R;
 import com.michael.wallpaper.api.belle.Belle;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -58,6 +60,14 @@ public class PhotoStreamAdapter extends BaseAdapter {
         }
 
         String photoUri = mBelles.get(i).url;
+        String desc = mBelles.get(i).desc;
+
+        if (TextUtils.isEmpty(desc)) {
+            holder.textView.setVisibility(View.GONE);
+        } else {
+            holder.textView.setVisibility(View.VISIBLE);
+            holder.textView.setText(desc);
+        }
 
         holder.progressBar.setVisibility(View.GONE);
 
@@ -92,9 +102,12 @@ public class PhotoStreamAdapter extends BaseAdapter {
 
         public ProgressBar progressBar;
 
+        public TextView textView;
+
         public ViewHolder(View rootView) {
             photo = (ImageView) rootView.findViewById(R.id.photo);
             progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
+            textView = (TextView) rootView.findViewById(R.id.desc);
         }
 
     }

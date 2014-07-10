@@ -25,6 +25,12 @@ public class BaiduItem {
     @JsonProperty("isAdapted")
     public int isAdapted;
 
+    @JsonProperty("image_width")
+    public int image_width;
+
+    @JsonProperty("image_height")
+    public int image_height;
+
     @Override
     public String toString() {
         return "BaiduItem{" +
@@ -34,6 +40,8 @@ public class BaiduItem {
                    ", thumbnail_url='" + thumbnail_url + '\'' +
                    ", thumb_large_url='" + thumb_large_url + '\'' +
                    ", isAdapted=" + isAdapted +
+                   ", image_width=" + image_width +
+                   ", image_height=" + image_height +
                    '}';
     }
 }

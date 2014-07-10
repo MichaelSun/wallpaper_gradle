@@ -3,6 +3,7 @@ package com.michael.wallpaper.fragment;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -122,7 +123,15 @@ public class PhotoStreamFragment extends Fragment implements OnRefreshListener {
                 for (Belle belle : mBelles) {
                     rawUrlList.add(belle.rawUrl);
                 }
-                GalleryActivity.startViewLarge(getActivity(), mSeries.getTitle(), uriList, rawUrlList, i);
+                ArrayList<String> descList = new ArrayList<String>();
+                for (Belle belle : mBelles) {
+                    if (TextUtils.isEmpty(belle.desc)) {
+                        descList.add("");
+                    } else {
+                        descList.add(belle.desc);
+                    }
+                }
+                GalleryActivity.startViewLarge(getActivity(), mSeries.getTitle(), uriList, rawUrlList, descList, i);
             }
         });
 

@@ -24,6 +24,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
         setContentView(R.layout.activity_setting);
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setIcon(getIconResByPackageName());
 
         mClearTv = (TextView) findViewById(R.id.clear);
         mClearTv.setOnClickListener(this);

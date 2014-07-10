@@ -92,7 +92,8 @@ public class BelleHelper {
                 if (AppRuntime.PACKAGE_NAME.endsWith(AppConfig.BAIDU_SOURCE_MM_PACKAGE_NAME)) {
                     getBaiduItems(startNum, count, category, title);
                 } else if (AppRuntime.PACKAGE_NAME.endsWith(AppConfig.CAR_PACKAGE_NAME)) {
-                    getNoramlItems(type, count);
+//                    getNoramlItems(type, count);
+                    getBaiduItems(startNum, count, category, title);
                 } else if (AppRuntime.PACKAGE_NAME.endsWith(AppConfig.MM_WALLPAPER_PACKAGE_NAMMME)) {
                     getNoramlItems(type, count);
                 }

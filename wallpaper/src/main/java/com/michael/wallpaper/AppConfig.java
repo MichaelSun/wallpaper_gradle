@@ -13,16 +13,18 @@ public class AppConfig {
 
     public static final boolean DOMOD_AD_ENABLE = true;
 
+    public static final long MAX_IMAGE_MEMORY = ((long) 720) * 720 * 4 / 1024;
+
     //pacakgeName list
     public static final String BAIDU_SOURCE_MM_PACKAGE_NAME = "com.michael.wallpaper.baidumm";
     public static final String CAR_PACKAGE_NAME = "com.michael.carwall";
     public static final String MM_WALLPAPER_PACKAGE_NAMMME = "com.michael.wallpaper";
 
-    public static final String YOUMI_APIKEY = "9fa5ad90d57082ce";
-    public static final String YOUMI_SECRETKEY = "375f8fffe03aa816";
+    public static final String YOUMI_APIKEY = "859ff840b668c633";
+    public static final String YOUMI_SECRETKEY = "87ed892bb7f8c34a";
 
-    public static final String DOMOD_PUBLISH_KEY = "56OJwdKYuNB/ECRykc";
-    public static final String DOMOD_PLACEMENT_KEY = "16TLuqyaApjJ1NUEzQfGknUs";
-    public static final String DOMOD_INSTER_KEY = "16TLuqyaApjJ1NUEK2Nkolxk";
+    public static final String DOMOD_PUBLISH_KEY = "56OJwdKYuNBxYMSZ84";
+    public static final String DOMOD_PLACEMENT_KEY = "16TLuqyaApjpsNUE2ljOxxds";
+    public static final String DOMOD_INSTER_KEY = "16TLuqyaApjpsNUE6s-l6czz";
 
 }

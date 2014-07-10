@@ -3,6 +3,7 @@ package com.michael.wallpaper.api.baidu;
 import android.text.TextUtils;
 import com.jesson.android.internet.core.ResponseBase;
 import com.jesson.android.internet.core.json.JsonProperty;
+import com.michael.wallpaper.AppConfig;
 import com.michael.wallpaper.api.belle.Belle;
 
 import java.util.ArrayList;
@@ -55,6 +56,11 @@ public class BaiduListResponse extends ResponseBase {
                 belle.desc = item.desc;
                 belle.url = item.thumb_large_url;
                 belle.rawUrl = item.image_url;
+
+                if ((item.image_height * item.image_width * 4) / 1024 < AppConfig.MAX_IMAGE_MEMORY) {
+                    belle.url = item.image_url;
+                }
+
                 ret.add(belle);
             }
         }

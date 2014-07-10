@@ -181,7 +181,7 @@ public class MainActivity extends BaseActivity
             DomobAdView adview = new DomobAdView(this, AppConfig.DOMOD_PUBLISH_KEY, AppConfig.DOMOD_PLACEMENT_KEY);
             RelativeLayout layout = (RelativeLayout) findViewById(R.id.ad_content);
             layout.addView(adview, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
-                                                                       RelativeLayout.LayoutParams.WRAP_CONTENT));
+                                                                      RelativeLayout.LayoutParams.WRAP_CONTENT));
         }
     }
 

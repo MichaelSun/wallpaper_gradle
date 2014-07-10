@@ -15,6 +15,7 @@ import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
@@ -29,7 +30,6 @@ import com.michael.wallpaper.adapter.GalleryAdapter;
 import com.michael.wallpaper.helper.CollectHelper;
 import com.michael.wallpaper.utils.AppRuntime;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import net.youmi.android.spot.SpotManager;
 import org.apache.http.Header;
 
 import java.io.File;
@@ -41,6 +41,7 @@ public class GalleryActivity extends BaseActivity {
     private static final String EXTRA_TITLE = "title";
     private static final String EXTRA_PHOTO_URI_LIST = "photo_uri_list";
     private static final String EXTRA_PHOTO_RAW_URI_LIST = "photo_raw_uri_list";
+    private static final String EXTRA_PHOTO_DESC_LIST = "desc_list";
     private static final String EXTRA_POSITION = "position";
 
     private TextView mPaginationTv;
@@ -51,6 +52,7 @@ public class GalleryActivity extends BaseActivity {
 
     private ArrayList<String> mPhotoUriList;
     private ArrayList<String> mPhotoRawUrlList;
+    private ArrayList<String> mDescList;
     private String mTitle;
     private int mPosition;
     private int mSwitchCount = 0;
@@ -61,7 +63,7 @@ public class GalleryActivity extends BaseActivity {
 
     private ProgressDialog mProgressDialog;
 
-//    private InterstitialAd iad;
+    private TextView mDescTV;
 
     private static final int WHAT_SAVE_SUCCESS = 1000;
     private static final int WHAT_SAVE_FAIL = 2000;
@@ -91,11 +93,15 @@ public class GalleryActivity extends BaseActivity {
         }
     };
 
-    public static void startViewLarge(Context context, String title, ArrayList<String> uriList, ArrayList<String> rawUrlList, int position) {
+    public static void startViewLarge(Context context, String title, ArrayList<String> uriList
+                                         , ArrayList<String> rawUrlList
+                                         , ArrayList<String> descList
+                                         , int position) {
         Intent intent = new Intent(context, GalleryActivity.class);
         intent.putExtra(EXTRA_TITLE, title);
         intent.putStringArrayListExtra(EXTRA_PHOTO_URI_LIST, uriList);
         intent.putStringArrayListExtra(EXTRA_PHOTO_RAW_URI_LIST, rawUrlList);
+        intent.putStringArrayListExtra(EXTRA_PHOTO_DESC_LIST, descList);
         intent.putExtra(EXTRA_POSITION, position);
         context.startActivity(intent);
 
@@ -106,7 +112,6 @@ public class GalleryActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_large);
-
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         mProgressDialog.setCanceledOnTouchOutside(false);
@@ -118,11 +123,13 @@ public class GalleryActivity extends BaseActivity {
         if (savedInstanceState != null) {
             mPhotoUriList = savedInstanceState.getStringArrayList(EXTRA_PHOTO_URI_LIST);
             mPhotoRawUrlList = savedInstanceState.getStringArrayList(EXTRA_PHOTO_RAW_URI_LIST);
+            mDescList = savedInstanceState.getStringArrayList(EXTRA_PHOTO_DESC_LIST);
             mTitle = savedInstanceState.getString(EXTRA_TITLE);
             mPosition = savedInstanceState.getInt(EXTRA_POSITION);
         } else {
             mPhotoUriList = getIntent().getStringArrayListExtra(EXTRA_PHOTO_URI_LIST);
             mPhotoRawUrlList = getIntent().getStringArrayListExtra(EXTRA_PHOTO_RAW_URI_LIST);
+            mDescList = getIntent().getStringArrayListExtra(EXTRA_PHOTO_DESC_LIST);
             mTitle = getIntent().getStringExtra(EXTRA_TITLE);
             mPosition = getIntent().getIntExtra(EXTRA_POSITION, 0);
         }
@@ -132,6 +139,7 @@ public class GalleryActivity extends BaseActivity {
         mShareIntent = getDefaultIntent();
 
         mPaginationTv = (TextView) findViewById(R.id.pagination);
+        mDescTV = (TextView) findViewById(R.id.desc);
 
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
         mPagerAdapter = new GalleryAdapter(this, mPhotoUriList);
@@ -150,6 +158,15 @@ public class GalleryActivity extends BaseActivity {
 
                 if (++mSwitchCount % 10 == 0) {
 //                    iad.loadAd();
+                }
+
+                if (mDescList != null && mDescList.size() > position) {
+                    if (TextUtils.isEmpty(mDescList.get(position))) {
+                        mDescTV.setVisibility(View.GONE);
+                    } else {
+                        mDescTV.setVisibility(View.VISIBLE);
+                        mDescTV.setText(mDescList.get(position));
+                    }
                 }
 
                 String url = getCurrentUrl();

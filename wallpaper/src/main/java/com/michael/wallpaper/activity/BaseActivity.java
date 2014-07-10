@@ -39,7 +39,7 @@ public class BaseActivity extends Activity {
         if (AppRuntime.PACKAGE_NAME.endsWith(AppConfig.BAIDU_SOURCE_MM_PACKAGE_NAME)) {
             return R.drawable.ic_launcher;
         } else if (AppRuntime.PACKAGE_NAME.endsWith(AppConfig.CAR_PACKAGE_NAME)) {
-            return R.drawable.ic_launcher;
+            return R.drawable.ic_lanucher_car;
         } else if (AppRuntime.PACKAGE_NAME.endsWith(AppConfig.MM_WALLPAPER_PACKAGE_NAMMME)) {
             return R.drawable.ic_wallpaper;
         }

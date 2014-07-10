@@ -133,9 +133,9 @@
 
     <integer-array name="gplus_colors">
         <item>@color/logo_color</item>
+        <item>@color/download_size</item>
         <item>@color/widget_post_disable</item>
-        <item>@color/logo_color</item>
-        <item>@color/widget_post_disable</item>
+        <item>@color/green</item>
     </integer-array>
 
 </resources>
