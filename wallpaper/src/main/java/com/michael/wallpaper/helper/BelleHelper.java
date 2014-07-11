@@ -85,17 +85,19 @@ public class BelleHelper {
      * @param type
      * @param count
      */
-    public void randomGetBelleListFromServer(final int type, final int startNum, final int count, final String category, final String title) {
+    public void randomGetBelleListFromServer(final int type, final int startNum, final int count, final String category, final String title, final String tag3) {
         new Thread() {
             @Override
             public void run() {
                 if (AppRuntime.PACKAGE_NAME.endsWith(AppConfig.BAIDU_SOURCE_MM_PACKAGE_NAME)) {
-                    getBaiduItems(startNum, count, category, title);
+                    getBaiduItems(startNum, count, category, title, tag3);
                 } else if (AppRuntime.PACKAGE_NAME.endsWith(AppConfig.CAR_PACKAGE_NAME)) {
 //                    getNoramlItems(type, count);
-                    getBaiduItems(startNum, count, category, title);
+                    getBaiduItems(startNum, count, category, title, tag3);
                 } else if (AppRuntime.PACKAGE_NAME.endsWith(AppConfig.MM_WALLPAPER_PACKAGE_NAMMME)) {
                     getNoramlItems(type, count);
+                } else if (AppRuntime.PACKAGE_NAME.endsWith(AppConfig.BAIDU_WALLPAPER_PACKAGE_NAMMME)) {
+                    getBaiduItems(startNum, count, category, title, tag3);
                 }
             }
         }.start();
@@ -150,9 +152,9 @@ public class BelleHelper {
         }
     }
 
-    private void getBaiduItems(int pageNum, int pageCount, String category, String title) {
+    private void getBaiduItems(int pageNum, int pageCount, String category, String title, String tag3) {
         try {
-            BaiduListRequest request = new BaiduListRequest(pageNum, pageCount, category, title);
+            BaiduListRequest request = new BaiduListRequest(pageNum, pageCount, category, title, tag3);
             BaiduListResponse response = InternetUtils.request(mContext, request);
             if (response != null) {
 

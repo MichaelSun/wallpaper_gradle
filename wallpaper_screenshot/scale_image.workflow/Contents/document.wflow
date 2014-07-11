@@ -52,10 +52,10 @@
 				<dict>
 					<key>fileNames</key>
 					<array>
-						<string>~/Desktop/device-2014-07-06-222314.png</string>
-						<string>~/Desktop/device-2014-07-06-222346.png</string>
-						<string>~/Desktop/device-2014-07-06-222422.png</string>
-						<string>~/Desktop/device-2014-07-06-222443.png</string>
+						<string>~/Desktop/device-2014-07-11-130726.png</string>
+						<string>~/Desktop/device-2014-07-11-130739.png</string>
+						<string>~/Desktop/device-2014-07-11-130844.png</string>
+						<string>~/Desktop/device-2014-07-11-130900.png</string>
 					</array>
 				</dict>
 				<key>BundleIdentifier</key>
@@ -105,8 +105,6 @@
 						<string>0</string>
 					</dict>
 				</dict>
-				<key>conversionLabel</key>
-				<integer>0</integer>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
@@ -187,7 +185,7 @@
 				<key>Class Name</key>
 				<string>AMScaleImagesAction</string>
 				<key>InputUUID</key>
-				<string>08D403DE-92E8-4B65-9D7E-202015E9003C</string>
+				<string>BFB5139D-8C73-4173-A8D0-646B9013E03F</string>
 				<key>Keywords</key>
 				<array>
 					<string>Image</string>
@@ -196,9 +194,9 @@
 					<string>Change</string>
 				</array>
 				<key>OutputUUID</key>
-				<string>DCBB4F46-50F3-4378-A3F4-BD26E19954F2</string>
+				<string>B447A73F-8037-4B22-A7B2-04E11576C169</string>
 				<key>UUID</key>
-				<string>8AB0C01C-243A-4CBE-9269-424F6D530CB3</string>
+				<string>62AD0EF8-C497-463B-A1CB-80F753656A40</string>
 				<key>UnlocalizedApplications</key>
 				<array>
 					<string>Preview</string>
@@ -273,12 +271,12 @@
 	</array>
 	<key>connectors</key>
 	<dict>
-		<key>B3EC897F-AB59-4DEF-A3A0-E3236C69257A</key>
+		<key>8A52755F-92B8-4439-80A2-DF8A63AA46EA</key>
 		<dict>
 			<key>from</key>
 			<string>7C855797-06F8-4760-9DD4-6EC8876289D0 - 7C855797-06F8-4760-9DD4-6EC8876289D0</string>
 			<key>to</key>
-			<string>8AB0C01C-243A-4CBE-9269-424F6D530CB3 - 8AB0C01C-243A-4CBE-9269-424F6D530CB3</string>
+			<string>62AD0EF8-C497-463B-A1CB-80F753656A40 - 62AD0EF8-C497-463B-A1CB-80F753656A40</string>
 		</dict>
 	</dict>
 	<key>workflowMetaData</key>

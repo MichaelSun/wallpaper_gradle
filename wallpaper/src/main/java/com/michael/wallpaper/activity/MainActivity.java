@@ -140,6 +140,8 @@ public class MainActivity extends BaseActivity
         mTitle = series.getTitle();
     }
 
+
+
     public void restoreActionBar() {
         ActionBar actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);

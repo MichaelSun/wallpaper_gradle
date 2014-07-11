@@ -155,7 +155,7 @@ public class PhotoStreamFragment extends Fragment implements OnRefreshListener {
         } else {
             mPageStartIndex = 0;
         }
-        mBelleHelper.randomGetBelleListFromServer(mSeries.getType(), mPageStartIndex, PAGE_COUNT, mSeries.getCategory(), mSeries.getTitle());
+        mBelleHelper.randomGetBelleListFromServer(mSeries.getType(), mPageStartIndex, PAGE_COUNT, mSeries.getCategory(), mSeries.getTitle(), mSeries.getTag3());
         ((MainActivity) getActivity()).onRefresh();
     }
 
@@ -169,7 +169,7 @@ public class PhotoStreamFragment extends Fragment implements OnRefreshListener {
                     mPageStartIndex = 0;
                 }
                 mPullToRefreshLayout.setRefreshing(true);
-                mBelleHelper.randomGetBelleListFromServer(mSeries.getType(), mPageStartIndex, PAGE_COUNT, mSeries.getCategory(), mSeries.getTitle());
+                mBelleHelper.randomGetBelleListFromServer(mSeries.getType(), mPageStartIndex, PAGE_COUNT, mSeries.getCategory(), mSeries.getTitle(), mSeries.getTag3());
                 ((MainActivity) getActivity()).onRefresh();
             }
             return true;
@@ -199,7 +199,7 @@ public class PhotoStreamFragment extends Fragment implements OnRefreshListener {
                     mGetBelleListEvent = null;
                     mPageStartIndex = 0;
                     mPullToRefreshLayout.setRefreshing(true);
-                    mBelleHelper.randomGetBelleListFromServer(mSeries.getType(), mPageStartIndex, PAGE_COUNT, mSeries.getCategory(), mSeries.getTitle());
+                    mBelleHelper.randomGetBelleListFromServer(mSeries.getType(), mPageStartIndex, PAGE_COUNT, mSeries.getCategory(), mSeries.getTitle(), mSeries.getTag3());
                     ((MainActivity) getActivity()).onRefresh();
                 }
             }

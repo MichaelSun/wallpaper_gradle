@@ -53,8 +53,8 @@ android {
             packageName = 'com.michael.wallpaper.baidumm'
         }
 
-        BaiduMingXing {
-            packageName = 'com.michael.wallpaper.baidumx'
+        BaiduWallpaper {
+            packageName = 'com.michael.baidu.wallpaper'
         }
         
         BaidduCar {
@@ -90,6 +90,8 @@ android.applicationVariants.all { variant ->
         label = '@string/app_name_car'
     } else if (flavor == 'BaiduMM') {
         label = '@string/app_name'
+    } else if (flavor == 'BaiduWallpaper') {
+        label = '@string/app_name_baiduwallpaper'
     }
     def icon = '@drawable/ic_launcher'
     if (flavor == 'MMWallpaper') {
@@ -98,6 +100,8 @@ android.applicationVariants.all { variant ->
         icon = '@drawable/ic_lanucher_car'
     } else if (flavor == 'BaiduMM') {
         icon = '@drawable/ic_launcher'
+    } else if (flavor == 'BaiduWallpaper') {
+        icon = '@drawable/ic_baidu_wallpaper'
     }
 
     variant.processResources.doFirst {
@@ -124,7 +128,14 @@ android.applicationVariants.all { variant ->
             domod_pubkey = '56OJwdKYuNB/ECRykc'
             domod_replacekey = '16TLuqyaApjJ1NUEzQfGknUs'
             domod_insterkey = '16TLuqyaApjJ1NUEK2Nkolxk'
-        } 
+        } else if (flavor == 'BaiduWallpaper') {
+            youmi_apikey = 'e58196077781ef32'
+            youmi_seckey = 'a4bf9c01789b9fe6'
+            domod_pubkey = '56OJwdKYuNBsUBUV3t'
+            domod_replacekey = '16TLuqyaApjOANUEnJSE8aas'
+            domod_insterkey = '16TLuqyaApjOANUEnLG7Cuoi'
+
+        }
 
         def file = new File("${projectDir}/src/main/java/com/michael/wallpaper/AppConfig.java");
         def text = file.getText("UTF-8")

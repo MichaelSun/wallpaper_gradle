@@ -11,6 +11,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.text.TextUtils;
 import android.view.*;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -114,7 +115,11 @@ public class NavigationDrawerFragment extends Fragment {
         });
         String[] titles = new String[mSeriesList.size()];
         for (int i = 0; i < mSeriesList.size(); i++) {
-            titles[i] = mSeriesList.get(i).getTitle();
+            if (!TextUtils.isEmpty(mSeriesList.get(i).getTag3())) {
+                titles[i] = mSeriesList.get(i).getTitle() + "-" + mSeriesList.get(i).getTag3();
+            } else {
+                titles[i] = mSeriesList.get(i).getTitle();
+            }
         }
         mDrawerListView.setAdapter(new ArrayAdapter<String>(getActionBar().getThemedContext(),
                                                                R.layout.drawer_list_item,
@@ -281,6 +286,8 @@ public class NavigationDrawerFragment extends Fragment {
             return getString(R.string.app_name_car);
         } else if (AppRuntime.PACKAGE_NAME.endsWith(AppConfig.MM_WALLPAPER_PACKAGE_NAMMME)) {
             return getString(R.string.app_name_wallpaper);
+        } else if (AppRuntime.PACKAGE_NAME.endsWith(AppConfig.BAIDU_WALLPAPER_PACKAGE_NAMMME)) {
+            return getString(R.string.app_name_baiduwallpaper);
         }
 
         return getString(R.string.app_name);

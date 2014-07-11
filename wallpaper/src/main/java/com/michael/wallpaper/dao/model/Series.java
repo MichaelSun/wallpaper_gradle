@@ -13,6 +13,7 @@ public class Series implements java.io.Serializable {
     /** Not-null value. */
     private String title;
     private String category;
+    private String tag3;
     private Integer property;
 
     // KEEP FIELDS - put your custom fields here
@@ -21,10 +22,11 @@ public class Series implements java.io.Serializable {
     public Series() {
     }
 
-    public Series(int type, String title, String category, Integer property) {
+    public Series(int type, String title, String category, String tag3, Integer property) {
         this.type = type;
         this.title = title;
         this.category = category;
+        this.tag3 = tag3;
         this.property = property;
     }
 
@@ -52,6 +54,14 @@ public class Series implements java.io.Serializable {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getTag3() {
+        return tag3;
+    }
+
+    public void setTag3(String tag3) {
+        this.tag3 = tag3;
     }
 
     public Integer getProperty() {

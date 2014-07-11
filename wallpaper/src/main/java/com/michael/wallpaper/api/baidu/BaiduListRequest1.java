@@ -1,18 +1,16 @@
 package com.michael.wallpaper.api.baidu;
 
 import com.jesson.android.internet.core.annotations.HttpMethod;
-import com.jesson.android.internet.core.annotations.OptionalParam;
 import com.jesson.android.internet.core.annotations.RequiredParam;
 import com.jesson.android.internet.core.annotations.RestMethodUrl;
 import com.michael.wallpaper.api.BelleRequestBase;
 
 /**
- * Created by michael on 14-7-5.
+ * Created by michael on 14-7-10.
  */
-
 @RestMethodUrl("http://image.baidu.com/channel/listjson")
 @HttpMethod("GET")
-public class BaiduListRequest extends BelleRequestBase<BaiduListResponse> {
+public class BaiduListRequest1 extends BelleRequestBase<BaiduListResponse> {
 
     @RequiredParam("pn")
     private int pageName;
@@ -27,21 +25,14 @@ public class BaiduListRequest extends BelleRequestBase<BaiduListResponse> {
     @RequiredParam("tag2")
     private String title;
 
-    @OptionalParam("tag3")
+    @RequiredParam("tag3")
     private String tag3;
 
-    public BaiduListRequest(int pageName, int pageSize, String category, String title, String tag3) {
+    public BaiduListRequest1(int pageName, int pageSize, String tag1, String tag2, String tag3) {
         this.pageName = pageName;
         this.pageSize = pageSize;
-        this.category = category;
-        this.title = title;
+        this.category = tag1;
+        this.title = tag2;
         this.tag3 = tag3;
-    }
-
-    public BaiduListRequest(int pageName, int pageSize, String category, String title) {
-        this.pageName = pageName;
-        this.pageSize = pageSize;
-        this.category = category;
-        this.title = title;
     }
 }

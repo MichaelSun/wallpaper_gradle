@@ -4,6 +4,7 @@
     <string name="app_name">百度美眉</string>
     <string name="app_name_wallpaper">美女壁纸</string>
     <string name="app_name_car">百度名车</string>
+    <string name="app_name_baiduwallpaper">百度壁纸</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -13,13 +14,13 @@
     <string name="action_refresh">刷新</string>
     <string name="action_more">更多</string>
 
-    <string name="action_save_gallery">保存到相册</string>
+    <string name="action_save_gallery">下载高清</string>
     <string name="save_gallery_success">成功保存到相册</string>
     <string name="save_gallery_fail">保存到相册失败</string>
 
     <string name="action_wallpaper">设为壁纸</string>
     <string name="set_wallpaper_success">成功设为壁纸</string>
-    <string name="set_wallpaper_fail">设为壁纸失败,请先保存壁纸到相册</string>
+    <string name="set_wallpaper_fail">设为壁纸失败,请先下载高清壁纸到相册</string>
 
     <string name="action_collect">收藏</string>
     <string name="action_cancel_collect">取消收藏</string>
