@@ -137,7 +137,11 @@ public class MainActivity extends BaseActivity
     }
 
     public void onSectionAttached(Series series) {
-        mTitle = series.getTitle();
+        if (!TextUtils.isEmpty(series.getTag3())) {
+            mTitle = series.getTitle() + "-" + series.getTag3();
+        } else {
+            mTitle = series.getTitle();
+        }
     }
 
 

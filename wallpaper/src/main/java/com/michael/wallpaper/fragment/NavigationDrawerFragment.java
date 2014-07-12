@@ -311,7 +311,11 @@ public class NavigationDrawerFragment extends Fragment {
         mSeriesList = SeriesHelper.getInstance().getSeriesList();
         String[] titles = new String[mSeriesList.size()];
         for (int i = 0; i < mSeriesList.size(); i++) {
-            titles[i] = mSeriesList.get(i).getTitle();
+            if (!TextUtils.isEmpty(mSeriesList.get(i).getTag3())) {
+                titles[i] = mSeriesList.get(i).getTitle() + "-" + mSeriesList.get(i).getTag3();
+            } else {
+                titles[i] = mSeriesList.get(i).getTitle();
+            }
         }
         mCurrentSelectedPosition = 0;
         mDrawerListView.setAdapter(new ArrayAdapter<String>(getActionBar().getThemedContext(),

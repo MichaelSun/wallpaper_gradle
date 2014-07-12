@@ -142,7 +142,8 @@ public class GalleryActivity extends BaseActivity {
         mDescTV = (TextView) findViewById(R.id.desc);
 
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
-        mPagerAdapter = new GalleryAdapter(this, mPhotoUriList);
+//        mPagerAdapter = new GalleryAdapter(this, mPhotoUriList);
+        mPagerAdapter = new GalleryAdapter(this, mPhotoRawUrlList);
         mViewPager.setAdapter(mPagerAdapter);
 
         mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {

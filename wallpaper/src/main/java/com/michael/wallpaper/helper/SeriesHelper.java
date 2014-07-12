@@ -42,8 +42,9 @@ public class SeriesHelper {
         }
         mSeriesList.addAll(localSeries());
 
-        if (AppConfig.BAIDU_SOURCE_MM_PACKAGE_NAME.endsWith(AppRuntime.PACKAGE_NAME)
-            || AppConfig.CAR_PACKAGE_NAME.endsWith(AppRuntime.PACKAGE_NAME)) {
+        if (AppConfig.BAIDU_SOURCE_MM_PACKAGE_NAME.equals(AppRuntime.PACKAGE_NAME)
+            || AppConfig.CAR_PACKAGE_NAME.equals(AppRuntime.PACKAGE_NAME)
+            || AppConfig.BAIDU_WALLPAPER_PACKAGE_NAMMME.equals(AppRuntime.PACKAGE_NAME)) {
             EventBus.getDefault().post(new SeriesUpdatedEvent());
             return;
         }

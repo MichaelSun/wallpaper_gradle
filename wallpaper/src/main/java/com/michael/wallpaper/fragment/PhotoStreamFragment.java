@@ -131,7 +131,11 @@ public class PhotoStreamFragment extends Fragment implements OnRefreshListener {
                         descList.add(belle.desc);
                     }
                 }
-                GalleryActivity.startViewLarge(getActivity(), mSeries.getTitle(), uriList, rawUrlList, descList, i);
+                String tilte = mSeries.getTitle();
+                if (!TextUtils.isEmpty(mSeries.getTag3())) {
+                    tilte = mSeries.getTitle() + "-" + mSeries.getTag3();
+                }
+                GalleryActivity.startViewLarge(getActivity(), tilte, uriList, rawUrlList, descList, i);
             }
         });
 
