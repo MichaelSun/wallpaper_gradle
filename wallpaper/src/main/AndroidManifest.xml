@@ -100,5 +100,19 @@
             android:value="53bc037856240bcf79105585">
         </meta-data>
 
+        <!--For wandoujia AdsSdk.-->
+        <activity
+            android:name="com.wandoujia.ads.sdk.AppWallActivity"
+            android:launchMode="singleTop"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
+
+        <activity
+            android:name="com.wandoujia.ads.sdk.AppWidgetContainerActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:launchMode="singleTop"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
+
+        <service android:name="com.wandoujia.ads.sdk.DownloadService"/>
+
     </application>
 </manifest>

@@ -1,9 +1,9 @@
 package com.michael.wallpaper.activity;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.app.WallpaperManager;
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -93,19 +93,17 @@ public class GalleryActivity extends BaseActivity {
         }
     };
 
-    public static void startViewLarge(Context context, String title, ArrayList<String> uriList
+    public static void startViewLarge(Activity activity, String title, ArrayList<String> uriList
                                          , ArrayList<String> rawUrlList
                                          , ArrayList<String> descList
                                          , int position) {
-        Intent intent = new Intent(context, GalleryActivity.class);
+        Intent intent = new Intent(activity.getApplicationContext(), GalleryActivity.class);
         intent.putExtra(EXTRA_TITLE, title);
         intent.putStringArrayListExtra(EXTRA_PHOTO_URI_LIST, uriList);
         intent.putStringArrayListExtra(EXTRA_PHOTO_RAW_URI_LIST, rawUrlList);
         intent.putStringArrayListExtra(EXTRA_PHOTO_DESC_LIST, descList);
         intent.putExtra(EXTRA_POSITION, position);
-        context.startActivity(intent);
-
-//        MobclickAgent.onEvent(context, "ViewLarge", title);
+        activity.startActivityForResult(intent, 100);
     }
 
     @Override
@@ -190,6 +188,8 @@ public class GalleryActivity extends BaseActivity {
         mPaginationTv.setText((mPosition + 1) + "/" + mPagerAdapter.getCount());
 
         mCollectHelper = new CollectHelper(this);
+
+        this.setResult(Activity.RESULT_OK);
     }
 
     private void initBanner() {

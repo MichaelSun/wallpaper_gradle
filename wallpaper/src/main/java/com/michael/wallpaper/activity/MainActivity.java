@@ -1,9 +1,6 @@
 package com.michael.wallpaper.activity;
 
-import android.app.ActionBar;
-import android.app.AlertDialog;
-import android.app.Fragment;
-import android.app.FragmentManager;
+import android.app.*;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -78,7 +75,7 @@ public class MainActivity extends BaseActivity
     @Override
     public void onResume() {
         super.onResume();
-        tryToShwoSplashAd();
+//        tryToShwoSplashAd();
 
         String data = MobclickAgent.getConfigParams(this.getApplicationContext(), "open_wall");
         if (!TextUtils.isEmpty(data) && data.endsWith("true")) {
@@ -103,6 +100,7 @@ public class MainActivity extends BaseActivity
         mSeries = seriesList.get(position);
         if (mSeries.getType() == -3) {
             OffersManager.getInstance(this).showOffersWall();
+//            Ads.showAppWall(MainActivity.this, AppConfig.WANDOUJIA_APP_WALL);
         } else if (mSeries.getType() == -2) {
             if (Setting.getInstace().getMode() != AppConfig.SERIES_MODE) {
                 return;
@@ -202,6 +200,13 @@ public class MainActivity extends BaseActivity
     public void onRefresh() {
         mRefreshTime += 1;
         if (mRefreshTime % 5 == 0) {
+            tryToShwoSplashAd();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK) {
             tryToShwoSplashAd();
         }
     }

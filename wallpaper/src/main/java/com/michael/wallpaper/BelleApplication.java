@@ -21,8 +21,8 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.wandoujia.ads.sdk.Ads;
 import net.youmi.android.AdManager;
-import net.youmi.android.spot.SpotManager;
 
 import java.io.File;
 
@@ -56,8 +56,19 @@ public class BelleApplication extends Application {
 
         AppRuntime.updateStat(getApplicationContext());
         initYoumi();
+        initWandoujia();
 
         Setting.getInstace().init(getApplicationContext());
+    }
+
+    private void initWandoujia() {
+        try {
+            Ads.init(this, AppConfig.WANDOUJIA_APP_ID, AppConfig.WANDOUJIA_SECRET_KEY);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
     }
 
     private void initYoumi() {

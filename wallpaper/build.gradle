@@ -19,8 +19,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 19
-        versionCode 1023
-        versionName "2.3"
+        versionCode 1024
+        versionName "2.4"
     }
 
     signingConfigs {
@@ -45,7 +45,7 @@ android {
     }
 
     productFlavors {
-        MMWallpaper {
+        MeiNvWallpaper {
             packageName = 'com.michael.wallpaper'
         }
 
@@ -64,7 +64,7 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:18.0.+'
+    compile 'com.android.support:support-v4:19.0.0'
     compile 'com.nostra13.universalimageloader:universal-image-loader:+'
     compile 'com.github.chrisbanes.actionbarpulltorefresh:library:+'
     compile 'com.google.code.gson:gson:2.2.+'
@@ -77,6 +77,18 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }
 
+task nativeLibsToJar(type: Zip, description: 'create a jar archive of the native libs') {
+    destinationDir file("$buildDir/native-libs")
+    baseName 'native-libs'
+    extension 'jar'
+    from fileTree(dir: 'libs', include: '**/*.so')
+    into 'lib/'
+}
+
+tasks.withType(JavaCompile) {
+    compileTask -> compileTask.dependsOn(nativeLibsToJar)
+}
+
 android.applicationVariants.all { variant ->
     def flavor = "debug"
     if (variant.productFlavors.size() > 0) {
@@ -84,7 +96,7 @@ android.applicationVariants.all { variant ->
     }
 
     def label = '@string/app_name'
-    if (flavor == 'MMWallpaper') {
+    if (flavor == 'MeiNvWallpaper') {
         label = '@string/app_name_wallpaper'
     } else if (flavor == 'BaidduCar') {
         label = '@string/app_name_car'
@@ -94,7 +106,7 @@ android.applicationVariants.all { variant ->
         label = '@string/app_name_baiduwallpaper'
     }
     def icon = '@drawable/ic_launcher'
-    if (flavor == 'MMWallpaper') {
+    if (flavor == 'MeiNvWallpaper') {
         icon = '@drawable/ic_wallpaper'
     } else if (flavor == 'BaidduCar') {
         icon = '@drawable/ic_lanucher_car'
@@ -110,12 +122,18 @@ android.applicationVariants.all { variant ->
         def domod_pubkey = ''
         def domod_replacekey = ''
         def domod_insterkey = ''
-        if (flavor == 'MMWallpaper') {
+        def wandoujia_appid = ''
+        def wandoujia_seckey = ''
+        def wandoujia_inster_key = ''
+        if (flavor == 'MeiNvWallpaper') {
             youmi_apikey = '6142d65763827912'
             youmi_seckey = 'b398417544f954ee'
             domod_pubkey = '56OJwdKYuNBjYRcFyA'
             domod_replacekey = '16TLuqyaApjUsNUE8qiTDk5z'
             domod_insterkey = '16TLuqyaApjUsNUE8BiPMA1s'
+            wandoujia_appid = '100009725'
+            wandoujia_seckey = '3589aaef1332dca448f3e97c3d894ab6'
+            wandoujia_inster_key = '5ae4d88378ee39098e1b81ef3b7b94cf'
         } else if (flavor == 'BaidduCar') {
             youmi_apikey = '859ff840b668c633'
             youmi_seckey = '87ed892bb7f8c34a'
@@ -134,7 +152,9 @@ android.applicationVariants.all { variant ->
             domod_pubkey = '56OJwdKYuNBsUBUV3t'
             domod_replacekey = '16TLuqyaApjOANUEnJSE8aas'
             domod_insterkey = '16TLuqyaApjOANUEnLG7Cuoi'
-
+            wandoujia_appid = '100009721'
+            wandoujia_seckey = '52f13cf91cae4f3def146f4a7a1d4466'
+            wandoujia_inster_key = '4dbe6be72c9f3a303ca0be2c66551901'
         }
 
         def file = new File("${projectDir}/src/main/java/com/michael/wallpaper/AppConfig.java");

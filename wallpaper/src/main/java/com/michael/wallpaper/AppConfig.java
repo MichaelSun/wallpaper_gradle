@@ -12,6 +12,9 @@ public class AppConfig {
     public static final boolean GOOLE_AD_ENABLE = false;
 
     public static final boolean DOMOD_AD_ENABLE = true;
+    public static final boolean DOMOD_INSTER_ENABLE = false;
+
+    public static final boolean WANDOUJIA_INSTER_ENABLE = true;
 
     public static final long MAX_IMAGE_MEMORY = ((long) 720) * 720 * 4 / 1024;
 
@@ -21,11 +24,16 @@ public class AppConfig {
     public static final String MM_WALLPAPER_PACKAGE_NAMMME = "com.michael.wallpaper";
     public static final String BAIDU_WALLPAPER_PACKAGE_NAMMME = "com.michael.baidu.wallpaper";
 
-    public static final String YOUMI_APIKEY = "9fa5ad90d57082ce";
-    public static final String YOUMI_SECRETKEY = "375f8fffe03aa816";
+    public static final String YOUMI_APIKEY = "6142d65763827912";
+    public static final String YOUMI_SECRETKEY = "b398417544f954ee";
 
-    public static final String DOMOD_PUBLISH_KEY = "56OJwdKYuNB/ECRykc";
-    public static final String DOMOD_PLACEMENT_KEY = "16TLuqyaApjJ1NUEzQfGknUs";
-    public static final String DOMOD_INSTER_KEY = "16TLuqyaApjJ1NUEK2Nkolxk";
+    public static final String DOMOD_PUBLISH_KEY = "56OJwdKYuNBjYRcFyA";
+    public static final String DOMOD_PLACEMENT_KEY = "16TLuqyaApjUsNUE8qiTDk5z";
+    public static final String DOMOD_INSTER_KEY = "16TLuqyaApjUsNUE8BiPMA1s";
+
+    public static final String WANDOUJIA_APP_ID = "100009721";
+    public static final String WANDOUJIA_SECRET_KEY = "52f13cf91cae4f3def146f4a7a1d4466";
+    public static final String WANDOUJIA_APP_WALL = "4dbe6be72c9f3a303ca0be2c66551901";
+    public static final String WANDOUJIA_INSTER_KEY = "4dbe6be72c9f3a303ca0be2c66551901";
 
 }
