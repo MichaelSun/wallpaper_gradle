@@ -38,6 +38,12 @@ android {
             runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
+        deubg {
+            signingConfig android.signingConfigs.debug
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            zipAlign true
+        }
     }
 
     lintOptions {
