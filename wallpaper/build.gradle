@@ -140,6 +140,9 @@ android.applicationVariants.all { variant ->
             domod_pubkey = '56OJwdKYuNBxYMSZ84'
             domod_replacekey = '16TLuqyaApjpsNUE2ljOxxds'
             domod_insterkey = '16TLuqyaApjpsNUE6s-l6czz'
+            wandoujia_appid = '100009749'
+            wandoujia_seckey = 'eb6f5830e7a8124aff4c911b905f488c'
+            wandoujia_inster_key = '254da0365c803e2d06dae6b39881f60a'
         } else if (flavor == 'BaiduMM') {
             youmi_apikey = '9fa5ad90d57082ce'
             youmi_seckey = '375f8fffe03aa816'
