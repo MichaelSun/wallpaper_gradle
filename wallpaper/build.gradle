@@ -149,6 +149,9 @@ android.applicationVariants.all { variant ->
             domod_pubkey = '56OJwdKYuNB/ECRykc'
             domod_replacekey = '16TLuqyaApjJ1NUEzQfGknUs'
             domod_insterkey = '16TLuqyaApjJ1NUEK2Nkolxk'
+            wandoujia_appid = '100009755'
+            wandoujia_seckey = '9c1111295b595a026637b939f1a371d3'
+            wandoujia_inster_key = 'b3e07d953e9b61c9693bf9275ea0199d'
         } else if (flavor == 'BaiduWallpaper') {
             youmi_apikey = 'e58196077781ef32'
             youmi_seckey = 'a4bf9c01789b9fe6'

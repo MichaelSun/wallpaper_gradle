@@ -67,11 +67,15 @@
             android:name="cn.domob.android.ads.DomobActivity"
             android:theme="@android:style/Theme.Translucent"/>
 
-        <!-- youmi used --><activity
-        android:name="net.youmi.android.AdBrowser"
-        android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-        android:theme="@android:style/Theme.Light.NoTitleBar">
-    </activity>
+        <!-- youmi used -->
+        <meta-data
+            android:name="YOUMI_CHANNEL"
+            android:value="10020"/>
+        <activity
+            android:name="net.youmi.android.AdBrowser"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:theme="@android:style/Theme.Light.NoTitleBar">
+        </activity>
 
         <service
             android:name="net.youmi.android.AdService"
