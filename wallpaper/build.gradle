@@ -38,7 +38,7 @@ android {
             runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
-        deubg {
+        debug {
             signingConfig android.signingConfigs.debug
             runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
@@ -121,6 +121,8 @@ android.applicationVariants.all { variant ->
     } else if (flavor == 'BaiduWallpaper') {
         icon = '@drawable/ic_baidu_wallpaper'
     }
+
+    variant.outputFile = file("${buildDir}/apk/${flavor}-${buildType.name}-${versionName}.apk")
 
     variant.processResources.doFirst {
         def youmi_apikey = ''
