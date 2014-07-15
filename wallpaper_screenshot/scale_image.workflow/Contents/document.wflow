@@ -52,10 +52,10 @@
 				<dict>
 					<key>fileNames</key>
 					<array>
-						<string>~/Desktop/device-2014-07-11-130726.png</string>
-						<string>~/Desktop/device-2014-07-11-130739.png</string>
-						<string>~/Desktop/device-2014-07-11-130844.png</string>
-						<string>~/Desktop/device-2014-07-11-130900.png</string>
+						<string>~/github/Wallpaper_gradle/wallpaper_screenshot/美女壁纸/device-2014-07-15-001450.png</string>
+						<string>~/github/Wallpaper_gradle/wallpaper_screenshot/美女壁纸/device-2014-07-15-001519.png</string>
+						<string>~/github/Wallpaper_gradle/wallpaper_screenshot/美女壁纸/device-2014-07-15-001543.png</string>
+						<string>~/github/Wallpaper_gradle/wallpaper_screenshot/美女壁纸/device-2014-07-15-001612.png</string>
 					</array>
 				</dict>
 				<key>BundleIdentifier</key>
@@ -108,9 +108,321 @@
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>390.000000:491.000000</string>
+				<string>390.000000:667.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Get Specified Finder Items.action/Contents/Resources/English.lproj/main.nib</string>
+			</dict>
+			<key>isViewVisible</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>action</key>
+			<dict>
+				<key>AMAccepts</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Optional</key>
+					<false/>
+					<key>Types</key>
+					<array>
+						<string>com.apple.cocoa.path</string>
+					</array>
+				</dict>
+				<key>AMActionVersion</key>
+				<string>2.0.1</string>
+				<key>AMApplication</key>
+				<array>
+					<string>Finder</string>
+				</array>
+				<key>AMParameterProperties</key>
+				<dict>
+					<key>replaceExisting</key>
+					<dict/>
+					<key>toDirectory</key>
+					<dict>
+						<key>isPathPopUp</key>
+						<true/>
+						<key>variableUUIDsInMenu</key>
+						<array/>
+					</dict>
+				</dict>
+				<key>AMProvides</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Types</key>
+					<array>
+						<string>com.apple.cocoa.path</string>
+					</array>
+				</dict>
+				<key>ActionBundlePath</key>
+				<string>/System/Library/Automator/Copy Finder Items.action</string>
+				<key>ActionName</key>
+				<string>Copy Finder Items</string>
+				<key>ActionParameters</key>
+				<dict>
+					<key>replaceExisting</key>
+					<false/>
+					<key>toDirectory</key>
+					<string>~/Desktop</string>
+				</dict>
+				<key>BundleIdentifier</key>
+				<string>com.apple.Automator.CopyFiles</string>
+				<key>CFBundleVersion</key>
+				<string>2.0.1</string>
+				<key>CanShowSelectedItemsWhenRun</key>
+				<true/>
+				<key>CanShowWhenRun</key>
+				<true/>
+				<key>Category</key>
+				<array>
+					<string>AMCategoryFilesAndFolders</string>
+				</array>
+				<key>Class Name</key>
+				<string>AMCopyFilesAction</string>
+				<key>InputUUID</key>
+				<string>BB0AD966-FDB4-4AA0-8174-02EA8CE33C6B</string>
+				<key>Keywords</key>
+				<array>
+					<string>File</string>
+					<string>Copy</string>
+				</array>
+				<key>OutputUUID</key>
+				<string>26191D5F-2CBF-41D4-84B6-B364C6B2D61C</string>
+				<key>UUID</key>
+				<string>F5D1D61B-CB9C-4E31-B74D-98B9504CEC3D</string>
+				<key>UnlocalizedApplications</key>
+				<array>
+					<string>Finder</string>
+				</array>
+				<key>arguments</key>
+				<dict>
+					<key>0</key>
+					<dict>
+						<key>default value</key>
+						<string>~/Desktop</string>
+						<key>name</key>
+						<string>toDirectory</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>0</string>
+					</dict>
+					<key>1</key>
+					<dict>
+						<key>default value</key>
+						<false/>
+						<key>name</key>
+						<string>replaceExisting</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>1</string>
+					</dict>
+				</dict>
+				<key>conversionLabel</key>
+				<integer>0</integer>
+				<key>isViewVisible</key>
+				<true/>
+				<key>location</key>
+				<string>390.000000:429.000000</string>
+				<key>nibPath</key>
+				<string>/System/Library/Automator/Copy Finder Items.action/Contents/Resources/Base.lproj/main.nib</string>
+			</dict>
+			<key>isViewVisible</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>action</key>
+			<dict>
+				<key>AMAccepts</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Optional</key>
+					<false/>
+					<key>Types</key>
+					<array>
+						<string>com.apple.cocoa.path</string>
+					</array>
+				</dict>
+				<key>AMActionVersion</key>
+				<string>1.2.1</string>
+				<key>AMApplication</key>
+				<array>
+					<string>Preview</string>
+				</array>
+				<key>AMParameterProperties</key>
+				<dict>
+					<key>cropMethod</key>
+					<dict/>
+					<key>scaleMethod</key>
+					<dict/>
+					<key>targetHeight</key>
+					<dict/>
+					<key>targetHeightPercentage</key>
+					<dict/>
+					<key>targetWidth</key>
+					<dict/>
+					<key>targetWidthPercentagle</key>
+					<dict/>
+				</dict>
+				<key>AMProvides</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Types</key>
+					<array>
+						<string>com.apple.cocoa.path</string>
+					</array>
+				</dict>
+				<key>ActionBundlePath</key>
+				<string>/System/Library/Automator/Crop Images.action</string>
+				<key>ActionName</key>
+				<string>Crop Images</string>
+				<key>ActionParameters</key>
+				<dict>
+					<key>cropMethod</key>
+					<integer>1</integer>
+					<key>scaleMethod</key>
+					<integer>2</integer>
+					<key>targetHeight</key>
+					<integer>800</integer>
+					<key>targetHeightPercentage</key>
+					<string>100</string>
+					<key>targetWidth</key>
+					<integer>480</integer>
+					<key>targetWidthPercentagle</key>
+					<string>100</string>
+				</dict>
+				<key>BundleIdentifier</key>
+				<string>com.apple.Automator.CropImages</string>
+				<key>CFBundleVersion</key>
+				<string>1.2.1</string>
+				<key>CanShowSelectedItemsWhenRun</key>
+				<false/>
+				<key>CanShowWhenRun</key>
+				<true/>
+				<key>Category</key>
+				<array>
+					<string>AMCategoryPhotos</string>
+				</array>
+				<key>Class Name</key>
+				<string>AMCropImagesAction</string>
+				<key>InputUUID</key>
+				<string>F32A43CC-F2B8-4310-BF14-5E7102939157</string>
+				<key>Keywords</key>
+				<array>
+					<string>Image</string>
+					<string>Photo</string>
+					<string>Crop</string>
+					<string>Change</string>
+					<string>Scale</string>
+				</array>
+				<key>OutputUUID</key>
+				<string>EA9C05A1-DD45-4473-B60C-868D99C01FCE</string>
+				<key>StartAction</key>
+				<false/>
+				<key>UUID</key>
+				<string>3D9A464A-C47C-4753-A795-DB1AEFD469D3</string>
+				<key>UnlocalizedApplications</key>
+				<array>
+					<string>Preview</string>
+				</array>
+				<key>arguments</key>
+				<dict>
+					<key>0</key>
+					<dict>
+						<key>default value</key>
+						<string>100</string>
+						<key>name</key>
+						<string>targetHeightPercentage</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>0</string>
+					</dict>
+					<key>1</key>
+					<dict>
+						<key>default value</key>
+						<string>100</string>
+						<key>name</key>
+						<string>targetWidthPercentagle</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>1</string>
+					</dict>
+					<key>2</key>
+					<dict>
+						<key>default value</key>
+						<integer>1</integer>
+						<key>name</key>
+						<string>cropMethod</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>2</string>
+					</dict>
+					<key>3</key>
+					<dict>
+						<key>default value</key>
+						<integer>480</integer>
+						<key>name</key>
+						<string>targetWidth</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>3</string>
+					</dict>
+					<key>4</key>
+					<dict>
+						<key>default value</key>
+						<integer>1</integer>
+						<key>name</key>
+						<string>scaleMethod</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>4</string>
+					</dict>
+					<key>5</key>
+					<dict>
+						<key>default value</key>
+						<integer>480</integer>
+						<key>name</key>
+						<string>targetHeight</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>5</string>
+					</dict>
+				</dict>
+				<key>conversionLabel</key>
+				<integer>0</integer>
+				<key>isViewVisible</key>
+				<true/>
+				<key>location</key>
+				<string>390.000000:326.000000</string>
+				<key>nibPath</key>
+				<string>/System/Library/Automator/Crop Images.action/Contents/Resources/English.lproj/main.nib</string>
 			</dict>
 			<key>isViewVisible</key>
 			<true/>
@@ -195,6 +507,8 @@
 				</array>
 				<key>OutputUUID</key>
 				<string>B447A73F-8037-4B22-A7B2-04E11576C169</string>
+				<key>StartAction</key>
+				<false/>
 				<key>UUID</key>
 				<string>62AD0EF8-C497-463B-A1CB-80F753656A40</string>
 				<key>UnlocalizedApplications</key>
@@ -261,7 +575,7 @@
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>390.000000:253.000000</string>
+				<string>390.000000:113.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Scale Images.action/Contents/Resources/Base.lproj/main.nib</string>
 			</dict>
@@ -271,12 +585,26 @@
 	</array>
 	<key>connectors</key>
 	<dict>
-		<key>8A52755F-92B8-4439-80A2-DF8A63AA46EA</key>
+		<key>47F68890-1D0B-47DB-8BB1-A669DEB1A373</key>
 		<dict>
 			<key>from</key>
 			<string>7C855797-06F8-4760-9DD4-6EC8876289D0 - 7C855797-06F8-4760-9DD4-6EC8876289D0</string>
 			<key>to</key>
+			<string>F5D1D61B-CB9C-4E31-B74D-98B9504CEC3D - F5D1D61B-CB9C-4E31-B74D-98B9504CEC3D</string>
+		</dict>
+		<key>B0653E0E-F87E-4D83-B067-E0D80E8EBD9A</key>
+		<dict>
+			<key>from</key>
+			<string>3D9A464A-C47C-4753-A795-DB1AEFD469D3 - 3D9A464A-C47C-4753-A795-DB1AEFD469D3</string>
+			<key>to</key>
 			<string>62AD0EF8-C497-463B-A1CB-80F753656A40 - 62AD0EF8-C497-463B-A1CB-80F753656A40</string>
+		</dict>
+		<key>CCA045D6-D807-4DE0-8D4D-9D6E8317E46D</key>
+		<dict>
+			<key>from</key>
+			<string>F5D1D61B-CB9C-4E31-B74D-98B9504CEC3D - F5D1D61B-CB9C-4E31-B74D-98B9504CEC3D</string>
+			<key>to</key>
+			<string>3D9A464A-C47C-4753-A795-DB1AEFD469D3 - 3D9A464A-C47C-4753-A795-DB1AEFD469D3</string>
 		</dict>
 	</dict>
 	<key>workflowMetaData</key>

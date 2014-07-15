@@ -23,8 +23,8 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/ad_content"
         android:orientation="vertical"
-        android:background="@color/nickname_linearlayout_bg"
-        android:layout_marginBottom="10dp">
+        android:background="@color/publisher_color_bg"
+        android:paddingBottom="10dp">
 
         <TextView
             android:id="@+id/desc"

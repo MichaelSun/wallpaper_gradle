@@ -52,7 +52,7 @@ public class BaseActivity extends Activity {
 
     protected void initSplashAd() {
         if (AppConfig.GOOLE_AD_ENABLE) {
-        } else if (AppConfig.DOMOD_AD_ENABLE) {
+        } else if (AppConfig.DOMOD_INSTER_ENABLE) {
             mDomobInterstitialAd = new DomobInterstitialAd(this, AppConfig.DOMOD_PUBLISH_KEY, AppConfig.DOMOD_INSTER_KEY, DomobInterstitialAd.INTERSITIAL_SIZE_FULL_SCREEN);
             mDomobInterstitialAd.setInterstitialAdListener(new DomobInterstitialAdListener() {
                 @Override
