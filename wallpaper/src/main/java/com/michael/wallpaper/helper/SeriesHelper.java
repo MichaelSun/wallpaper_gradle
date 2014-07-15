@@ -87,13 +87,17 @@ public class SeriesHelper {
             list.add(new Series("甜素纯".hashCode(), "甜素纯", "美女", null, 1));
             list.add(new Series("清纯".hashCode(), "清纯", "美女", null, 1));
             list.add(new Series("校花".hashCode(), "校花", "美女", null, 1));
+            list.add(new Series("网络美女".hashCode(), "网络美女", "美女", null, 1));
             list.add(new Series("唯美".hashCode(), "唯美", "美女", null, 1));
+            list.add(new Series("时尚".hashCode(), "时尚", "美女", null, 1));
             list.add(new Series("气质".hashCode(), "气质", "美女", null, 1));
             list.add(new Series("足球宝贝".hashCode(), "足球宝贝", "美女", null, 0));
             list.add(new Series("嫩萝莉".hashCode(), "嫩萝莉", "美女", null, 0));
             list.add(new Series("长发".hashCode(), "长发", "美女", null, 0));
             list.add(new Series("可爱".hashCode(), "可爱", "美女", null, 0));
             list.add(new Series("素颜".hashCode(), "素颜", "美女", null, 0));
+            list.add(new Series("非主流".hashCode(), "非主流", "美女", null, 0));
+            list.add(new Series("短发".hashCode(), "短发", "美女", null, 0));
             list.add(new Series("高雅大气很有范".hashCode(), "高雅大气很有范", "美女", null, 0));
         } else if (AppConfig.CAR_PACKAGE_NAME.endsWith(AppRuntime.PACKAGE_NAME)) {
             list.add(new Series("名车".hashCode(), "名车", "汽车", null, 1));
@@ -147,7 +151,7 @@ public class SeriesHelper {
         if (AppConfig.MM_WALLPAPER_PACKAGE_NAMMME.endsWith(AppRuntime.PACKAGE_NAME)) {
             list.add(new Series(-2, "隐藏美女", "本地", null, 1));
         }
-        list.add(new Series(-3, "更多应用", "本地", null, 0));
+//        list.add(new Series(-3, "更多应用", "本地", null, 0));
 
         return list;
     }

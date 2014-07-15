@@ -8,7 +8,6 @@ import com.michael.wallpaper.AppConfig;
 import com.michael.wallpaper.R;
 import com.michael.wallpaper.utils.AppRuntime;
 import com.umeng.analytics.MobclickAgent;
-import com.wandoujia.ads.sdk.Ads;
 
 /**
  * Created by zhangdi on 14-3-5.
@@ -106,9 +105,10 @@ public class BaseActivity extends Activity {
             if (mDomobInterstitialAd != null && mDomobInterstitialAd.isInterstitialAdReady()) {
                 mDomobInterstitialAd.showInterstitialAd(this);
             }
-        } else if (AppConfig.WANDOUJIA_INSTER_ENABLE) {
-            Ads.showAppWidget(this, null, AppConfig.WANDOUJIA_INSTER_KEY, Ads.ShowMode.FULL_SCREEN);
         }
+// else if (AppConfig.WANDOUJIA_INSTER_ENABLE) {
+//            Ads.showAppWidget(this, null, AppConfig.WANDOUJIA_INSTER_KEY, Ads.ShowMode.FULL_SCREEN);
+//        }
     }
 
 }
