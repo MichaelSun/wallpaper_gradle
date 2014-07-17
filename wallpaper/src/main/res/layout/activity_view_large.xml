@@ -5,18 +5,20 @@
                 android:background="@drawable/black"
                 tools:context="com.jesson.belle.activity.GalleryActivity">
 
-    <com.jesson.android.widget.HackyViewPager
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </com.jesson.android.widget.HackyViewPager>
-
     <RelativeLayout
         android:id="@+id/ad_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"/>
+
+    <com.jesson.android.widget.HackyViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_above="@id/ad_content">
+
+    </com.jesson.android.widget.HackyViewPager>
 
     <LinearLayout
         android:layout_width="match_parent"

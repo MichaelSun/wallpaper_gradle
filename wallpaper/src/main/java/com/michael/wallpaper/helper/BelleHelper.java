@@ -98,6 +98,8 @@ public class BelleHelper {
                     getNoramlItems(type, count);
                 } else if (AppRuntime.PACKAGE_NAME.endsWith(AppConfig.BAIDU_WALLPAPER_PACKAGE_NAMMME)) {
                     getBaiduItems(startNum, count, category, title, tag3);
+                } else if (AppRuntime.PACKAGE_NAME.endsWith(AppConfig.GAOXIAO_WALLPAPER_PACKAGE_NAMMME)) {
+                    getBaiduItems(startNum, count, category, title, tag3);
                 }
             }
         }.start();

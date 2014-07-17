@@ -44,6 +44,7 @@ public class SeriesHelper {
 
         if (AppConfig.BAIDU_SOURCE_MM_PACKAGE_NAME.equals(AppRuntime.PACKAGE_NAME)
             || AppConfig.CAR_PACKAGE_NAME.equals(AppRuntime.PACKAGE_NAME)
+            || AppConfig.GAOXIAO_WALLPAPER_PACKAGE_NAMMME.equals(AppRuntime.PACKAGE_NAME)
             || AppConfig.BAIDU_WALLPAPER_PACKAGE_NAMMME.equals(AppRuntime.PACKAGE_NAME)) {
             EventBus.getDefault().post(new SeriesUpdatedEvent());
             return;
@@ -140,6 +141,29 @@ public class SeriesHelper {
             list.add(new Series("创意+广告创意".hashCode(), "创意", "壁纸", "广告创意", 0));
             list.add(new Series("创意+治愈系".hashCode(), "创意", "壁纸", "治愈系", 0));
             list.add(new Series("创意+三维立体".hashCode(), "创意", "壁纸", "三维立体", 0));
+        } else if (AppConfig.GAOXIAO_WALLPAPER_PACKAGE_NAMMME.endsWith(AppRuntime.PACKAGE_NAME)) {
+            list.add(new Series("脑残对话".hashCode(), "脑残对话", "搞笑", null, 1));
+            list.add(new Series("搞笑牛人".hashCode(), "搞笑牛人", "搞笑", null, 1));
+            list.add(new Series("神吐槽".hashCode(), "神吐槽", "搞笑", null, 1));
+            list.add(new Series("百思不得姐".hashCode(), "百思不得姐", "搞笑", null, 1));
+            list.add(new Series("搞笑动物".hashCode(), "搞笑动物", "搞笑", null, 1));
+            list.add(new Series("没品图".hashCode(), "没品图", "搞笑", null, 1));
+            list.add(new Series("熊孩子".hashCode(), "熊孩子", "搞笑", null, 1));
+            list.add(new Series("2B青年".hashCode(), "2B青年", "搞笑", null, 1));
+            list.add(new Series("萌死你不偿命".hashCode(), "萌死你不偿命", "搞笑", null, 1));
+            list.add(new Series("哈哈搞笑".hashCode(), "哈哈搞笑", "搞笑", null, 1));
+            list.add(new Series("神回复".hashCode(), "神回复", "搞笑", null, 1));
+            list.add(new Series("ps大神".hashCode(), "ps大神", "搞笑", null, 1));
+            list.add(new Series("搞笑漫画".hashCode(), "搞笑漫画", "搞笑", null, 1));
+            list.add(new Series("创意趣图".hashCode(), "创意趣图", "搞笑", null, 1));
+            list.add(new Series("爆笑瞬间".hashCode(), "爆笑瞬间", "搞笑", null, 1));
+            list.add(new Series("猎奇".hashCode(), "猎奇", "搞笑", null, 1));
+            list.add(new Series("糗事".hashCode(), "糗事", "搞笑", null, 1));
+            list.add(new Series("囧事集".hashCode(), "囧事集", "搞笑", null, 1));
+            list.add(new Series("山寨".hashCode(), "山寨", "搞笑", null, 1));
+            list.add(new Series("我和我的小伙伴都惊呆了".hashCode(), "我和我的小伙伴都惊呆了", "搞笑", null, 1));
+            list.add(new Series("神感悟".hashCode(), "神感悟", "搞笑", null, 1));
+            list.add(new Series("微段子".hashCode(), "微段子", "搞笑", null, 1));
         }
 
         return list;

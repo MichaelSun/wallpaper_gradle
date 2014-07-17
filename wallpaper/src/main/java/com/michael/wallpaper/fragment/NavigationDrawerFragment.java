@@ -288,6 +288,8 @@ public class NavigationDrawerFragment extends Fragment {
             return getString(R.string.app_name_wallpaper);
         } else if (AppRuntime.PACKAGE_NAME.endsWith(AppConfig.BAIDU_WALLPAPER_PACKAGE_NAMMME)) {
             return getString(R.string.app_name_baiduwallpaper);
+        } else if (AppRuntime.PACKAGE_NAME.endsWith(AppConfig.GAOXIAO_WALLPAPER_PACKAGE_NAMMME)) {
+            return getString(R.string.app_name_gaoxiao);
         }
 
         return getString(R.string.app_name);

@@ -44,6 +44,8 @@ public class BaseActivity extends Activity {
             return R.drawable.ic_wallpaper;
         } else if (AppRuntime.PACKAGE_NAME.endsWith(AppConfig.BAIDU_WALLPAPER_PACKAGE_NAMMME)) {
             return R.drawable.ic_baidu_wallpaper;
+        } else if (AppRuntime.PACKAGE_NAME.endsWith(AppConfig.GAOXIAO_WALLPAPER_PACKAGE_NAMMME)) {
+            return R.drawable.icon_gaoxiao;
         }
 
         return R.drawable.ic_launcher;

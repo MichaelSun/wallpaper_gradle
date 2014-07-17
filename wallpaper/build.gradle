@@ -55,16 +55,20 @@ android {
             packageName = 'com.michael.wallpaper'
         }
 
-        BaiduMM {
+        MeiNvTianTianKan {
             packageName = 'com.michael.wallpaper.baidumm'
         }
 
-        BaiduWallpaper {
+        GaoQingWallpaper {
             packageName = 'com.michael.baidu.wallpaper'
         }
         
         BaidduCar {
             packageName = 'com.michael.carwall'
+        } 
+
+        GaoXiaoTianTang {
+            packageName = 'com.michael.gaoxiao'
         }
     }
 }
@@ -106,20 +110,26 @@ android.applicationVariants.all { variant ->
         label = '@string/app_name_wallpaper'
     } else if (flavor == 'BaidduCar') {
         label = '@string/app_name_car'
-    } else if (flavor == 'BaiduMM') {
+    } else if (flavor == 'MeiNvTianTianKan') {
         label = '@string/app_name'
-    } else if (flavor == 'BaiduWallpaper') {
+    } else if (flavor == 'GaoQingWallpaper') {
         label = '@string/app_name_baiduwallpaper'
+    } else if (flavor == 'GaoXiaoTianTang') {
+        label = '@string/app_name_gaoxiao'
     }
+
+
     def icon = '@drawable/ic_launcher'
     if (flavor == 'MeiNvWallpaper') {
         icon = '@drawable/ic_wallpaper'
     } else if (flavor == 'BaidduCar') {
         icon = '@drawable/ic_lanucher_car'
-    } else if (flavor == 'BaiduMM') {
+    } else if (flavor == 'MeiNvTianTianKan') {
         icon = '@drawable/ic_launcher'
-    } else if (flavor == 'BaiduWallpaper') {
+    } else if (flavor == 'GaoQingWallpaper') {
         icon = '@drawable/ic_baidu_wallpaper'
+    } else if (flavor == 'GaoXiaoTianTang') {
+        icon = '@drawable/icon_gaoxiao'
     }
 
     variant.outputFile = file("${buildDir}/apk/${flavor}-${buildType.name}-${versionName}.apk")
@@ -169,6 +179,9 @@ android.applicationVariants.all { variant ->
             wandoujia_appid = '100009721'
             wandoujia_seckey = '52f13cf91cae4f3def146f4a7a1d4466'
             wandoujia_inster_key = '4dbe6be72c9f3a303ca0be2c66551901'
+        } else if (flavor == 'GaoXiaoTianTang') {
+            domod_pubkey = '56OJwdKYuNBdeAVfIX'
+            domod_replacekey = '16TLuqyaApjD4NU0d9R1kiGi'
         }
 
         def file = new File("${projectDir}/src/main/java/com/michael/wallpaper/AppConfig.java");

@@ -52,10 +52,10 @@
 				<dict>
 					<key>fileNames</key>
 					<array>
-						<string>~/github/Wallpaper_gradle/wallpaper_screenshot/美女壁纸/device-2014-07-15-001450.png</string>
-						<string>~/github/Wallpaper_gradle/wallpaper_screenshot/美女壁纸/device-2014-07-15-001519.png</string>
-						<string>~/github/Wallpaper_gradle/wallpaper_screenshot/美女壁纸/device-2014-07-15-001543.png</string>
-						<string>~/github/Wallpaper_gradle/wallpaper_screenshot/美女壁纸/device-2014-07-15-001612.png</string>
+						<string>~/github/Wallpaper_gradle/wallpaper_screenshot/搞笑天堂/1080/device-2014-07-17-224419.png</string>
+						<string>~/github/Wallpaper_gradle/wallpaper_screenshot/搞笑天堂/1080/device-2014-07-17-224451.png</string>
+						<string>~/github/Wallpaper_gradle/wallpaper_screenshot/搞笑天堂/1080/device-2014-07-17-224502.png</string>
+						<string>~/github/Wallpaper_gradle/wallpaper_screenshot/搞笑天堂/1080/device-2014-07-17-224534.png</string>
 					</array>
 				</dict>
 				<key>BundleIdentifier</key>
@@ -182,16 +182,16 @@
 				<key>Class Name</key>
 				<string>AMCopyFilesAction</string>
 				<key>InputUUID</key>
-				<string>BB0AD966-FDB4-4AA0-8174-02EA8CE33C6B</string>
+				<string>AAC17581-E280-4E6E-85F1-6862D2016800</string>
 				<key>Keywords</key>
 				<array>
 					<string>File</string>
 					<string>Copy</string>
 				</array>
 				<key>OutputUUID</key>
-				<string>26191D5F-2CBF-41D4-84B6-B364C6B2D61C</string>
+				<string>03581D49-E7B6-471F-B9D0-9D9527271CC4</string>
 				<key>UUID</key>
-				<string>F5D1D61B-CB9C-4E31-B74D-98B9504CEC3D</string>
+				<string>36C458CF-1851-43A3-815A-31B4ACE3F543</string>
 				<key>UnlocalizedApplications</key>
 				<array>
 					<string>Finder</string>
@@ -315,7 +315,7 @@
 				<key>Class Name</key>
 				<string>AMCropImagesAction</string>
 				<key>InputUUID</key>
-				<string>F32A43CC-F2B8-4310-BF14-5E7102939157</string>
+				<string>9CBBC89E-56DD-441E-BDD8-EF3EDAFCD367</string>
 				<key>Keywords</key>
 				<array>
 					<string>Image</string>
@@ -325,11 +325,11 @@
 					<string>Scale</string>
 				</array>
 				<key>OutputUUID</key>
-				<string>EA9C05A1-DD45-4473-B60C-868D99C01FCE</string>
+				<string>AD5872D2-2E38-4B38-AC6E-EAF1C577ADC2</string>
 				<key>StartAction</key>
 				<false/>
 				<key>UUID</key>
-				<string>3D9A464A-C47C-4753-A795-DB1AEFD469D3</string>
+				<string>E123B4A4-0059-48D4-8E8B-D8648E6252C1</string>
 				<key>UnlocalizedApplications</key>
 				<array>
 					<string>Preview</string>
@@ -480,7 +480,7 @@
 					<key>scaleValue</key>
 					<integer>0</integer>
 					<key>sizeValue</key>
-					<integer>480</integer>
+					<integer>512</integer>
 				</dict>
 				<key>BundleIdentifier</key>
 				<string>com.apple.Automator.ScaleImage</string>
@@ -497,7 +497,7 @@
 				<key>Class Name</key>
 				<string>AMScaleImagesAction</string>
 				<key>InputUUID</key>
-				<string>BFB5139D-8C73-4173-A8D0-646B9013E03F</string>
+				<string>CEBCDD7C-4870-42ED-A81A-467B53CD9F09</string>
 				<key>Keywords</key>
 				<array>
 					<string>Image</string>
@@ -506,11 +506,9 @@
 					<string>Change</string>
 				</array>
 				<key>OutputUUID</key>
-				<string>B447A73F-8037-4B22-A7B2-04E11576C169</string>
-				<key>StartAction</key>
-				<false/>
+				<string>DA87AA07-F0E1-4A5A-A9AD-0A2116FA8FA5</string>
 				<key>UUID</key>
-				<string>62AD0EF8-C497-463B-A1CB-80F753656A40</string>
+				<string>1C868FD3-7917-43F6-A28C-E70CB246C474</string>
 				<key>UnlocalizedApplications</key>
 				<array>
 					<string>Preview</string>
@@ -585,26 +583,26 @@
 	</array>
 	<key>connectors</key>
 	<dict>
-		<key>47F68890-1D0B-47DB-8BB1-A669DEB1A373</key>
+		<key>9A0D7A31-2183-4A49-9C89-6ABE68B2DCE8</key>
+		<dict>
+			<key>from</key>
+			<string>36C458CF-1851-43A3-815A-31B4ACE3F543 - 36C458CF-1851-43A3-815A-31B4ACE3F543</string>
+			<key>to</key>
+			<string>E123B4A4-0059-48D4-8E8B-D8648E6252C1 - E123B4A4-0059-48D4-8E8B-D8648E6252C1</string>
+		</dict>
+		<key>A1604A26-A236-4455-AF97-3E7A30E32F0A</key>
 		<dict>
 			<key>from</key>
 			<string>7C855797-06F8-4760-9DD4-6EC8876289D0 - 7C855797-06F8-4760-9DD4-6EC8876289D0</string>
 			<key>to</key>
-			<string>F5D1D61B-CB9C-4E31-B74D-98B9504CEC3D - F5D1D61B-CB9C-4E31-B74D-98B9504CEC3D</string>
+			<string>36C458CF-1851-43A3-815A-31B4ACE3F543 - 36C458CF-1851-43A3-815A-31B4ACE3F543</string>
 		</dict>
-		<key>B0653E0E-F87E-4D83-B067-E0D80E8EBD9A</key>
+		<key>B351D541-DB10-40B3-ADC6-C3AD4899C78B</key>
 		<dict>
 			<key>from</key>
-			<string>3D9A464A-C47C-4753-A795-DB1AEFD469D3 - 3D9A464A-C47C-4753-A795-DB1AEFD469D3</string>
+			<string>E123B4A4-0059-48D4-8E8B-D8648E6252C1 - E123B4A4-0059-48D4-8E8B-D8648E6252C1</string>
 			<key>to</key>
-			<string>62AD0EF8-C497-463B-A1CB-80F753656A40 - 62AD0EF8-C497-463B-A1CB-80F753656A40</string>
-		</dict>
-		<key>CCA045D6-D807-4DE0-8D4D-9D6E8317E46D</key>
-		<dict>
-			<key>from</key>
-			<string>F5D1D61B-CB9C-4E31-B74D-98B9504CEC3D - F5D1D61B-CB9C-4E31-B74D-98B9504CEC3D</string>
-			<key>to</key>
-			<string>3D9A464A-C47C-4753-A795-DB1AEFD469D3 - 3D9A464A-C47C-4753-A795-DB1AEFD469D3</string>
+			<string>1C868FD3-7917-43F6-A28C-E70CB246C474 - 1C868FD3-7917-43F6-A28C-E70CB246C474</string>
 		</dict>
 	</dict>
 	<key>workflowMetaData</key>

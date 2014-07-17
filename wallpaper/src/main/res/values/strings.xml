@@ -3,8 +3,9 @@
 
     <string name="app_name">美女天天看</string>
     <string name="app_name_wallpaper">美女壁纸</string>
-    <string name="app_name_car">百度名车</string>
+    <string name="app_name_car">名车鉴赏</string>
     <string name="app_name_baiduwallpaper">高清壁纸</string>
+    <string name="app_name_gaoxiao">搞笑天堂</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

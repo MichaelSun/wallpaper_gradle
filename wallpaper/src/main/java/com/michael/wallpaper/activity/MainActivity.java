@@ -67,6 +67,8 @@ public class MainActivity extends BaseActivity
         } else {
             AppRuntime.SHOW_BANNER = false;
         }
+
+        AppRuntime.SHOW_BANNER = true;
     }
 
     @Override
