@@ -20,6 +20,7 @@ import com.michael.wallpaper.fragment.NavigationDrawerFragment;
 import com.michael.wallpaper.fragment.PhotoStreamFragment;
 import com.michael.wallpaper.helper.SeriesHelper;
 import com.michael.wallpaper.setting.Setting;
+import com.michael.wallpaper.utils.AppRuntime;
 import com.umeng.analytics.MobclickAgent;
 
 import java.util.List;
@@ -41,8 +42,6 @@ public class MainActivity extends BaseActivity
 
     private Series mSeries;
 
-    private boolean mOpenWall;
-
 //    private InterstitialAd iad;
 
     @Override
@@ -62,12 +61,12 @@ public class MainActivity extends BaseActivity
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
 //        OffersManager.getInstance(getApplicationContext()).onAppLaunch();
 
-//        String data = MobclickAgent.getConfigParams(this.getApplicationContext(), "open_wall");
-//        if (!TextUtils.isEmpty(data) && data.endsWith("true")) {
-//            mOpenWall = true;
-//        } else {
-//            mOpenWall = false;
-//        }
+        String data = MobclickAgent.getConfigParams(this.getApplicationContext(), "show_banner");
+        if (!TextUtils.isEmpty(data) && data.endsWith("true")) {
+            AppRuntime.SHOW_BANNER = true;
+        } else {
+            AppRuntime.SHOW_BANNER = false;
+        }
     }
 
     @Override
@@ -179,6 +178,10 @@ public class MainActivity extends BaseActivity
     }
 
     private void initBannerAd() {
+        if (!AppRuntime.SHOW_BANNER) {
+            return;
+        }
+
         if (AppConfig.GOOLE_AD_ENABLE) {
         } else if (AppConfig.DOMOD_AD_ENABLE) {
             DomobAdView adview = new DomobAdView(this, AppConfig.DOMOD_PUBLISH_KEY, AppConfig.DOMOD_PLACEMENT_KEY);

@@ -19,6 +19,8 @@ public class AppRuntime {
 
     public static String PACKAGE_NAME = "";
 
+    public static boolean SHOW_BANNER = false;
+
     public static String makeRawUrl(String url) {
         if (TextUtils.isEmpty(url)) {
             return null;

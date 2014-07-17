@@ -193,6 +193,10 @@ public class GalleryActivity extends BaseActivity {
     }
 
     private void initBanner() {
+        if (!AppRuntime.SHOW_BANNER) {
+            return;
+        }
+
         if (AppConfig.GOOLE_AD_ENABLE) {
         } else if (AppConfig.DOMOD_AD_ENABLE) {
             DomobAdView adview = new DomobAdView(this, AppConfig.DOMOD_PUBLISH_KEY, AppConfig.DOMOD_PLACEMENT_KEY);

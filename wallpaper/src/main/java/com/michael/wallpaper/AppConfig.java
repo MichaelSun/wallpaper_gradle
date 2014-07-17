@@ -12,7 +12,7 @@ public class AppConfig {
     public static final boolean GOOLE_AD_ENABLE = false;
 
     public static final boolean DOMOD_AD_ENABLE = true;
-    public static final boolean DOMOD_INSTER_ENABLE = true;
+    public static final boolean DOMOD_INSTER_ENABLE = false;
 
     public static final boolean WANDOUJIA_INSTER_ENABLE = false;
 
