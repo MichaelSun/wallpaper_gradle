@@ -16,6 +16,8 @@ public class LocalBelle {
     /** Not-null value. */
     private String url;
     private String rawUrl;
+    private Integer width;
+    private Integer height;
 
     // KEEP FIELDS - put your custom fields here
     // KEEP FIELDS END
@@ -23,13 +25,15 @@ public class LocalBelle {
     public LocalBelle() {
     }
 
-    public LocalBelle(long id, long time, int type, String desc, String url, String rawUrl) {
+    public LocalBelle(long id, long time, int type, String desc, String url, String rawUrl, Integer width, Integer height) {
         this.id = id;
         this.time = time;
         this.type = type;
         this.desc = desc;
         this.url = url;
         this.rawUrl = rawUrl;
+        this.width = width;
+        this.height = height;
     }
 
     public long getId() {
@@ -80,6 +84,22 @@ public class LocalBelle {
 
     public void setRawUrl(String rawUrl) {
         this.rawUrl = rawUrl;
+    }
+
+    public Integer getWidth() {
+        return width;
+    }
+
+    public void setWidth(Integer width) {
+        this.width = width;
+    }
+
+    public Integer getHeight() {
+        return height;
+    }
+
+    public void setHeight(Integer height) {
+        this.height = height;
     }
 
     // KEEP METHODS - put your custom methods here

@@ -56,6 +56,8 @@ public class BaiduListResponse extends ResponseBase {
                 belle.desc = item.desc;
                 belle.url = item.thumb_large_url;
                 belle.rawUrl = item.image_url;
+                belle.thumb_large_width = item.thumb_large_width;
+                belle.thumb_large_height = item.thumb_large_height;
 
                 if ((item.image_height * item.image_width * 4) / 1024 < AppConfig.MAX_IMAGE_MEMORY) {
                     belle.url = item.image_url;

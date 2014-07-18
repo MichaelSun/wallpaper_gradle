@@ -8,9 +8,8 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.GridView;
 import com.michael.wallpaper.R;
+import com.michael.wallpaper.StaggeredGridView.StaggeredGridView;
 import com.michael.wallpaper.activity.GalleryActivity;
 import com.michael.wallpaper.activity.MainActivity;
 import com.michael.wallpaper.adapter.PhotoStreamAdapter;
@@ -40,7 +39,7 @@ public class PhotoStreamFragment extends Fragment implements OnRefreshListener {
 
     private PullToRefreshLayout mPullToRefreshLayout;
 
-    private GridView mGridView;
+    private StaggeredGridView mGridView;
 
     private PhotoStreamAdapter mPhotoStreamAdapter;
 
@@ -108,13 +107,15 @@ public class PhotoStreamFragment extends Fragment implements OnRefreshListener {
 
         setupWizard.setup(mPullToRefreshLayout);
 
-        mGridView = (GridView) rootView.findViewById(R.id.grid_view);
+        mGridView = (StaggeredGridView) rootView.findViewById(R.id.grid_view);
         mPhotoStreamAdapter = new PhotoStreamAdapter(getActivity(), mBelles);
         mGridView.setAdapter(mPhotoStreamAdapter);
+        mGridView.setSelector(R.color.logo_color);
 
-        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        mGridView.setOnItemClickListener(new StaggeredGridView.OnItemClickListener() {
+
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemClick(StaggeredGridView parent, View view, int position, long id) {
                 ArrayList<String> uriList = new ArrayList<String>();
                 for (Belle belle : mBelles) {
                     uriList.add(belle.url);
@@ -135,9 +136,37 @@ public class PhotoStreamFragment extends Fragment implements OnRefreshListener {
                 if (!TextUtils.isEmpty(mSeries.getTag3())) {
                     tilte = mSeries.getTitle() + "-" + mSeries.getTag3();
                 }
-                GalleryActivity.startViewLarge(getActivity(), tilte, uriList, rawUrlList, descList, i);
+                GalleryActivity.startViewLarge(getActivity(), tilte, uriList, rawUrlList, descList, position);
             }
         });
+
+
+//        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                ArrayList<String> uriList = new ArrayList<String>();
+//                for (Belle belle : mBelles) {
+//                    uriList.add(belle.url);
+//                }
+//                ArrayList<String> rawUrlList = new ArrayList<String>();
+//                for (Belle belle : mBelles) {
+//                    rawUrlList.add(belle.rawUrl);
+//                }
+//                ArrayList<String> descList = new ArrayList<String>();
+//                for (Belle belle : mBelles) {
+//                    if (TextUtils.isEmpty(belle.desc)) {
+//                        descList.add("");
+//                    } else {
+//                        descList.add(belle.desc);
+//                    }
+//                }
+//                String tilte = mSeries.getTitle();
+//                if (!TextUtils.isEmpty(mSeries.getTag3())) {
+//                    tilte = mSeries.getTitle() + "-" + mSeries.getTag3();
+//                }
+//                GalleryActivity.startViewLarge(getActivity(), tilte, uriList, rawUrlList, descList, i);
+//            }
+//        });
 
         if (mSeries.getType() >= 0) {
             mBelleHelper.getBelleListFromLocal(mSeries.getType());
@@ -228,7 +257,7 @@ public class PhotoStreamFragment extends Fragment implements OnRefreshListener {
         List<CollectedBelle> collectedBelles = helper.loadAll();
         if (collectedBelles != null) {
             for (CollectedBelle collectedBelle : collectedBelles) {
-                Belle belle = new Belle(0, collectedBelle.getTime(), -1, null, collectedBelle.getUrl(), null);
+                Belle belle = new Belle(0, collectedBelle.getTime(), -1, null, collectedBelle.getUrl(), null, 0, 0);
                 belles.add(belle);
             }
         }

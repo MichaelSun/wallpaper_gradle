@@ -5,7 +5,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/card_bg_play">
 
-    <com.makeramen.RoundedImageView
+    <com.michael.wallpaper.views.STGVImageView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/photo"
         android:layout_width="match_parent"
@@ -16,6 +16,12 @@
         <!--app:border_color="@color/publisher_color_bg"-->
         <!--app:mutate_background="true"-->
         <!--/>-->
+
+    <!--<com.michael.wallpaper.views.ScaleImageView-->
+        <!--android:id="@+id/photo"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@null" />-->
 
     <ProgressBar
         android:id="@+id/progressBar"

@@ -7,11 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.michael.wallpaper.R;
 import com.michael.wallpaper.api.belle.Belle;
+import com.michael.wallpaper.views.STGVImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
@@ -70,6 +70,8 @@ public class PhotoStreamAdapter extends BaseAdapter {
         }
 
         holder.progressBar.setVisibility(View.GONE);
+        holder.photo.mWidth = mBelles.get(i).thumb_large_width;
+        holder.photo.mHeight = mBelles.get(i).thumb_large_height;
 
         ImageLoader.getInstance().displayImage(photoUri, holder.photo, new ImageLoadingListener() {
             @Override
@@ -98,14 +100,14 @@ public class PhotoStreamAdapter extends BaseAdapter {
 
     private static final class ViewHolder {
 
-        public ImageView photo;
+        public STGVImageView photo;
 
         public ProgressBar progressBar;
 
         public TextView textView;
 
         public ViewHolder(View rootView) {
-            photo = (ImageView) rootView.findViewById(R.id.photo);
+            photo = (STGVImageView) rootView.findViewById(R.id.photo);
             progressBar = (ProgressBar) rootView.findViewById(R.id.progressBar);
             textView = (TextView) rootView.findViewById(R.id.desc);
         }

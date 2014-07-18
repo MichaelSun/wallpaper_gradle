@@ -25,6 +25,26 @@ public class Belle {
     @JsonProperty("rawUrl")
     public String rawUrl;
 
+    @JsonProperty("thumb_large_width")
+    public int thumb_large_width;
+
+    @JsonProperty("thumb_large_height")
+    public int thumb_large_height;
+
+    public Belle(long id, long time, int type, String desc, String url, String rawUrl, int thumb_large_width, int thumb_large_height) {
+        this.id = id;
+        this.time = time;
+        this.type = type;
+        this.desc = desc;
+        this.url = url;
+        this.rawUrl = rawUrl;
+        this.thumb_large_width = thumb_large_width;
+        this.thumb_large_height = thumb_large_height;
+    }
+
+    public Belle() {
+    }
+
     @Override
     public String toString() {
         return "Belle{" +
@@ -34,18 +54,8 @@ public class Belle {
                    ", desc='" + desc + '\'' +
                    ", url='" + url + '\'' +
                    ", rawUrl='" + rawUrl + '\'' +
+                   ", thumb_large_width=" + thumb_large_width +
+                   ", thumb_large_height=" + thumb_large_height +
                    '}';
-    }
-
-    public Belle() {
-    }
-
-    public Belle(long id, long time, int type, String desc, String url, String rawUrl) {
-        this.id = id;
-        this.time = time;
-        this.type = type;
-        this.desc = desc;
-        this.url = url;
-        this.rawUrl = rawUrl;
     }
 }
