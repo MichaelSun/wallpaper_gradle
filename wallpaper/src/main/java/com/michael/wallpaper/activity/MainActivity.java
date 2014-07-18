@@ -42,7 +42,7 @@ public class MainActivity extends BaseActivity
 
     private Series mSeries;
 
-//    private InterstitialAd iad;
+    private boolean mAdViewShow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,33 +55,36 @@ public class MainActivity extends BaseActivity
         initInterstitialAd();
         initAppWall();
 
+        MobclickAgent.updateOnlineConfig(getApplicationContext());
+
         mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
-        // Set up the drawer.
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
-//        OffersManager.getInstance(getApplicationContext()).onAppLaunch();
 
         String data = MobclickAgent.getConfigParams(this.getApplicationContext(), "show_banner");
-        if (!TextUtils.isEmpty(data) && data.endsWith("true")) {
+        if (!TextUtils.isEmpty(data) && data.equals("true")) {
             AppRuntime.SHOW_BANNER = true;
         } else {
             AppRuntime.SHOW_BANNER = false;
         }
 
-        AppRuntime.SHOW_BANNER = true;
+//        AppRuntime.SHOW_BANNER = true;
     }
 
     @Override
     public void onResume() {
         super.onResume();
 //        tryToShwoSplashAd();
+        String data = MobclickAgent.getConfigParams(this.getApplicationContext(), "show_banner");
+        if (!TextUtils.isEmpty(data) && data.equals("true")) {
+            AppRuntime.SHOW_BANNER = true;
+        } else {
+            AppRuntime.SHOW_BANNER = false;
+        }
 
-//        String data = MobclickAgent.getConfigParams(this.getApplicationContext(), "open_wall");
-//        if (!TextUtils.isEmpty(data) && data.endsWith("true")) {
-//            mOpenWall = true;
-//        } else {
-//            mOpenWall = false;
-//        }
+        if (!mAdViewShow) {
+            initBannerAd();
+        }
     }
 
     @Override
@@ -190,6 +193,7 @@ public class MainActivity extends BaseActivity
             RelativeLayout layout = (RelativeLayout) findViewById(R.id.ad_content);
             layout.addView(adview, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
                                                                       RelativeLayout.LayoutParams.WRAP_CONTENT));
+            mAdViewShow = true;
         }
     }
 
@@ -212,6 +216,10 @@ public class MainActivity extends BaseActivity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK) {
             tryToShwoSplashAd();
+        }
+
+        if (!mAdViewShow) {
+            initBannerAd();
         }
     }
 

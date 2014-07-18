@@ -30,6 +30,7 @@ import com.michael.wallpaper.adapter.GalleryAdapter;
 import com.michael.wallpaper.helper.CollectHelper;
 import com.michael.wallpaper.utils.AppRuntime;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.umeng.analytics.MobclickAgent;
 import org.apache.http.Header;
 
 import java.io.File;
@@ -114,6 +115,7 @@ public class GalleryActivity extends BaseActivity {
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         mProgressDialog.setCanceledOnTouchOutside(false);
 
+        MobclickAgent.updateOnlineConfig(getApplicationContext());
         this.initSplashAd();
 
         initBanner();

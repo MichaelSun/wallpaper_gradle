@@ -216,7 +216,8 @@ public class BelleHelper {
                 if (localList != null) {
                     belles = new ArrayList<Belle>();
                     for (LocalBelle localBelle : localList) {
-                        Belle belle = new Belle(localBelle.getId(), localBelle.getTime(), localBelle.getType(), null, localBelle.getUrl(), localBelle.getRawUrl());
+                        Belle belle = new Belle(localBelle.getId(), localBelle.getTime(), localBelle.getType(), localBelle.getDesc()
+                                                   , localBelle.getUrl(), localBelle.getRawUrl());
                         belles.add(belle);
                     }
                 }

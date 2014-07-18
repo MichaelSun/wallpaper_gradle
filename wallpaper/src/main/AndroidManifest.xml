@@ -30,7 +30,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.READ_LOGS"/>
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
 
     <application
         android:name=".BelleApplication"
@@ -61,62 +60,14 @@
             android:theme="@style/Theme_ActionBar_Style"
             android:label="@string/title_setting"/>
 
-        <!--<activity--><!--android:name="com.google.ads.AdActivity"--><!--android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>-->
-
         <activity
             android:name="cn.domob.android.ads.DomobActivity"
             android:theme="@android:style/Theme.Translucent"/>
 
-        <!-- youmi used -->
-        <!--<meta-data-->
-            <!--android:name="YOUMI_CHANNEL"-->
-            <!--android:value="10020"/>-->
-        <!--<activity-->
-            <!--android:name="net.youmi.android.AdBrowser"-->
-            <!--android:configChanges="keyboard|keyboardHidden|orientation|screenSize"-->
-            <!--android:theme="@android:style/Theme.Light.NoTitleBar">-->
-        <!--</activity>-->
-
-        <!--<service-->
-            <!--android:name="net.youmi.android.AdService"-->
-            <!--android:exported="false">-->
-        <!--</service>-->
-        <!--<service-->
-            <!--android:name="net.youmi.android.ExpService"-->
-            <!--android:exported="false">-->
-        <!--</service>-->
-
-        <!--<receiver-->
-            <!--android:name="net.youmi.android.AdReceiver">-->
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.PACKAGE_ADDED"/>-->
-                <!--<data android:scheme="package"/>-->
-            <!--</intent-filter>-->
-        <!--</receiver>-->
-        <!--<receiver-->
-            <!--android:name="net.youmi.android.offers.OffersReceiver"-->
-            <!--android:exported="false">-->
-        <!--</receiver>-->
-
         <!-- 友盟统计 -->
         <meta-data
-            android:name="UMENG_APPKEY"
-            android:value="53bc037856240bcf79105585">
+            android:name="UMENG_APPKEY" android:value="53c8fede56240bcb4301601a">
         </meta-data>
-
-        <!--For wandoujia AdsSdk.-->
-        <!--<activity-->
-            <!--android:name="com.wandoujia.ads.sdk.AppWallActivity"-->
-            <!--android:launchMode="singleTop"-->
-            <!--android:configChanges="orientation|keyboardHidden|screenSize"/>-->
-
-        <!--<activity-->
-            <!--android:name="com.wandoujia.ads.sdk.AppWidgetContainerActivity"-->
-            <!--android:theme="@android:style/Theme.Translucent.NoTitleBar"-->
-            <!--android:launchMode="singleTop"-->
-            <!--android:configChanges="orientation|keyboardHidden|screenSize"/>-->
-
-        <!--<service android:name="com.wandoujia.ads.sdk.DownloadService"/>-->
 
     </application>
 </manifest>
