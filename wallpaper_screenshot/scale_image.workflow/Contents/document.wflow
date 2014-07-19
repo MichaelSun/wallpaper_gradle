@@ -52,7 +52,7 @@
 				<dict>
 					<key>fileNames</key>
 					<array>
-						<string>~/github/Wallpaper_gradle/wallpaper_screenshot/搞笑天堂/icon_256 (1).png</string>
+						<string>~/github/Wallpaper_gradle/wallpaper_screenshot/美女天天看/icon-512.png</string>
 					</array>
 				</dict>
 				<key>BundleIdentifier</key>
@@ -222,8 +222,6 @@
 						<string>1</string>
 					</dict>
 				</dict>
-				<key>conversionLabel</key>
-				<integer>0</integer>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
@@ -375,8 +373,6 @@
 						<string>3</string>
 					</dict>
 				</dict>
-				<key>conversionLabel</key>
-				<integer>0</integer>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
@@ -390,14 +386,14 @@
 	</array>
 	<key>connectors</key>
 	<dict>
-		<key>6F5A08CE-DB07-4034-99B9-AA54ACE8BF49</key>
+		<key>68E0DCFC-84E2-405D-9A12-319F7D024DB1</key>
 		<dict>
 			<key>from</key>
 			<string>36C458CF-1851-43A3-815A-31B4ACE3F543 - 36C458CF-1851-43A3-815A-31B4ACE3F543</string>
 			<key>to</key>
 			<string>1C868FD3-7917-43F6-A28C-E70CB246C474 - 1C868FD3-7917-43F6-A28C-E70CB246C474</string>
 		</dict>
-		<key>82FC5128-CBA8-4EA1-BD8D-4FB050B3592D</key>
+		<key>77A7591A-2145-483E-A9E7-2B3CEC6111DC</key>
 		<dict>
 			<key>from</key>
 			<string>7C855797-06F8-4760-9DD4-6EC8876289D0 - 7C855797-06F8-4760-9DD4-6EC8876289D0</string>

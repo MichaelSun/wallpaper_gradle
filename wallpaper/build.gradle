@@ -113,6 +113,7 @@ android.applicationVariants.all { variant ->
         label = '@string/app_name_car'
     } else if (flavor == 'MeiNvTianTianKan') {
         label = '@string/app_name'
+        umeng_key = 'android:value=\"53ca3b8356240bbd91022743\"'
     } else if (flavor == 'GaoQingWallpaper') {
         label = '@string/app_name_baiduwallpaper'
         umeng_key = 'android:value=\"53c8fede56240bcb4301601a\"'
@@ -167,8 +168,8 @@ android.applicationVariants.all { variant ->
         } else if (flavor == 'MeiNvTianTianKan') {
             youmi_apikey = '9fa5ad90d57082ce'
             youmi_seckey = '375f8fffe03aa816'
-            domod_pubkey = '56OJwdKYuNB/ECRykc'
-            domod_replacekey = '16TLuqyaApjJ1NUEzQfGknUs'
+            domod_pubkey = '56OJwdKYuNBG2m1Jh/'
+            domod_replacekey = '16TLuqyaApjuHNU0IuYVFkls'
             domod_insterkey = '16TLuqyaApjJ1NUEK2Nkolxk'
             wandoujia_appid = '100009755'
             wandoujia_seckey = '9c1111295b595a026637b939f1a371d3'

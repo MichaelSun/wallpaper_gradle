@@ -19,18 +19,18 @@ public class AppConfig {
     public static final long MAX_IMAGE_MEMORY = ((long) 720) * 720 * 4 / 1024;
 
     //pacakgeName list
-    public static final String BAIDU_SOURCE_MM_PACKAGE_NAME = "com.michael.wallpaper.baidumm";
+    public static final String BAIDU_SOURCE_MM_PACKAGE_NAME = "com.michael.wallpaper.mm";
     public static final String CAR_PACKAGE_NAME = "com.michael.carwall";
     public static final String MM_WALLPAPER_PACKAGE_NAMMME = "com.michael.wallpaper";
     public static final String BAIDU_WALLPAPER_PACKAGE_NAMMME = "com.michael.baidu.wallpaper";
     public static final String GAOXIAO_WALLPAPER_PACKAGE_NAMMME = "com.michael.gaoxiao";
 
-    public static final String YOUMI_APIKEY = "";
-    public static final String YOUMI_SECRETKEY = "";
+    public static final String YOUMI_APIKEY = "9fa5ad90d57082ce";
+    public static final String YOUMI_SECRETKEY = "375f8fffe03aa816";
 
-    public static final String DOMOD_PUBLISH_KEY = "56OJwdKYuNBdeAVfIX";
-    public static final String DOMOD_PLACEMENT_KEY = "16TLuqyaApjD4NU0d9R1kiGi";
-    public static final String DOMOD_INSTER_KEY = "";
+    public static final String DOMOD_PUBLISH_KEY = "56OJwdKYuNBG2m1Jh/";
+    public static final String DOMOD_PLACEMENT_KEY = "16TLuqyaApjuHNU0IuYVFkls";
+    public static final String DOMOD_INSTER_KEY = "16TLuqyaApjJ1NUEK2Nkolxk";
 
     public static final String WANDOUJIA_APP_ID = "100009721";
     public static final String WANDOUJIA_SECRET_KEY = "52f13cf91cae4f3def146f4a7a1d4466";
