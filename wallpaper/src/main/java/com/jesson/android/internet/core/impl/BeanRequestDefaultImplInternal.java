@@ -139,6 +139,9 @@ class BeanRequestDefaultImplInternal implements BeanRequestInterface {
                 }
             }
 
+//        Log.d("Log", "\n\n//***\n| [[request::" + request + "]] \n" + "| RestAPI URL = " + api_url
+//                  + "\n| after getSig bundle params is = \n" + param + " \n\\\\***\n");
+
             Jess.LOGD("\n\n//***\n| [[request::" + request + "]] \n" + "| RestAPI URL = " + api_url
                     + "\n| after getSig bundle params is = \n" + param + " \n\\\\***\n");
         }

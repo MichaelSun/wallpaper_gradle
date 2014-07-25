@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import com.jesson.android.utils.UtilsRuntime;
 import com.michael.wallpaper.R;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -18,6 +19,8 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
 
     private AlertDialog mAlertDialog;
 
+    private TextView mVersion;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +31,8 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
 
         mClearTv = (TextView) findViewById(R.id.clear);
         mClearTv.setOnClickListener(this);
+        mVersion = (TextView) findViewById(R.id.version);
+        mVersion.setText(String.format(getString(R.string.setting_version), UtilsRuntime.getVersionName(getApplicationContext())));
     }
 
     @Override

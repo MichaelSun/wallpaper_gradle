@@ -1,5 +1,6 @@
 package com.michael.wallpaper.adapter;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.support.v4.view.PagerAdapter;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import com.michael.wallpaper.R;
+import com.michael.wallpaper.activity.GalleryActivity;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
@@ -43,6 +45,28 @@ public class GalleryAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         View retView = LayoutInflater.from(mActivity).inflate(R.layout.item_view_large, null);
         PhotoView photoView = (PhotoView) retView.findViewById(R.id.photo_view);
+
+        photoView.setOnPhotoTapListener(new PhotoViewAttacher.OnPhotoTapListener() {
+
+            @Override
+            public void onPhotoTap(View view, float x, float y) {
+                if (mActivity != null) {
+                    ActionBar actionBar = mActivity.getActionBar();
+                    if (actionBar.isShowing()) {
+                        actionBar.hide();
+                        if (mActivity instanceof GalleryActivity) {
+                            ((GalleryActivity) mActivity).hideDescRegion();
+                        }
+                    } else {
+                        actionBar.show();
+                        if (mActivity instanceof GalleryActivity) {
+                            ((GalleryActivity) mActivity).showDescRegion();
+                        }
+                    }
+                }
+            }
+        });
+
         final ProgressBar progressBar = (ProgressBar) retView.findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);
 

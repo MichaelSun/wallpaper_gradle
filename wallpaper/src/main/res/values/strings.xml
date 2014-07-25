@@ -30,6 +30,7 @@
 
     <string name="title_setting">设置</string>
     <string name="setting_clear">清除图片缓存</string>
+    <string name="setting_version" formatted="false">版本 %s</string>
     <string name="clear_dialog_message">要清除本地图片缓存吗？</string>
     <string name="clear_dialog_positive">清除</string>
     <string name="clear_dialog_negative">取消</string>

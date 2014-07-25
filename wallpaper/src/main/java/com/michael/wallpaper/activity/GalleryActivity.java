@@ -49,6 +49,8 @@ public class GalleryActivity extends BaseActivity {
 
     private ViewPager mViewPager;
 
+    private View mDesc_region;
+
     private GalleryAdapter mPagerAdapter;
 
     private ArrayList<String> mPhotoUriList;
@@ -114,6 +116,8 @@ public class GalleryActivity extends BaseActivity {
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         mProgressDialog.setCanceledOnTouchOutside(false);
+
+        mDesc_region = findViewById(R.id.desc_region);
 
         MobclickAgent.updateOnlineConfig(getApplicationContext());
         this.initSplashAd();
@@ -290,6 +294,14 @@ public class GalleryActivity extends BaseActivity {
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void showDescRegion() {
+        mDesc_region.setVisibility(View.VISIBLE);
+    }
+
+    public void hideDescRegion() {
+        mDesc_region.setVisibility(View.GONE);
     }
 
     private Intent getDefaultIntent() {

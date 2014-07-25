@@ -9,7 +9,7 @@ import de.greenrobot.daogenerator.Schema;
  */
 public class Main {
     private static final String PACKAGE_NAME = "com.michael.wallpaper.dao.model";
-    private static final int VERSION = 4;
+    private static final int VERSION = 5;
 
     public static void main(String[] args) throws Exception {
         Schema schema = new Schema(VERSION, PACKAGE_NAME);

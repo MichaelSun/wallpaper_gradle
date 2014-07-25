@@ -21,6 +21,7 @@
     </com.jesson.android.widget.HackyViewPager>
 
     <LinearLayout
+        android:id="@+id/desc_region"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/ad_content"
