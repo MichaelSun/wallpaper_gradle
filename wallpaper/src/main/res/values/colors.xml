@@ -36,6 +36,7 @@
     <color name="notify_msg_unread">#666666</color>
     <color name="notify_text_pressed">#ffffff</color>
 
+    <color name="gold">#FFD700</color>
     <!-- 红色 -->
     <color name="red">#873324</color>
     <color name="green">#228B22</color>
@@ -132,7 +133,7 @@
     <color name="shaer_background_color">#FFF3F3F3</color>
 
     <integer-array name="gplus_colors">
-        <item>@color/logo_color</item>
+        <item>@color/gold</item>
         <item>@color/download_size</item>
         <item>@color/widget_post_disable</item>
         <item>@color/green</item>

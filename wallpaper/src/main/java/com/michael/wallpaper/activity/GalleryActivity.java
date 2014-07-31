@@ -147,7 +147,6 @@ public class GalleryActivity extends BaseActivity {
         mDescTV = (TextView) findViewById(R.id.desc);
 
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
-//        mPagerAdapter = new GalleryAdapter(this, mPhotoUriList);
         mPagerAdapter = new GalleryAdapter(this, mPhotoRawUrlList);
         mViewPager.setAdapter(mPagerAdapter);
 
@@ -193,10 +192,23 @@ public class GalleryActivity extends BaseActivity {
 
         mViewPager.setCurrentItem(mPosition);
         mPaginationTv.setText((mPosition + 1) + "/" + mPagerAdapter.getCount());
+        if (mDescList != null && mDescList.size() > mPosition) {
+            if (TextUtils.isEmpty(mDescList.get(mPosition))) {
+                mDescTV.setVisibility(View.GONE);
+            } else {
+                mDescTV.setVisibility(View.VISIBLE);
+                mDescTV.setText(mDescList.get(mPosition));
+            }
+        }
 
         mCollectHelper = new CollectHelper(this);
 
         this.setResult(Activity.RESULT_OK);
+
+        if (getActionBar().isShowing()) {
+            getActionBar().hide();
+            hideDescRegion();
+        }
     }
 
     private void initBanner() {
