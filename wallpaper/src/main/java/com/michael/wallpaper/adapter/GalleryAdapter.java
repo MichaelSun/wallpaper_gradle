@@ -71,6 +71,11 @@ public class GalleryAdapter extends PagerAdapter {
         progressBar.setVisibility(View.GONE);
 
         String uri = mUrlList.get(position);
+
+//        if (ImageLoader.getInstance().getDiskCache().get(uri) == null) {
+//            photoView.setImageResource(R.drawable.);
+//        }
+
         ImageLoader.getInstance().displayImage(uri, photoView, new ImageLoadingListener() {
             @Override
             public void onLoadingStarted(String imageUri, View view) {

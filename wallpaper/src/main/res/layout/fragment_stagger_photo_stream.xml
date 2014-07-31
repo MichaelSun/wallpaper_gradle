@@ -13,13 +13,18 @@
         <!--android:verticalSpacing="10dp"-->
         <!--android:numColumns="2"/>-->
 
-    <com.android.deskclock.widget.sgv.StaggeredGridView
-        xmlns:staggered="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/grid_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        staggered:numColumns="2"
-        staggered:drawSelectorOnTop="false"/>
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+        <com.android.deskclock.widget.sgv.StaggeredGridView
+            xmlns:staggered="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/grid_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            staggered:numColumns="2"
+            staggered:drawSelectorOnTop="false"/>
+    <!--</ScrollView>-->
+
 
     <!--<ListView-->
         <!--android:id="@+id/listview"-->

@@ -24,7 +24,8 @@ public class AppRuntime {
 
     public static boolean useStaggerGridView() {
         if (AppRuntime.PACKAGE_NAME.endsWith(AppConfig.GAOXIAO_WALLPAPER_PACKAGE_NAMMME)
-            || AppRuntime.PACKAGE_NAME.endsWith(AppConfig.CAR_PACKAGE_NAME)) {
+            || AppRuntime.PACKAGE_NAME.endsWith(AppConfig.CAR_PACKAGE_NAME)
+            || AppRuntime.PACKAGE_NAME.equals(AppConfig.BAIDU_SOURCE_MM_PACKAGE_NAME)) {
             return true;
         }
 
