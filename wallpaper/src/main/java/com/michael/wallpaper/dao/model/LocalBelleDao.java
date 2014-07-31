@@ -29,6 +29,8 @@ public class LocalBelleDao extends AbstractDao<LocalBelle, Void> {
         public final static Property Desc = new Property(3, String.class, "desc", false, "DESC");
         public final static Property Url = new Property(4, String.class, "url", false, "URL");
         public final static Property RawUrl = new Property(5, String.class, "rawUrl", false, "RAW_URL");
+        public final static Property Width = new Property(6, Integer.class, "width", false, "WIDTH");
+        public final static Property Height = new Property(7, Integer.class, "height", false, "HEIGHT");
     };
 
 
@@ -49,7 +51,9 @@ public class LocalBelleDao extends AbstractDao<LocalBelle, Void> {
                 "'TYPE' INTEGER NOT NULL ," + // 2: type
                 "'DESC' TEXT," + // 3: desc
                 "'URL' TEXT NOT NULL ," + // 4: url
-                "'RAW_URL' TEXT);"); // 5: rawUrl
+                "'RAW_URL' TEXT," + // 5: rawUrl
+                "'WIDTH' INTEGER," + // 6: width
+                "'HEIGHT' INTEGER);"); // 7: height
     }
 
     /** Drops the underlying database table. */
@@ -76,6 +80,16 @@ public class LocalBelleDao extends AbstractDao<LocalBelle, Void> {
         if (rawUrl != null) {
             stmt.bindString(6, rawUrl);
         }
+ 
+        Integer width = entity.getWidth();
+        if (width != null) {
+            stmt.bindLong(7, width);
+        }
+ 
+        Integer height = entity.getHeight();
+        if (height != null) {
+            stmt.bindLong(8, height);
+        }
     }
 
     /** @inheritdoc */
@@ -93,7 +107,9 @@ public class LocalBelleDao extends AbstractDao<LocalBelle, Void> {
             cursor.getInt(offset + 2), // type
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // desc
             cursor.getString(offset + 4), // url
-            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5) // rawUrl
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // rawUrl
+            cursor.isNull(offset + 6) ? null : cursor.getInt(offset + 6), // width
+            cursor.isNull(offset + 7) ? null : cursor.getInt(offset + 7) // height
         );
         return entity;
     }
@@ -107,6 +123,8 @@ public class LocalBelleDao extends AbstractDao<LocalBelle, Void> {
         entity.setDesc(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setUrl(cursor.getString(offset + 4));
         entity.setRawUrl(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setWidth(cursor.isNull(offset + 6) ? null : cursor.getInt(offset + 6));
+        entity.setHeight(cursor.isNull(offset + 7) ? null : cursor.getInt(offset + 7));
      }
     
     /** @inheritdoc */

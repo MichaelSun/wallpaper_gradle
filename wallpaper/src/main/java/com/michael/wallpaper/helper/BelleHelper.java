@@ -59,7 +59,9 @@ public class BelleHelper {
                             if (response.belles != null) {
                                 List<LocalBelle> localBelles = new ArrayList<LocalBelle>();
                                 for (Belle belle : response.belles) {
-                                    LocalBelle localBelle = new LocalBelle(belle.id, belle.time, belle.type, belle.desc, belle.url, belle.rawUrl);
+                                    LocalBelle localBelle = new LocalBelle(belle.id, belle.time, belle.type,
+                                                                              belle.desc, belle.url, belle.rawUrl
+                                                                                , belle.thumb_large_width, belle.thumb_large_height);
                                     localBelles.add(localBelle);
                                 }
                                 dao.insertOrReplaceInTx(localBelles);
@@ -129,7 +131,9 @@ public class BelleHelper {
                         if (TextUtils.isEmpty(belle.rawUrl)) {
                             belle.rawUrl = belle.url;
                         }
-                        LocalBelle localBelle = new LocalBelle(belle.id, belle.time, belle.type, belle.desc, belle.url, belle.rawUrl);
+                        LocalBelle localBelle = new LocalBelle(belle.id, belle.time, belle.type
+                                                                  , belle.desc, belle.url, belle.rawUrl
+                                                                  , belle.thumb_large_width, belle.thumb_large_height);
                         localBelles.add(localBelle);
                     }
                     dao.insertOrReplaceInTx(localBelles);
@@ -174,12 +178,19 @@ public class BelleHelper {
                 // update local database
                 LocalBelleDao dao = mSession.getLocalBelleDao();
                 // delete old
-                dao.queryBuilder().where(LocalBelleDao.Properties.Type.eq(2000)).buildDelete().forCurrentThread().executeDeleteWithoutDetachingEntities();
+//                dao.queryBuilder().where(LocalBelleDao.Properties.Type.eq(2000)).buildDelete().forCurrentThread().executeDeleteWithoutDetachingEntities();
+                if (pageNum == 0) {
+                    dao.queryBuilder().where(LocalBelleDao.Properties.Type.eq(Math.abs(title.hashCode())))
+                        .buildDelete().forCurrentThread().executeDeleteWithoutDetachingEntities();
+                }
+
                 // insert new
                 if (event.belles != null) {
                     List<LocalBelle> localBelles = new ArrayList<LocalBelle>();
                     for (Belle belle : event.belles) {
-                        LocalBelle localBelle = new LocalBelle(belle.id, belle.time, title.hashCode(), belle.desc, belle.url, belle.rawUrl);
+                        LocalBelle localBelle = new LocalBelle(belle.id, belle.time, Math.abs(title.hashCode())
+                                                                  , belle.desc, belle.url, belle.rawUrl
+                                                                  , belle.thumb_large_width, belle.thumb_large_height);
                         localBelles.add(localBelle);
                     }
                     dao.insertOrReplaceInTx(localBelles);
@@ -205,6 +216,20 @@ public class BelleHelper {
         }
     }
 
+    private static List<Belle> LocalBellToBell(List<LocalBelle> localBelles) {
+        List<Belle> ret = new ArrayList<Belle>();
+        if (localBelles != null) {
+            for (LocalBelle localBelle : localBelles) {
+                Belle belle = new Belle(localBelle.getId(), localBelle.getTime(), localBelle.getType(), localBelle.getDesc()
+                                           , localBelle.getUrl(), localBelle.getRawUrl()
+                                           , localBelle.getWidth(), localBelle.getHeight());
+                ret.add(belle);
+            }
+        }
+
+        return ret;
+    }
+
     public void getBelleListFromLocal(final int type) {
         new Thread() {
             @Override
@@ -217,7 +242,8 @@ public class BelleHelper {
                     belles = new ArrayList<Belle>();
                     for (LocalBelle localBelle : localList) {
                         Belle belle = new Belle(localBelle.getId(), localBelle.getTime(), localBelle.getType(), localBelle.getDesc()
-                                                   , localBelle.getUrl(), localBelle.getRawUrl());
+                                                   , localBelle.getUrl(), localBelle.getRawUrl()
+                                                   , localBelle.getWidth(), localBelle.getHeight());
                         belles.add(belle);
                     }
                 }

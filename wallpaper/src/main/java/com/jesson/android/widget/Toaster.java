@@ -15,13 +15,19 @@ public class Toaster {
         if (toast == null) {
             synchronized (Toaster.class) {
                 if (toast == null) {
-                    toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+                    toast = Toast.makeText(context, text, Toast.LENGTH_LONG);
                 }
             }
         } else {
             toast.setText(text);
         }
         toast.show();
+    }
+
+    public static void cancel() {
+        if (toast != null) {
+            toast.cancel();
+        }
     }
 
     public static void show(Context context, int resId) {

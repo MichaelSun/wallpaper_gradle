@@ -15,6 +15,9 @@
     <string name="action_refresh">刷新</string>
     <string name="action_more">更多</string>
 
+    <string name="loading_more">玩命加载中~~</string>
+    <string name="no_more">已经没有更多了，试试刷新或者换个频道吧~~</string>
+
     <string name="action_save_gallery">下载高清</string>
     <string name="save_gallery_success">成功保存到相册</string>
     <string name="save_gallery_fail">保存到相册失败</string>

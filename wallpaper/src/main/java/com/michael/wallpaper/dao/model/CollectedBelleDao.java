@@ -25,6 +25,9 @@ public class CollectedBelleDao extends AbstractDao<CollectedBelle, String> {
     public static class Properties {
         public final static Property Url = new Property(0, String.class, "url", true, "URL");
         public final static Property Time = new Property(1, long.class, "time", false, "TIME");
+        public final static Property RawUrl = new Property(2, String.class, "rawUrl", false, "RAW_URL");
+        public final static Property Width = new Property(3, Integer.class, "width", false, "WIDTH");
+        public final static Property Height = new Property(4, Integer.class, "height", false, "HEIGHT");
     };
 
 
@@ -41,7 +44,10 @@ public class CollectedBelleDao extends AbstractDao<CollectedBelle, String> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'COLLECTED_BELLE' (" + //
                 "'URL' TEXT PRIMARY KEY NOT NULL ," + // 0: url
-                "'TIME' INTEGER NOT NULL );"); // 1: time
+                "'TIME' INTEGER NOT NULL ," + // 1: time
+                "'RAW_URL' TEXT," + // 2: rawUrl
+                "'WIDTH' INTEGER," + // 3: width
+                "'HEIGHT' INTEGER);"); // 4: height
     }
 
     /** Drops the underlying database table. */
@@ -56,6 +62,21 @@ public class CollectedBelleDao extends AbstractDao<CollectedBelle, String> {
         stmt.clearBindings();
         stmt.bindString(1, entity.getUrl());
         stmt.bindLong(2, entity.getTime());
+ 
+        String rawUrl = entity.getRawUrl();
+        if (rawUrl != null) {
+            stmt.bindString(3, rawUrl);
+        }
+ 
+        Integer width = entity.getWidth();
+        if (width != null) {
+            stmt.bindLong(4, width);
+        }
+ 
+        Integer height = entity.getHeight();
+        if (height != null) {
+            stmt.bindLong(5, height);
+        }
     }
 
     /** @inheritdoc */
@@ -69,7 +90,10 @@ public class CollectedBelleDao extends AbstractDao<CollectedBelle, String> {
     public CollectedBelle readEntity(Cursor cursor, int offset) {
         CollectedBelle entity = new CollectedBelle( //
             cursor.getString(offset + 0), // url
-            cursor.getLong(offset + 1) // time
+            cursor.getLong(offset + 1), // time
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // rawUrl
+            cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3), // width
+            cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4) // height
         );
         return entity;
     }
@@ -79,6 +103,9 @@ public class CollectedBelleDao extends AbstractDao<CollectedBelle, String> {
     public void readEntity(Cursor cursor, CollectedBelle entity, int offset) {
         entity.setUrl(cursor.getString(offset + 0));
         entity.setTime(cursor.getLong(offset + 1));
+        entity.setRawUrl(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setWidth(cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3));
+        entity.setHeight(cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4));
      }
     
     /** @inheritdoc */

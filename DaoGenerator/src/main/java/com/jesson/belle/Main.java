@@ -9,7 +9,7 @@ import de.greenrobot.daogenerator.Schema;
  */
 public class Main {
     private static final String PACKAGE_NAME = "com.michael.wallpaper.dao.model";
-    private static final int VERSION = 5;
+    private static final int VERSION = 6;
 
     public static void main(String[] args) throws Exception {
         Schema schema = new Schema(VERSION, PACKAGE_NAME);
@@ -29,6 +29,8 @@ public class Main {
         entity.addStringProperty("desc");
         entity.addStringProperty("url").notNull();
         entity.addStringProperty("rawUrl");
+        entity.addIntProperty("width");
+        entity.addIntProperty("height");
         entity.setHasKeepSections(true);
     }
 
@@ -36,6 +38,9 @@ public class Main {
         Entity entity = schema.addEntity("CollectedBelle");
         entity.addStringProperty("url").notNull().primaryKey();
         entity.addLongProperty("time").notNull();
+        entity.addStringProperty("rawUrl");
+        entity.addIntProperty("width");
+        entity.addIntProperty("height");
         entity.setHasKeepSections(true);
     }
 

@@ -27,6 +27,7 @@ import com.loopj.android.http.RangeFileAsyncHttpResponseHandler;
 import com.michael.wallpaper.AppConfig;
 import com.michael.wallpaper.R;
 import com.michael.wallpaper.adapter.GalleryAdapter;
+import com.michael.wallpaper.api.belle.Belle;
 import com.michael.wallpaper.helper.CollectHelper;
 import com.michael.wallpaper.utils.AppRuntime;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -282,12 +283,15 @@ public class GalleryActivity extends BaseActivity {
             case R.id.action_collect: {
                 String url = getCurrentUrl();
                 if (mCollectHelper.isCollected(url)) {
-//                    MobclickAgent.onEvent(GalleryActivity.this, "Collect", "collect");
                     mCollectHelper.cancelCollectBelle(url);
                     Toaster.show(this, R.string.cancel_collect_success);
                 } else {
-//                    MobclickAgent.onEvent(GalleryActivity.this, "Collect", "cancel collect");
-                    mCollectHelper.collectBelle(url);
+                    Belle belleC = new Belle();
+                    belleC.url = url;
+                    belleC.thumb_large_width = 300;
+                    belleC.thumb_large_height = 400;
+                    belleC.rawUrl = url;
+                    mCollectHelper.collectBelle(belleC);
                     Toaster.show(this, R.string.collect_success);
                 }
                 return true;

@@ -1,6 +1,7 @@
 package com.michael.wallpaper.helper;
 
 import android.content.Context;
+import com.michael.wallpaper.api.belle.Belle;
 import com.michael.wallpaper.dao.model.CollectedBelle;
 import com.michael.wallpaper.dao.model.CollectedBelleDao;
 import com.michael.wallpaper.dao.model.DaoSession;
@@ -32,12 +33,12 @@ public class CollectHelper {
         }
     }
 
-    public void collectBelle(String url) {
+    public void collectBelle(Belle belleC) {
         DaoSession session = DaoUtils.getDaoSession(mContext);
         CollectedBelleDao dao = session.getCollectedBelleDao();
-        CollectedBelle belle = new CollectedBelle(url, System.currentTimeMillis());
+        CollectedBelle belle = new CollectedBelle(belleC.url, System.currentTimeMillis(), belleC.rawUrl, belleC.thumb_large_width, belleC.thumb_large_height);
         dao.insertOrReplace(belle);
-        mCollectHashtable.put(url, true);
+        mCollectHashtable.put(belleC.url, true);
     }
 
     public void cancelCollectBelle(String url) {

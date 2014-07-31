@@ -12,6 +12,9 @@ public class CollectedBelle {
     /** Not-null value. */
     private String url;
     private long time;
+    private String rawUrl;
+    private Integer width;
+    private Integer height;
 
     // KEEP FIELDS - put your custom fields here
     // KEEP FIELDS END
@@ -23,9 +26,12 @@ public class CollectedBelle {
         this.url = url;
     }
 
-    public CollectedBelle(String url, long time) {
+    public CollectedBelle(String url, long time, String rawUrl, Integer width, Integer height) {
         this.url = url;
         this.time = time;
+        this.rawUrl = rawUrl;
+        this.width = width;
+        this.height = height;
     }
 
     /** Not-null value. */
@@ -44,6 +50,30 @@ public class CollectedBelle {
 
     public void setTime(long time) {
         this.time = time;
+    }
+
+    public String getRawUrl() {
+        return rawUrl;
+    }
+
+    public void setRawUrl(String rawUrl) {
+        this.rawUrl = rawUrl;
+    }
+
+    public Integer getWidth() {
+        return width;
+    }
+
+    public void setWidth(Integer width) {
+        this.width = width;
+    }
+
+    public Integer getHeight() {
+        return height;
+    }
+
+    public void setHeight(Integer height) {
+        this.height = height;
     }
 
     // KEEP METHODS - put your custom methods here

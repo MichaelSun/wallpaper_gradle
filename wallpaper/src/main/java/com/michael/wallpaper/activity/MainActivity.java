@@ -18,6 +18,7 @@ import com.michael.wallpaper.R;
 import com.michael.wallpaper.dao.model.Series;
 import com.michael.wallpaper.fragment.NavigationDrawerFragment;
 import com.michael.wallpaper.fragment.PhotoStreamFragment;
+import com.michael.wallpaper.fragment.StaggerPhotoStreamFragment;
 import com.michael.wallpaper.helper.SeriesHelper;
 import com.michael.wallpaper.setting.Setting;
 import com.michael.wallpaper.utils.AppRuntime;
@@ -131,7 +132,9 @@ public class MainActivity extends BaseActivity
             String tag = String.valueOf(mSeries.getType());
             Fragment fragment = fragmentManager.findFragmentByTag(tag);
             if (fragment == null) {
-                fragment = PhotoStreamFragment.newInstance(mSeries);
+                fragment = AppRuntime.useStaggerGridView()
+                               ? StaggerPhotoStreamFragment.newInstance(mSeries)
+                               : PhotoStreamFragment.newInstance(mSeries);
             }
             fragmentManager.beginTransaction().replace(R.id.container, fragment, tag).commit();
         }

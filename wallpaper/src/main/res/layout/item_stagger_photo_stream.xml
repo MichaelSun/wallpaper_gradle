@@ -10,7 +10,7 @@
         <!--android:layout_height="wrap_content"-->
         <!--android:background="@drawable/note_shadow_widget">-->
 
-        <ImageView
+        <com.michael.wallpaper.views.STGVImageView
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/photo"
             android:layout_width="match_parent"

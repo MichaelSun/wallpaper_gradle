@@ -7,6 +7,7 @@
      https://developer.android.com/design/patterns/navigation-drawer.html -->
     <dimen name="navigation_drawer_width">240dp</dimen>
 
+    <dimen name="stgv_margin">8dp</dimen>
 
     <!--&lt;!&ndash; Card &ndash;&gt;-->
     <!--<dimen name="card_base_empty_height">96dp</dimen>-->

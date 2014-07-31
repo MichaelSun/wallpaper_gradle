@@ -7,6 +7,7 @@ import com.jesson.android.Jess;
 import com.jesson.android.internet.InternetUtils;
 import com.jesson.android.utils.CustomThreadPool;
 import com.jesson.android.utils.UtilsRuntime;
+import com.michael.wallpaper.AppConfig;
 import com.michael.wallpaper.api.stat.StatRequest;
 import com.michael.wallpaper.api.stat.StatResponse;
 
@@ -20,6 +21,15 @@ public class AppRuntime {
     public static String PACKAGE_NAME = "";
 
     public static boolean SHOW_BANNER = false;
+
+    public static boolean useStaggerGridView() {
+        if (AppRuntime.PACKAGE_NAME.endsWith(AppConfig.GAOXIAO_WALLPAPER_PACKAGE_NAMMME)
+            || AppRuntime.PACKAGE_NAME.endsWith(AppConfig.CAR_PACKAGE_NAME)) {
+            return true;
+        }
+
+        return false;
+    }
 
     public static String makeRawUrl(String url) {
         if (TextUtils.isEmpty(url)) {
