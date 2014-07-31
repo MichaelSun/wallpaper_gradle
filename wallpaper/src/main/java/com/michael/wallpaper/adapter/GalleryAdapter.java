@@ -72,9 +72,9 @@ public class GalleryAdapter extends PagerAdapter {
 
         String uri = mUrlList.get(position);
 
-        if (ImageLoader.getInstance().getDiskCache().get(uri) == null) {
-            photoView.setImageResource(R.drawable.);
-        }
+//        if (ImageLoader.getInstance().getDiskCache().get(uri) == null) {
+//            photoView.setImageResource(R.drawable.);
+//        }
 
         ImageLoader.getInstance().displayImage(uri, photoView, new ImageLoadingListener() {
             @Override
