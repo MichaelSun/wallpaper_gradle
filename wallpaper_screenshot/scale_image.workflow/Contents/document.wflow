@@ -52,9 +52,10 @@
 				<dict>
 					<key>fileNames</key>
 					<array>
-						<string>~/github/Wallpaper_gradle/wallpaper_screenshot/高清壁纸/1080/device-2014-07-16-161758.png</string>
-						<string>~/github/Wallpaper_gradle/wallpaper_screenshot/高清壁纸/1080/device-2014-07-16-161824.png</string>
-						<string>~/github/Wallpaper_gradle/wallpaper_screenshot/美女天天看/1080/device-2014-07-21-113635.png</string>
+						<string>~/github/tinygame/screenshot/1080/device-2014-08-13-121121.png</string>
+						<string>~/github/tinygame/screenshot/1080/device-2014-08-13-121150.png</string>
+						<string>~/github/tinygame/screenshot/1080/device-2014-08-13-121157.png</string>
+						<string>~/github/tinygame/screenshot/1080/device-2014-08-13-121209.png</string>
 					</array>
 				</dict>
 				<key>BundleIdentifier</key>
@@ -312,7 +313,7 @@
 				<key>Class Name</key>
 				<string>AMCropImagesAction</string>
 				<key>InputUUID</key>
-				<string>9CA4CA0E-EC93-451F-91BE-778BF49923FC</string>
+				<string>FB3F3844-F8D4-43D0-8226-F4CF659F8B36</string>
 				<key>Keywords</key>
 				<array>
 					<string>Image</string>
@@ -322,9 +323,9 @@
 					<string>Scale</string>
 				</array>
 				<key>OutputUUID</key>
-				<string>FBEAA3AF-A7E2-4F90-B819-5EFD641B8849</string>
+				<string>2D40A9ED-7DF2-4ADC-8CE8-793FA88AD128</string>
 				<key>UUID</key>
-				<string>EDB7FFCC-AE00-4D66-9EEC-51BC03D0E1BA</string>
+				<string>AD95EBCA-DD2A-43C3-8DA2-CBA80C953431</string>
 				<key>UnlocalizedApplications</key>
 				<array>
 					<string>Preview</string>
@@ -475,7 +476,7 @@
 					<key>scaleValue</key>
 					<integer>0</integer>
 					<key>sizeValue</key>
-					<integer>50</integer>
+					<integer>480</integer>
 				</dict>
 				<key>BundleIdentifier</key>
 				<string>com.apple.Automator.ScaleImage</string>
@@ -492,7 +493,7 @@
 				<key>Class Name</key>
 				<string>AMScaleImagesAction</string>
 				<key>InputUUID</key>
-				<string>CEBCDD7C-4870-42ED-A81A-467B53CD9F09</string>
+				<string>9EFBC92D-9CF3-4160-B6F3-6380D40FE6F0</string>
 				<key>Keywords</key>
 				<array>
 					<string>Image</string>
@@ -501,11 +502,9 @@
 					<string>Change</string>
 				</array>
 				<key>OutputUUID</key>
-				<string>DA87AA07-F0E1-4A5A-A9AD-0A2116FA8FA5</string>
-				<key>StartAction</key>
-				<false/>
+				<string>4D9B3B79-2ADA-41F8-BAE7-CDB05D7FBEC4</string>
 				<key>UUID</key>
-				<string>1C868FD3-7917-43F6-A28C-E70CB246C474</string>
+				<string>D837E810-4B34-47F6-9FBC-EF24866FBDD8</string>
 				<key>UnlocalizedApplications</key>
 				<array>
 					<string>Preview</string>
@@ -565,6 +564,8 @@
 						<string>3</string>
 					</dict>
 				</dict>
+				<key>conversionLabel</key>
+				<integer>0</integer>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
@@ -578,26 +579,26 @@
 	</array>
 	<key>connectors</key>
 	<dict>
-		<key>07EE1A34-FB89-4E63-B4C6-B7A9A3E47E3F</key>
+		<key>88638603-35E6-4B86-82E6-8C7EE6C80EE1</key>
 		<dict>
 			<key>from</key>
 			<string>36C458CF-1851-43A3-815A-31B4ACE3F543 - 36C458CF-1851-43A3-815A-31B4ACE3F543</string>
 			<key>to</key>
-			<string>EDB7FFCC-AE00-4D66-9EEC-51BC03D0E1BA - EDB7FFCC-AE00-4D66-9EEC-51BC03D0E1BA</string>
+			<string>AD95EBCA-DD2A-43C3-8DA2-CBA80C953431 - AD95EBCA-DD2A-43C3-8DA2-CBA80C953431</string>
 		</dict>
-		<key>7CE455EC-1425-4A57-B93D-D8DAC43FDE77</key>
+		<key>F7474D15-0197-4960-9920-B3E5B0CD24BD</key>
+		<dict>
+			<key>from</key>
+			<string>AD95EBCA-DD2A-43C3-8DA2-CBA80C953431 - AD95EBCA-DD2A-43C3-8DA2-CBA80C953431</string>
+			<key>to</key>
+			<string>D837E810-4B34-47F6-9FBC-EF24866FBDD8 - D837E810-4B34-47F6-9FBC-EF24866FBDD8</string>
+		</dict>
+		<key>FCB8EC20-7EDC-41A6-B90E-08C9C71F27CF</key>
 		<dict>
 			<key>from</key>
 			<string>7C855797-06F8-4760-9DD4-6EC8876289D0 - 7C855797-06F8-4760-9DD4-6EC8876289D0</string>
 			<key>to</key>
 			<string>36C458CF-1851-43A3-815A-31B4ACE3F543 - 36C458CF-1851-43A3-815A-31B4ACE3F543</string>
-		</dict>
-		<key>B2D7BA91-97FD-4038-86D4-0B2BDCB18677</key>
-		<dict>
-			<key>from</key>
-			<string>EDB7FFCC-AE00-4D66-9EEC-51BC03D0E1BA - EDB7FFCC-AE00-4D66-9EEC-51BC03D0E1BA</string>
-			<key>to</key>
-			<string>1C868FD3-7917-43F6-A28C-E70CB246C474 - 1C868FD3-7917-43F6-A28C-E70CB246C474</string>
 		</dict>
 	</dict>
 	<key>workflowMetaData</key>
