@@ -56,19 +56,19 @@ android {
         }
 
         MeiNvTianTianKan {
-            packageName = 'com.michael.wallpaper.mm'
+            applicationId = 'com.michael.wallpaper.mm'
         }
 
         GaoQingWallpaper {
-            packageName = 'com.michael.baidu.wallpaper'
+            applicationId = 'com.michael.baidu.wallpaper'
         }
         
         BaidduCar {
-            packageName = 'com.michael.carwall'
+            applicationId = 'com.michael.carwall'
         } 
 
         GaoXiaoTianTang {
-            packageName = 'com.michael.gaoxiao'
+            applicationId = 'com.michael.gaoxiao'
         }
     }
 }
