@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.9.+'
+        classpath 'com.android.tools.build:gradle:0.12.+'
     }
 }
 apply plugin: 'android'
@@ -14,7 +14,7 @@ repositories {
 
 android {
     compileSdkVersion 19
-    buildToolsVersion '19.0.3'
+    buildToolsVersion '19.1.0'
 
     defaultConfig {
         minSdkVersion 14
@@ -219,10 +219,10 @@ android.applicationVariants.all { variant ->
 
     variant.processManifest.doLast {
         copy {
-            from("${buildDir}/manifests") {
+            from("${buildDir}/intermediates/manifests") {
                 include "${variant.dirName}/AndroidManifest.xml"
             }
-            into("${buildDir}/manifests/$variant.name")
+            into("${buildDir}/manifests/${variant.name}")
 
             filter {
                 String line -> line.replaceAll("@string/app_name", "${label}")
