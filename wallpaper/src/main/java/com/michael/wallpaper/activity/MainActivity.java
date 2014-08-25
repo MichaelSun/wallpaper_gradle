@@ -62,25 +62,27 @@ public class MainActivity extends BaseActivity
         mTitle = getTitle();
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
 
-        String data = MobclickAgent.getConfigParams(this.getApplicationContext(), "show_banner");
-        if (!TextUtils.isEmpty(data) && data.equals("true")) {
-            AppRuntime.SHOW_BANNER = true;
-        } else {
-            AppRuntime.SHOW_BANNER = false;
+        if (AppConfig.SERVER_BANNER) {
+            String data = MobclickAgent.getConfigParams(this.getApplicationContext(), "show_banner");
+            if (!TextUtils.isEmpty(data) && data.equals("true")) {
+                AppRuntime.SHOW_BANNER = true;
+            } else {
+                AppRuntime.SHOW_BANNER = false;
+            }
         }
-
-//        AppRuntime.SHOW_BANNER = true;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-//        tryToShwoSplashAd();
-        String data = MobclickAgent.getConfigParams(this.getApplicationContext(), "show_banner");
-        if (!TextUtils.isEmpty(data) && data.equals("true")) {
-            AppRuntime.SHOW_BANNER = true;
-        } else {
-            AppRuntime.SHOW_BANNER = false;
+
+        if (AppConfig.SERVER_BANNER) {
+            String data = MobclickAgent.getConfigParams(this.getApplicationContext(), "show_banner");
+            if (!TextUtils.isEmpty(data) && data.equals("true")) {
+                AppRuntime.SHOW_BANNER = true;
+            } else {
+                AppRuntime.SHOW_BANNER = false;
+            }
         }
 
         if (!mAdViewShow) {

@@ -20,7 +20,7 @@ public class AppRuntime {
 
     public static String PACKAGE_NAME = "";
 
-    public static boolean SHOW_BANNER = false;
+    public static boolean SHOW_BANNER = true;
 
     public static boolean useStaggerGridView() {
         if (AppRuntime.PACKAGE_NAME.endsWith(AppConfig.GAOXIAO_WALLPAPER_PACKAGE_NAMMME)
