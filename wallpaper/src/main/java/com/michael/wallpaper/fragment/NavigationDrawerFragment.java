@@ -120,6 +120,10 @@ public class NavigationDrawerFragment extends Fragment {
             } else {
                 titles[i] = mSeriesList.get(i).getTitle();
             }
+
+            if (AppRuntime.APP_WALL_TYPE_LIST.contains(mSeriesList.get(i).getType())) {
+                titles[i] = titles[i] + " HOT";
+            }
         }
         mDrawerListView.setAdapter(new ArrayAdapter<String>(getActionBar().getThemedContext(),
                                                                R.layout.drawer_list_item,

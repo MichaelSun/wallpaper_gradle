@@ -89,17 +89,23 @@ public class SeriesHelper {
             list.add(new Series(Math.abs("清纯".hashCode()), "清纯", "美女", null, 1));
             list.add(new Series(Math.abs("校花".hashCode()), "校花", "美女", null, 1));
             list.add(new Series(Math.abs("网络美女".hashCode()), "网络美女", "美女", null, 1));
-            list.add(new Series(Math.abs("唯美".hashCode()), "唯美", "美女", null, 1));
             list.add(new Series(Math.abs("时尚".hashCode()), "时尚", "美女", null, 1));
             list.add(new Series(Math.abs("气质".hashCode()), "气质", "美女", null, 1));
             list.add(new Series(Math.abs("足球宝贝".hashCode()), "足球宝贝", "美女", null, 0));
-            list.add(new Series(Math.abs("嫩萝莉".hashCode()), "嫩萝莉", "美女", null, 0));
-            list.add(new Series(Math.abs("长发".hashCode()), "长发", "美女", null, 0));
             list.add(new Series(Math.abs("可爱".hashCode()), "可爱", "美女", null, 0));
-            list.add(new Series(Math.abs("素颜".hashCode()), "素颜", "美女", null, 0));
-            list.add(new Series(Math.abs("非主流".hashCode()), "非主流", "美女", null, 0));
-            list.add(new Series(Math.abs("短发".hashCode()), "短发", "美女", null, 0));
+            list.add(new Series(Math.abs("长腿".hashCode()), "长腿", "美女", null, 0));
+            list.add(new Series(Math.abs("车模".hashCode()), "车模", "美女", null, 0));
+            list.add(new Series(Math.abs("写真".hashCode()), "写真", "美女", null, 0));
+            list.add(new Series(Math.abs("诱惑".hashCode()), "诱惑", "美女", null, 0));
+            list.add(new Series(Math.abs("性感写真".hashCode()), "性感写真", "美女", null, 0));
             list.add(new Series(Math.abs("高雅大气很有范".hashCode()), "高雅大气很有范", "美女", null, 0));
+
+            AppRuntime.APP_WALL_TYPE_LIST.add(Math.abs("长腿".hashCode()));
+            AppRuntime.APP_WALL_TYPE_LIST.add(Math.abs("车模".hashCode()));
+            AppRuntime.APP_WALL_TYPE_LIST.add(Math.abs("写真".hashCode()));
+            AppRuntime.APP_WALL_TYPE_LIST.add(Math.abs("诱惑".hashCode()));
+            AppRuntime.APP_WALL_TYPE_LIST.add(Math.abs("性感写真".hashCode()));
+            AppRuntime.APP_WALL_TYPE_LIST.add(Math.abs("高雅大气很有范".hashCode()));
         } else if (AppConfig.CAR_PACKAGE_NAME.endsWith(AppRuntime.PACKAGE_NAME)) {
             list.add(new Series(Math.abs("名车".hashCode()), "名车", "汽车", null, 1));
             list.add(new Series(Math.abs("汽车图解".hashCode()), "汽车图解", "汽车", null, 1));

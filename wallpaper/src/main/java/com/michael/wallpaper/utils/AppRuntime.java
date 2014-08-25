@@ -11,6 +11,8 @@ import com.michael.wallpaper.AppConfig;
 import com.michael.wallpaper.api.stat.StatRequest;
 import com.michael.wallpaper.api.stat.StatResponse;
 
+import java.util.ArrayList;
+
 /**
  * Created by michael on 14-5-13.
  */
@@ -21,6 +23,8 @@ public class AppRuntime {
     public static String PACKAGE_NAME = "";
 
     public static boolean SHOW_BANNER = true;
+
+    public static ArrayList<Integer> APP_WALL_TYPE_LIST = new ArrayList<Integer>();
 
     public static boolean useStaggerGridView() {
         if (AppRuntime.PACKAGE_NAME.endsWith(AppConfig.GAOXIAO_WALLPAPER_PACKAGE_NAMMME)

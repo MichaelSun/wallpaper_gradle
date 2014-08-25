@@ -1,16 +1,20 @@
 package com.michael.wallpaper.activity;
 
-import android.app.ActionBar;
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
+import android.app.*;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import cn.dm.android.DMOfferWall;
+import cn.dm.android.data.listener.CheckPointListener;
+import cn.dm.android.model.ErrorInfo;
+import cn.dm.android.model.Point;
 import cn.domob.android.ads.DomobAdView;
 import com.jesson.android.widget.Toaster;
 import com.michael.wallpaper.AppConfig;
@@ -45,6 +49,8 @@ public class MainActivity extends BaseActivity
 
     private boolean mAdViewShow;
 
+    private ProgressDialog mProgressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +76,11 @@ public class MainActivity extends BaseActivity
                 AppRuntime.SHOW_BANNER = false;
             }
         }
+
+        DMOfferWall.getInstance().init(this, AppConfig.DOMOD_PUBLISH_ID, "1005661");
+
+        mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setMessage("玩命加载中~~~");
     }
 
     @Override
@@ -115,30 +126,54 @@ public class MainActivity extends BaseActivity
 //            if (point < 60) {
 //                showWallInfoDialog(point);
 //            } else {
-                Setting.getInstace().setMode(1);
-                Toaster.show(getApplicationContext(), "开启隐藏成功，请退出应用重新进入");
+            Setting.getInstace().setMode(1);
+            Toaster.show(getApplicationContext(), "开启隐藏成功，请退出应用重新进入");
 //            }
         } else {
-            //检查是否积分已购
-//            if (mOpenWall && mSeries.getProperty() == 0) {
-//                隐藏属性
-//                int point = PointsManager.getInstance(this).queryPoints();
-//                if (point < 60) {
-//                    showWallInfoDialog(point);
-//                    return;
-//                }
-//            }
+            if (AppRuntime.APP_WALL_TYPE_LIST.contains(mSeries.getType())) {
+                if (mProgressDialog.isShowing()) {
+                    mProgressDialog.dismiss();
+                }
+                mProgressDialog.show();
+                //需要提示积分墙
+                DMOfferWall.getInstance().checkPoints(new CheckPointListener() {
+                    @Override
+                    public void onError(ErrorInfo errorInfo) {
+                        mProgressDialog.dismiss();
+                        Toaster.show(getApplicationContext(), "哎呀，网络出问题了，找个网好的地方在试试~~~~");
+                    }
 
-            // update the main content by replacing fragments
-            FragmentManager fragmentManager = getFragmentManager();
-            String tag = String.valueOf(mSeries.getType());
-            Fragment fragment = fragmentManager.findFragmentByTag(tag);
-            if (fragment == null) {
-                fragment = AppRuntime.useStaggerGridView()
-                               ? StaggerPhotoStreamFragment.newInstance(mSeries)
-                               : PhotoStreamFragment.newInstance(mSeries);
+                    @Override
+                    public void onResponse(Point data) {
+                        mProgressDialog.dismiss();
+                        int currentPoint = data.point - data.consumed;
+                        if (currentPoint < 100) {
+                            showWallInfoDialog(currentPoint);
+                        } else {
+                            FragmentManager fragmentManager = getFragmentManager();
+                            String tag = String.valueOf(mSeries.getType());
+                            Fragment fragment = fragmentManager.findFragmentByTag(tag);
+                            if (fragment == null) {
+                                fragment = AppRuntime.useStaggerGridView()
+                                               ? StaggerPhotoStreamFragment.newInstance(mSeries)
+                                               : PhotoStreamFragment.newInstance(mSeries);
+                            }
+                            fragmentManager.beginTransaction().replace(R.id.container, fragment, tag).commit();
+                        }
+                    }
+                });
+            } else {
+                // update the main content by replacing fragments
+                FragmentManager fragmentManager = getFragmentManager();
+                String tag = String.valueOf(mSeries.getType());
+                Fragment fragment = fragmentManager.findFragmentByTag(tag);
+                if (fragment == null) {
+                    fragment = AppRuntime.useStaggerGridView()
+                                   ? StaggerPhotoStreamFragment.newInstance(mSeries)
+                                   : PhotoStreamFragment.newInstance(mSeries);
+                }
+                fragmentManager.beginTransaction().replace(R.id.container, fragment, tag).commit();
             }
-            fragmentManager.beginTransaction().replace(R.id.container, fragment, tag).commit();
         }
     }
 
@@ -148,8 +183,11 @@ public class MainActivity extends BaseActivity
         } else {
             mTitle = series.getTitle();
         }
-    }
 
+        if (AppRuntime.APP_WALL_TYPE_LIST.contains(mSeries.getType())) {
+            mTitle = mTitle + " HOT";
+        }
+    }
 
 
     public void restoreActionBar() {
@@ -228,27 +266,27 @@ public class MainActivity extends BaseActivity
         }
     }
 
-//    private void showWallInfoDialog(int currentUserPoint) {
-//        String tips = String.format(getString(R.string.offer_info_detail), 60, currentUserPoint);
-//        View view = this.getLayoutInflater().inflate(R.layout.offer_tips_view, null);
-//        TextView tv = (TextView) view.findViewById(R.id.tips);
-//        tv.setText(tips);
-//        AlertDialog dialog = new AlertDialog.Builder(this).setTitle(R.string.tips_title).setView(view)
-//                                 .setPositiveButton(R.string.download_offer, new DialogInterface.OnClickListener() {
-//
-//                                     @Override
-//                                     public void onClick(DialogInterface dialog, int which) {
-//                                         OffersManager.getInstance(MainActivity.this).showOffersWall();
-//                                     }
-//                                 })
-//                                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-//
-//                                     @Override
-//                                     public void onClick(DialogInterface dialog, int which) {
-//                                     }
-//                                 }).create();
-//        dialog.setCanceledOnTouchOutside(false);
-//        dialog.show();
-//    }
+    private void showWallInfoDialog(int currentUserPoint) {
+        String tips = String.format(getString(R.string.offer_info_detail), 100, currentUserPoint);
+        View view = this.getLayoutInflater().inflate(R.layout.offer_tips_view, null);
+        TextView tv = (TextView) view.findViewById(R.id.tips);
+        tv.setText(tips);
+        AlertDialog dialog = new AlertDialog.Builder(this).setTitle(R.string.tips_title).setView(view)
+                                 .setPositiveButton(R.string.download_offer, new DialogInterface.OnClickListener() {
+
+                                     @Override
+                                     public void onClick(DialogInterface dialog, int which) {
+                                         DMOfferWall.getInstance().showOfferWall();
+                                     }
+                                 })
+                                 .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+
+                                     @Override
+                                     public void onClick(DialogInterface dialog, int which) {
+                                     }
+                                 }).create();
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+    }
 
 }
