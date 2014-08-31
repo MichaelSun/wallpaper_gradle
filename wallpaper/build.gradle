@@ -53,7 +53,7 @@ android {
 
     productFlavors {
         MeiNvWallpaper {
-            packageName = 'com.michael.wallpaper'
+            packageName = 'com.michael.wallpaper.mv'
         }
         MeiNvTianTianKan {
             applicationId = 'com.michael.wallpaper.mm'

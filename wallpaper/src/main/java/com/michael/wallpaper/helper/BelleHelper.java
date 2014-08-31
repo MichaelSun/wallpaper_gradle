@@ -119,6 +119,7 @@ public class BelleHelper {
                 GetBelleListEvent event = new GetBelleListEvent();
                 event.belles = response.belles;
                 event.type = GetBelleListEvent.TYPE_SERVER_RANDOM;
+                event.contentType = type;
                 event.hasMore = false;
                 // update local database
                 LocalBelleDao dao = mSession.getLocalBelleDao();
@@ -150,7 +151,9 @@ public class BelleHelper {
                 }
                 EventBus.getDefault().post(event);
             } else {
-                EventBus.getDefault().post(new ServerErrorEvent());
+                ServerErrorEvent serverErrorEvent = new ServerErrorEvent();
+                serverErrorEvent.contentType = type;
+                EventBus.getDefault().post(serverErrorEvent);
             }
         } catch (NetWorkException e) {
             e.printStackTrace();

@@ -68,15 +68,21 @@ public class STGVImageView extends ImageView {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 
-        int width = MeasureSpec.getSize(widthMeasureSpec);
-        int height = MeasureSpec.getSize(heightMeasureSpec);
+        if (mWidth == 0 || mHeight == 0) {
+            super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+            int measuredWidth = getMeasuredWidth();
+            setMeasuredDimension(measuredWidth, measuredWidth);
+        } else {
+            int width = MeasureSpec.getSize(widthMeasureSpec);
+            int height = MeasureSpec.getSize(heightMeasureSpec);
 
-        int heightC = height;
-        if (mHeight > 0 && mWidth > 0) {
-            heightC = width * mHeight / mWidth;
+            int heightC = height;
+            if (mHeight > 0 && mWidth > 0) {
+                heightC = width * mHeight / mWidth;
+            }
+
+            setMeasuredDimension(width, heightC);
         }
-
-        setMeasuredDimension(width, heightC);
     }
 
 }

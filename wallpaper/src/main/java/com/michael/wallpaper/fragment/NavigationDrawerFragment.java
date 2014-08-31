@@ -19,10 +19,8 @@ import android.widget.ListView;
 import com.michael.wallpaper.AppConfig;
 import com.michael.wallpaper.R;
 import com.michael.wallpaper.dao.model.Series;
-import com.michael.wallpaper.event.SeriesUpdatedEvent;
 import com.michael.wallpaper.helper.SeriesHelper;
 import com.michael.wallpaper.utils.AppRuntime;
-import de.greenrobot.event.EventBus;
 
 import java.util.List;
 
@@ -72,7 +70,7 @@ public class NavigationDrawerFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        EventBus.getDefault().register(this);
+//        EventBus.getDefault().register(this);
 
         mSeriesList = SeriesHelper.getInstance().getNavigationList();
 
@@ -93,7 +91,7 @@ public class NavigationDrawerFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
+//        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -184,8 +182,7 @@ public class NavigationDrawerFragment extends Fragment {
                     // The user manually opened the drawer; store this flag to prevent auto-showing
                     // the navigation drawer automatically in the future.
                     mUserLearnedDrawer = true;
-                    SharedPreferences sp = PreferenceManager
-                                               .getDefaultSharedPreferences(getActivity());
+                    SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
                     sp.edit().putBoolean(PREF_USER_LEARNED_DRAWER, true).apply();
                 }
 
@@ -312,20 +309,20 @@ public class NavigationDrawerFragment extends Fragment {
         void onNavigationDrawerItemSelected(int position);
     }
 
-    public void onEventMainThread(SeriesUpdatedEvent event) {
-        mSeriesList = SeriesHelper.getInstance().getSeriesList();
-        String[] titles = new String[mSeriesList.size()];
-        for (int i = 0; i < mSeriesList.size(); i++) {
-            if (!TextUtils.isEmpty(mSeriesList.get(i).getTag3())) {
-                titles[i] = mSeriesList.get(i).getTitle() + "-" + mSeriesList.get(i).getTag3();
-            } else {
-                titles[i] = mSeriesList.get(i).getTitle();
-            }
-        }
-        mCurrentSelectedPosition = 0;
-        mDrawerListView.setAdapter(new ArrayAdapter<String>(getActionBar().getThemedContext(),
-                                                               R.layout.drawer_list_item,
-                                                               R.id.text,
-                                                               titles));
-    }
+//    public void onEventMainThread(SeriesUpdatedEvent event) {
+//        mSeriesList = SeriesHelper.getInstance().getSeriesList();
+//        String[] titles = new String[mSeriesList.size()];
+//        for (int i = 0; i < mSeriesList.size(); i++) {
+//            if (!TextUtils.isEmpty(mSeriesList.get(i).getTag3())) {
+//                titles[i] = mSeriesList.get(i).getTitle() + "-" + mSeriesList.get(i).getTag3();
+//            } else {
+//                titles[i] = mSeriesList.get(i).getTitle();
+//            }
+//        }
+//        mCurrentSelectedPosition = 0;
+//        mDrawerListView.setAdapter(new ArrayAdapter<String>(getActionBar().getThemedContext(),
+//                                                               R.layout.drawer_list_item,
+//                                                               R.id.text,
+//                                                               titles));
+//    }
 }
