@@ -5,4 +5,6 @@ package com.michael.wallpaper.event;
  */
 public class ServerErrorEvent {
 
+    public int contentType;
+
 }

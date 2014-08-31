@@ -3,12 +3,12 @@ package com.michael.wallpaper.fragment;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.text.TextUtils;
@@ -74,7 +74,7 @@ public class NavigationDrawerFragment extends Fragment {
 
         EventBus.getDefault().register(this);
 
-        mSeriesList = SeriesHelper.getInstance().getSeriesList();
+        mSeriesList = SeriesHelper.getInstance().getNavigationList();
 
         // Read in the flag indicating whether or not the user has demonstrated awareness of the
         // drawer. See PREF_USER_LEARNED_DRAWER for details.
@@ -157,8 +157,7 @@ public class NavigationDrawerFragment extends Fragment {
 
         // ActionBarDrawerToggle ties together the the proper interactions
         // between the navigation drawer and the action bar app icon.
-        mDrawerToggle = new ActionBarDrawerToggle(
-                                                     getActivity(),                    /* host Activity */
+        mDrawerToggle = new ActionBarDrawerToggle(getActivity(),                    /* host Activity */
                                                      mDrawerLayout,                    /* DrawerLayout object */
                                                      R.drawable.ic_drawer,             /* nav drawer image to replace 'Up' caret */
                                                      R.string.navigation_drawer_open,  /* "open drawer" description for accessibility */
@@ -196,9 +195,9 @@ public class NavigationDrawerFragment extends Fragment {
 
         // If the user hasn't 'learned' about the drawer, open it to introduce them to the drawer,
         // per the navigation drawer design guidelines.
-        if (!mUserLearnedDrawer && !mFromSavedInstanceState) {
-            mDrawerLayout.openDrawer(mFragmentContainerView);
-        }
+//        if (!mUserLearnedDrawer && !mFromSavedInstanceState) {
+//            mDrawerLayout.openDrawer(mFragmentContainerView);
+//        }
 
         // Defer code dependent on restoration of previous instance state.
         mDrawerLayout.post(new Runnable() {

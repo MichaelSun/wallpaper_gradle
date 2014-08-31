@@ -13,6 +13,8 @@
     <color name="download_size">#191970</color>
     <color name="bg_black">#90000000</color>
 
+    <color name="indicator">#ffff674f</color>
+
     <drawable name="white">#FFFFFF</drawable>
     <drawable name="black">#000000</drawable>
     <drawable name="gray1">#AAAAAA</drawable>

@@ -1,6 +1,6 @@
 package com.michael.wallpaper.activity;
 
-import android.app.Activity;
+import android.support.v4.app.FragmentActivity;
 import cn.domob.android.ads.DomobAdManager;
 import cn.domob.android.ads.DomobInterstitialAd;
 import cn.domob.android.ads.DomobInterstitialAdListener;
@@ -12,7 +12,7 @@ import com.umeng.analytics.MobclickAgent;
 /**
  * Created by zhangdi on 14-3-5.
  */
-public class BaseActivity extends Activity {
+public class BaseActivity extends FragmentActivity {
 
     protected DomobInterstitialAd mDomobInterstitialAd;
 

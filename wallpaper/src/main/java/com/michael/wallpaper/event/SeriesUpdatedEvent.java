@@ -5,4 +5,6 @@ package com.michael.wallpaper.event;
  */
 public class SeriesUpdatedEvent {
 
+    public int contentType;
+
 }

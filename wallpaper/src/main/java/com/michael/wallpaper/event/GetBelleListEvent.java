@@ -24,6 +24,8 @@ public class GetBelleListEvent {
 
     public int totalNum;
 
+    public int contentType;
+
     public List<Belle> belles;
 
     @Override
@@ -34,6 +36,7 @@ public class GetBelleListEvent {
                    ", startIndex=" + startIndex +
                    ", pageCount=" + pageCount +
                    ", totalNum=" + totalNum +
+                   ", contentType=" + contentType +
                    ", belles=" + belles +
                    '}';
     }

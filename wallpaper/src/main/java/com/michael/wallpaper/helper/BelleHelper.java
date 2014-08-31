@@ -75,7 +75,7 @@ public class BelleHelper {
                     }
                 } catch (NetWorkException e) {
                     e.printStackTrace();
-                    EventBus.getDefault().post(new NetworkErrorEvent(e));
+                    EventBus.getDefault().post(new NetworkErrorEvent(e, type));
                 }
             }
         }.start();
@@ -154,7 +154,7 @@ public class BelleHelper {
             }
         } catch (NetWorkException e) {
             e.printStackTrace();
-            EventBus.getDefault().post(new NetworkErrorEvent(e));
+            EventBus.getDefault().post(new NetworkErrorEvent(e, type));
         }
     }
 
@@ -174,6 +174,7 @@ public class BelleHelper {
                 event.hasMore = response.totalNum > (response.start_index + response.return_number);
                 event.pageCount = response.return_number;
                 event.startIndex = response.start_index;
+                event.contentType = Math.abs(title.hashCode());
                 event.type = GetBelleListEvent.TYPE_SERVER_RANDOM;
                 // update local database
                 LocalBelleDao dao = mSession.getLocalBelleDao();
@@ -212,7 +213,7 @@ public class BelleHelper {
             }
         } catch (NetWorkException e) {
             e.printStackTrace();
-            EventBus.getDefault().post(new NetworkErrorEvent(e));
+            EventBus.getDefault().post(new NetworkErrorEvent(e, Math.abs(title.hashCode())));
         }
     }
 
@@ -251,6 +252,7 @@ public class BelleHelper {
                 event.type = GetBelleListEvent.TYPE_LOCAL;
                 event.belles = belles;
                 event.hasMore = false;
+                event.contentType = type;
                 EventBus.getDefault().post(event);
             }
         }.start();

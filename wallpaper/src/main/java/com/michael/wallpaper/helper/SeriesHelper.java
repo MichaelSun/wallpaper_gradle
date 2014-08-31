@@ -176,6 +176,19 @@ public class SeriesHelper {
     }
 
     private List<Series> localSeries() {
+        return new ArrayList<Series>();
+
+//        List<Series> list = new ArrayList<Series>();
+//        list.add(new Series(-1, "我的收藏", "本地", null, 1));
+//        if (AppConfig.MM_WALLPAPER_PACKAGE_NAMMME.endsWith(AppRuntime.PACKAGE_NAME)) {
+//            list.add(new Series(-2, "隐藏美女", "本地", null, 1));
+//        }
+////        list.add(new Series(-3, "更多应用", "本地", null, 0));
+//
+//        return list;
+    }
+
+    public List<Series> getNavigationList() {
         List<Series> list = new ArrayList<Series>();
         list.add(new Series(-1, "我的收藏", "本地", null, 1));
         if (AppConfig.MM_WALLPAPER_PACKAGE_NAMMME.endsWith(AppRuntime.PACKAGE_NAME)) {

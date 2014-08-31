@@ -1,9 +1,15 @@
 package com.michael.wallpaper.activity;
 
-import android.app.*;
+import android.app.ActionBar;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -23,6 +29,8 @@ import com.michael.wallpaper.dao.model.Series;
 import com.michael.wallpaper.fragment.NavigationDrawerFragment;
 import com.michael.wallpaper.fragment.PhotoStreamFragment;
 import com.michael.wallpaper.fragment.StaggerPhotoStreamFragment;
+import com.michael.wallpaper.fragment_list.ContentListFragment;
+import com.michael.wallpaper.fragment_list.SlideFragment;
 import com.michael.wallpaper.helper.SeriesHelper;
 import com.michael.wallpaper.setting.Setting;
 import com.michael.wallpaper.utils.AppRuntime;
@@ -31,7 +39,9 @@ import com.umeng.analytics.MobclickAgent;
 import java.util.List;
 
 public class MainActivity extends BaseActivity
-    implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+    implements NavigationDrawerFragment.NavigationDrawerCallbacks,
+                   SlideFragment.OnFragmentInteractionListener,
+                   ContentListFragment.OnFragmentInteractionListener {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -64,7 +74,7 @@ public class MainActivity extends BaseActivity
 
         MobclickAgent.updateOnlineConfig(getApplicationContext());
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.navigation_drawer);
+        mNavigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
 
@@ -150,27 +160,34 @@ public class MainActivity extends BaseActivity
                         if (currentPoint < 100) {
                             showWallInfoDialog(currentPoint);
                         } else {
-                            FragmentManager fragmentManager = getFragmentManager();
-                            String tag = String.valueOf(mSeries.getType());
-                            Fragment fragment = fragmentManager.findFragmentByTag(tag);
-                            if (fragment == null) {
-                                fragment = AppRuntime.useStaggerGridView()
-                                               ? StaggerPhotoStreamFragment.newInstance(mSeries)
-                                               : PhotoStreamFragment.newInstance(mSeries);
-                            }
-                            fragmentManager.beginTransaction().replace(R.id.container, fragment, tag).commit();
+//                            FragmentManager fragmentManager = getFragmentManager();
+//                            String tag = String.valueOf(mSeries.getType());
+//                            Fragment fragment = fragmentManager.findFragmentByTag(tag);
+//                            if (fragment == null) {
+//                                fragment = AppRuntime.useStaggerGridView()
+//                                               ? StaggerPhotoStreamFragment.newInstance(mSeries)
+//                                               : PhotoStreamFragment.newInstance(mSeries);
+//                            }
+//                            fragmentManager.beginTransaction().replace(R.id.container, fragment, tag).commit();
                         }
                     }
                 });
             } else {
                 // update the main content by replacing fragments
-                FragmentManager fragmentManager = getFragmentManager();
+                FragmentManager fragmentManager = getSupportFragmentManager();
                 String tag = String.valueOf(mSeries.getType());
                 Fragment fragment = fragmentManager.findFragmentByTag(tag);
-                if (fragment == null) {
-                    fragment = AppRuntime.useStaggerGridView()
-                                   ? StaggerPhotoStreamFragment.newInstance(mSeries)
-                                   : PhotoStreamFragment.newInstance(mSeries);
+                int type = mSeries.getType();
+                if (type == -1) {
+                    if (fragment == null) {
+                        fragment = AppRuntime.useStaggerGridView()
+                                       ? StaggerPhotoStreamFragment.newInstance(mSeries)
+                                       : PhotoStreamFragment.newInstance(mSeries);
+                    }
+                } else {
+                    if (fragment == null) {
+                        fragment = SlideFragment.newInstance("1", "2");
+                    }
                 }
                 fragmentManager.beginTransaction().replace(R.id.container, fragment, tag).commit();
             }
@@ -289,4 +306,8 @@ public class MainActivity extends BaseActivity
         dialog.show();
     }
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
 }
