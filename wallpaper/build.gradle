@@ -148,8 +148,8 @@ android.applicationVariants.all { variant ->
         if (flavor == 'MeiNvWallpaper') {
             youmi_apikey = '6142d65763827912'
             youmi_seckey = 'b398417544f954ee'
-            domod_pubkey = '56OJwdKYuNBjYRcFyA'
-            domod_replacekey = '16TLuqyaApjUsNUE8qiTDk5z'
+            domod_pubkey = '56OJwdKYuNDIqu1lil'
+            domod_replacekey = '16TLuqyaApUiiNU0oJpTsQNz'
             domod_insterkey = '16TLuqyaApjUsNUE8BiPMA1s'
             wandoujia_appid = '100009725'
             wandoujia_seckey = '3589aaef1332dca448f3e97c3d894ab6'

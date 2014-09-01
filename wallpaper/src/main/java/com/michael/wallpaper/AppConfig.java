@@ -30,8 +30,8 @@ public class AppConfig {
     public static final String YOUMI_APIKEY = "6142d65763827912";
     public static final String YOUMI_SECRETKEY = "b398417544f954ee";
 
-    public static final String DOMOD_PUBLISH_KEY = "56OJwdKYuNBjYRcFyA";
-    public static final String DOMOD_PLACEMENT_KEY = "16TLuqyaApjUsNUE8qiTDk5z";
+    public static final String DOMOD_PUBLISH_KEY = "56OJwdKYuNDIqu1lil";
+    public static final String DOMOD_PLACEMENT_KEY = "16TLuqyaApUiiNU0oJpTsQNz";
     public static final String DOMOD_INSTER_KEY = "16TLuqyaApjUsNUE8BiPMA1s";
     public static final String DOMOD_PUBLISH_ID = "96ZJ34ggzeG5vwTBEs";
 
