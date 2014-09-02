@@ -22,7 +22,10 @@ import com.michael.wallpaper.dao.model.Series;
 import com.michael.wallpaper.helper.SeriesHelper;
 import com.michael.wallpaper.utils.AppRuntime;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -61,7 +64,7 @@ public class NavigationDrawerFragment extends Fragment {
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
 
-    private List<Series> mSeriesList;
+    private String[] mTitles;
 
     public NavigationDrawerFragment() {
     }
@@ -72,7 +75,30 @@ public class NavigationDrawerFragment extends Fragment {
 
 //        EventBus.getDefault().register(this);
 
-        mSeriesList = SeriesHelper.getInstance().getNavigationList();
+        if (AppConfig.GAOXIAO_WALLPAPER_PACKAGE_NAMMME.endsWith(AppRuntime.PACKAGE_NAME)) {
+            Map<String, List<Series>> map = SeriesHelper.getInstance().getSeriesMap();
+            List<String> keys = new ArrayList<String>();
+            for (String key : map.keySet()) {
+                keys.add(key);
+            }
+            mTitles = new String[keys.size()];
+            Collections.reverse(keys);
+            keys.toArray(mTitles);
+        } else {
+            List<Series> data = SeriesHelper.getInstance().getNavigationList();
+            mTitles = new String[data.size()];
+            for (int i = 0; i < data.size(); i++) {
+                if (!TextUtils.isEmpty(data.get(i).getTag3())) {
+                    mTitles[i] = data.get(i).getTitle() + "-" + data.get(i).getTag3();
+                } else {
+                    mTitles[i] = data.get(i).getTitle();
+                }
+
+                if (AppRuntime.APP_WALL_TYPE_LIST.contains(data.get(i).getType())) {
+                    mTitles[i] = mTitles[i] + " HOT";
+                }
+            }
+        }
 
         // Read in the flag indicating whether or not the user has demonstrated awareness of the
         // drawer. See PREF_USER_LEARNED_DRAWER for details.
@@ -111,22 +137,10 @@ public class NavigationDrawerFragment extends Fragment {
                 selectItem(position);
             }
         });
-        String[] titles = new String[mSeriesList.size()];
-        for (int i = 0; i < mSeriesList.size(); i++) {
-            if (!TextUtils.isEmpty(mSeriesList.get(i).getTag3())) {
-                titles[i] = mSeriesList.get(i).getTitle() + "-" + mSeriesList.get(i).getTag3();
-            } else {
-                titles[i] = mSeriesList.get(i).getTitle();
-            }
-
-            if (AppRuntime.APP_WALL_TYPE_LIST.contains(mSeriesList.get(i).getType())) {
-                titles[i] = titles[i] + " HOT";
-            }
-        }
         mDrawerListView.setAdapter(new ArrayAdapter<String>(getActionBar().getThemedContext(),
                                                                R.layout.drawer_list_item,
                                                                R.id.text,
-                                                               titles));
+                                                               mTitles));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
     }

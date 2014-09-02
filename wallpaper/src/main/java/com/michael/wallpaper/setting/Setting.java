@@ -39,4 +39,12 @@ public class Setting {
         return mSharedPreferences.getInt("mode", AppConfig.SERIES_MODE);
     }
 
+    public void setLastRefreshTime(long time) {
+        mEditor.putLong("last_refresh", time).commit();
+    }
+
+    public long getLastRefreshTime() {
+        return mSharedPreferences.getLong("last_refresh", 0);
+    }
+
 }

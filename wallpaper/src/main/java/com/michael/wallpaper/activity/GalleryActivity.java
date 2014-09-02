@@ -32,6 +32,8 @@ import com.michael.wallpaper.helper.CollectHelper;
 import com.michael.wallpaper.utils.AppRuntime;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.umeng.analytics.MobclickAgent;
+import net.youmi.android.banner.AdSize;
+import net.youmi.android.banner.AdView;
 import org.apache.http.Header;
 
 import java.io.File;
@@ -217,6 +219,11 @@ public class GalleryActivity extends BaseActivity {
             DomobAdView adview = new DomobAdView(this, AppConfig.DOMOD_PUBLISH_KEY, AppConfig.DOMOD_PLACEMENT_KEY);
             RelativeLayout layout = (RelativeLayout) findViewById(R.id.ad_content);
             layout.addView(adview, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
+                                                                      RelativeLayout.LayoutParams.WRAP_CONTENT));
+        }  else if (AppConfig.YOUMI_AD_ENABLE) {
+            AdView adView = new AdView(this, AdSize.FIT_SCREEN);
+            RelativeLayout layout = (RelativeLayout) findViewById(R.id.ad_content);
+            layout.addView(adView, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
                                                                       RelativeLayout.LayoutParams.WRAP_CONTENT));
         }
     }

@@ -1,7 +1,6 @@
 package com.michael.wallpaper.fragment_list;
 
 import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -12,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import com.jesson.android.Jess;
 import com.jesson.android.widget.Toaster;
 import com.michael.wallpaper.R;
 import com.michael.wallpaper.activity.GalleryActivity;
@@ -25,6 +25,7 @@ import com.michael.wallpaper.event.NetworkErrorEvent;
 import com.michael.wallpaper.event.ServerErrorEvent;
 import com.michael.wallpaper.helper.BelleHelper;
 import com.michael.wallpaper.helper.CollectHelper;
+import com.michael.wallpaper.setting.Setting;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import de.greenrobot.event.EventBus;
 import uk.co.senab.actionbarpulltorefresh.library.ActionBarPullToRefresh;
@@ -44,6 +45,7 @@ import java.util.List;
  *
  */
 public class ContentListFragment extends Fragment implements OnRefreshListener {
+
     private static final String ARG_SERIES = "series";
 
     private Series mSeries;
@@ -69,6 +71,8 @@ public class ContentListFragment extends Fragment implements OnRefreshListener {
     private OnFragmentInteractionListener mListener;
 
     public static ContentListFragment newInstance(Series series) {
+        Jess.LOGD("[[ContentListFragment::newInstance]] series title = " + series.getTitle());
+
         ContentListFragment fragment = new ContentListFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARG_SERIES, series);
@@ -82,6 +86,9 @@ public class ContentListFragment extends Fragment implements OnRefreshListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Jess.LOGD("[[ContentListFragment::onCreate]]");
+
         if (getArguments() != null) {
             mSeries = (Series) getArguments().getSerializable(ARG_SERIES);
         }
@@ -93,6 +100,8 @@ public class ContentListFragment extends Fragment implements OnRefreshListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Jess.LOGD("[[ContentListFragment::onCreateView]]");
+
         View rootView = inflater.inflate(R.layout.fragment_content_list, container, false);
         mPullToRefreshLayout = (PullToRefreshLayout) rootView.findViewById(R.id.ptr_layout);
         ActionBarPullToRefresh.SetupWizard setupWizard = ActionBarPullToRefresh.from(getActivity())
@@ -178,15 +187,18 @@ public class ContentListFragment extends Fragment implements OnRefreshListener {
     }
 
     // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
+//    public void onButtonPressed(Uri uri) {
+//        if (mListener != null) {
+//            mListener.onFragmentInteraction(uri);
+//        }
+//    }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+
+        Jess.LOGD("[[ContentListFragment::onAttach]]");
+
         try {
             mListener = (OnFragmentInteractionListener) activity;
         } catch (ClassCastException e) {
@@ -197,12 +209,16 @@ public class ContentListFragment extends Fragment implements OnRefreshListener {
 
     @Override
     public void onDetach() {
+        Jess.LOGD("[[ContentListFragment::onDetach]]");
+
         super.onDetach();
         mListener = null;
     }
 
     @Override
     public void onDestroyView() {
+        Jess.LOGD("[[ContentListFragment::onDestroyView]]");
+
         super.onDestroyView();
         ImageLoader.getInstance().stop();
     }
@@ -243,7 +259,7 @@ public class ContentListFragment extends Fragment implements OnRefreshListener {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        public void onFragmentInteraction(Uri uri);
+        public void onFragmentInteraction(String data);
     }
 
     @Override
@@ -265,9 +281,15 @@ public class ContentListFragment extends Fragment implements OnRefreshListener {
     }
 
     public void onEventMainThread(GetBelleListEvent event) {
+        Jess.LOGD("[[ContentListFragment::onEventMainThread]]");
+
         if (event.contentType != mSeries.getType()) {
+//            Jess.LOGD("[[ContentListFragment::onEventMainThread]] do nothing for this type with : " + mSeries.getTitle());
             return;
         }
+
+        Jess.LOGD("[[ContentListFragment::onEventMainThread]] do something for title : " + mSeries.getTitle()
+            + " type = " + event.type);
 
         Toaster.cancel();
         mLoadingMore = false;
@@ -291,14 +313,19 @@ public class ContentListFragment extends Fragment implements OnRefreshListener {
                 mPhotoStreamListAdapter.notifyDataChanged(event.belles);
             }
             mPullToRefreshLayout.setRefreshComplete();
+
+            Setting.getInstace().setLastRefreshTime(System.currentTimeMillis());
         } else if (event.type == GetBelleListEvent.TYPE_LOCAL) {
+            Jess.LOGD("[[ContentListFragment::onEventMainThread]] local belle list : " + event.belles);
+
             mBelles.clear();
             if (event.belles != null) {
                 mBelles.addAll(event.belles);
             }
-            mPhotoStreamListAdapter.notifyDataSetChanged();
+            mPhotoStreamListAdapter.notifyDataChanged(mBelles);
             // load from server
-            if (mBelles.size() == 0) {
+            long deta = System.currentTimeMillis() - Setting.getInstace().getLastRefreshTime();
+            if (mBelles.size() == 0 || deta > (10 * 60 * 1000)) {
                 if (!mPullToRefreshLayout.isRefreshing()) {
                     mGetBelleListEvent = null;
                     mPageStartIndex = 0;
@@ -311,6 +338,8 @@ public class ContentListFragment extends Fragment implements OnRefreshListener {
     }
 
     public void onEventMainThread(NetworkErrorEvent event) {
+        Jess.LOGD("[[ContentListFragment::onEventMainThread]] NetworkErrorEvent");
+
         if (event.contentType != mSeries.getType()) {
             return;
         }
@@ -324,6 +353,8 @@ public class ContentListFragment extends Fragment implements OnRefreshListener {
     }
 
     public void onEventMainThread(ServerErrorEvent event) {
+        Jess.LOGD("[[ContentListFragment::onEventMainThread]] ServerErrorEvent");
+
         if (event.contentType != mSeries.getType()) {
             return;
         }

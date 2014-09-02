@@ -15,7 +15,9 @@ import com.michael.wallpaper.utils.AppRuntime;
 import de.greenrobot.event.EventBus;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by zhangdi on 14-3-11.
@@ -26,11 +28,26 @@ public class SeriesHelper {
 
     private List<Series> mSeriesList = new ArrayList<Series>();
 
+    private Map<String, List<Series>> mSeriesMap;
+
     private SeriesHelper() {
 
     }
 
+    public Map<String, List<Series>> getSeriesMap() {
+        return mSeriesMap;
+    }
+
+    public List<Series> getSeriesListByType(String type) {
+        return mSeriesMap.get(type);
+    }
+
     public void syncSeries(final Context context) {
+        if (AppConfig.GAOXIAO_WALLPAPER_PACKAGE_NAMMME.equals(AppRuntime.PACKAGE_NAME)) {
+            mSeriesMap = makeSeriesMap();
+            return;
+        }
+
         DaoSession session = DaoUtils.getDaoSession(context);
         final SeriesDao dao = session.getSeriesDao();
         // load from local database
@@ -175,6 +192,62 @@ public class SeriesHelper {
         return list;
     }
 
+    private static Map<String, List<Series>> makeSeriesMap() {
+        Map<String, List<Series>> ret = new HashMap<String, List<Series>>();
+
+        if (AppConfig.GAOXIAO_WALLPAPER_PACKAGE_NAMMME.endsWith(AppRuntime.PACKAGE_NAME)) {
+            List<Series> list = makeList(ret, "热门 HOT");
+            list.add(new Series(Math.abs("碉堡".hashCode()), "碉堡", "搞笑", null, 1));
+            list.add(new Series(Math.abs("邪恶笑话".hashCode()), "邪恶笑话", "搞笑", null, 1));
+            list.add(new Series(Math.abs("节操".hashCode()), "节操", "搞笑", null, 1));
+            list.add(new Series(Math.abs("神吐槽".hashCode()), "神吐槽", "搞笑", null, 1));
+            list.add(new Series(Math.abs("内涵图片".hashCode()), "内涵图片", "搞笑", null, 1));
+            list.add(new Series(Math.abs("女汉子".hashCode()), "女汉子", "搞笑", null, 1));
+            list.add(new Series(Math.abs("脑残对话".hashCode()), "脑残对话", "搞笑", null, 1));
+            list.add(new Series(Math.abs("搞笑牛人".hashCode()), "搞笑牛人", "搞笑", null, 1));
+            list.add(new Series(Math.abs("百思不得姐".hashCode()), "百思不得姐", "搞笑", null, 1));
+            list.add(new Series(Math.abs("我们爱讲冷笑话".hashCode()), "我们爱讲冷笑话", "搞笑", null, 1));
+
+            list = makeList(ret, "逗比");
+            list.add(new Series(Math.abs("逗比".hashCode()), "逗比", "搞笑", null, 1));
+            list.add(new Series(Math.abs("爆笑瞬间".hashCode()), "爆笑瞬间", "搞笑", null, 1));
+            list.add(new Series(Math.abs("我和我的小伙伴都惊呆了".hashCode()), "我和我的小伙伴都惊呆了", "搞笑", null, 1));
+            list.add(new Series(Math.abs("搞笑动物".hashCode()), "搞笑动物", "搞笑", null, 1));
+            list.add(new Series(Math.abs("没品图".hashCode()), "没品图", "搞笑", null, 1));
+            list.add(new Series(Math.abs("熊孩子".hashCode()), "熊孩子", "搞笑", null, 1));
+            list.add(new Series(Math.abs("2B青年".hashCode()), "2B青年", "搞笑", null, 1));
+            list.add(new Series(Math.abs("萌死你不偿命".hashCode()), "萌死你不偿命", "搞笑", null, 1));
+            list.add(new Series(Math.abs("哈哈搞笑".hashCode()), "哈哈搞笑", "搞笑", null, 1));
+            list.add(new Series(Math.abs("神回复".hashCode()), "神回复", "搞笑", null, 1));
+
+            list = makeList(ret, "微段子");
+            list.add(new Series(Math.abs("ps大神".hashCode()), "ps大神", "搞笑", null, 1));
+            list.add(new Series(Math.abs("搞笑漫画".hashCode()), "搞笑漫画", "搞笑", null, 1));
+            list.add(new Series(Math.abs("创意趣图".hashCode()), "创意趣图", "搞笑", null, 1));
+            list.add(new Series(Math.abs("猎奇".hashCode()), "猎奇", "搞笑", null, 1));
+            list.add(new Series(Math.abs("糗事".hashCode()), "糗事", "搞笑", null, 1));
+            list.add(new Series(Math.abs("囧事集".hashCode()), "囧事集", "搞笑", null, 1));
+            list.add(new Series(Math.abs("山寨".hashCode()), "山寨", "搞笑", null, 1));
+            list.add(new Series(Math.abs("神感悟".hashCode()), "神感悟", "搞笑", null, 1));
+            list.add(new Series(Math.abs("微段子".hashCode()), "微段子", "搞笑", null, 1));
+        }
+
+        List<Series> list = makeList(ret, "我的收藏");
+        list.add(new Series(-1, "我的收藏", "本地", null, 1));
+
+        return ret;
+    }
+
+    private static List<Series> makeList(Map<String, List<Series>> source, String type) {
+        List<Series> ret = source.get(type);
+        if (ret == null) {
+            ret = new ArrayList<Series>();
+            source.put(type, ret);
+        }
+
+        return ret;
+    }
+
     private List<Series> localSeries() {
         return new ArrayList<Series>();
 
@@ -190,11 +263,11 @@ public class SeriesHelper {
 
     public List<Series> getNavigationList() {
         List<Series> list = new ArrayList<Series>();
+        list.add(new Series(0, "热门频道", "本地", null, 1));
         list.add(new Series(-1, "我的收藏", "本地", null, 1));
         if (AppConfig.MM_WALLPAPER_PACKAGE_NAMMME.endsWith(AppRuntime.PACKAGE_NAME)) {
             list.add(new Series(-2, "隐藏美女", "本地", null, 1));
         }
-//        list.add(new Series(-3, "更多应用", "本地", null, 0));
 
         return list;
     }

@@ -6,7 +6,6 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -22,6 +21,7 @@ import cn.dm.android.data.listener.CheckPointListener;
 import cn.dm.android.model.ErrorInfo;
 import cn.dm.android.model.Point;
 import cn.domob.android.ads.DomobAdView;
+import com.jesson.android.Jess;
 import com.jesson.android.widget.Toaster;
 import com.michael.wallpaper.AppConfig;
 import com.michael.wallpaper.R;
@@ -35,13 +35,20 @@ import com.michael.wallpaper.helper.SeriesHelper;
 import com.michael.wallpaper.setting.Setting;
 import com.michael.wallpaper.utils.AppRuntime;
 import com.umeng.analytics.MobclickAgent;
+import net.youmi.android.banner.AdSize;
+import net.youmi.android.banner.AdView;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class MainActivity extends BaseActivity
     implements NavigationDrawerFragment.NavigationDrawerCallbacks,
                    SlideFragment.OnFragmentInteractionListener,
                    ContentListFragment.OnFragmentInteractionListener {
+
+    private static final int FRAGMENT_TAG = 100;
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -119,26 +126,25 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        List<Series> seriesList = SeriesHelper.getInstance().getSeriesList();
+        if (AppConfig.GAOXIAO_WALLPAPER_PACKAGE_NAMMME.endsWith(AppRuntime.PACKAGE_NAME)) {
+            handleNivigationForGaoXiao(position);
+            return;
+        }
+
+        List<Series> seriesList = SeriesHelper.getInstance().getNavigationList();
+
         if (position < 0 || position > seriesList.size() - 1) {
             return;
         }
         mSeries = seriesList.get(position);
         if (mSeries.getType() == -3) {
-//            OffersManager.getInstance(this).showOffersWall();
-//            Ads.showAppWall(MainActivity.this, AppConfig.WANDOUJIA_APP_WALL);
         } else if (mSeries.getType() == -2) {
             if (Setting.getInstace().getMode() != AppConfig.SERIES_MODE) {
                 Toaster.show(getApplicationContext(), "已经开启");
                 return;
             }
-//            int point = PointsManager.getInstance(this).queryPoints();
-//            if (point < 60) {
-//                showWallInfoDialog(point);
-//            } else {
             Setting.getInstace().setMode(1);
             Toaster.show(getApplicationContext(), "开启隐藏成功，请退出应用重新进入");
-//            }
         } else {
             if (AppRuntime.APP_WALL_TYPE_LIST.contains(mSeries.getType())) {
                 if (mProgressDialog.isShowing()) {
@@ -186,7 +192,7 @@ public class MainActivity extends BaseActivity
                     }
                 } else {
                     if (fragment == null) {
-                        fragment = SlideFragment.newInstance("1", "2");
+                        fragment = SlideFragment.newInstance("1");
                     }
                 }
                 fragmentManager.beginTransaction().replace(R.id.container, fragment, tag).commit();
@@ -194,16 +200,53 @@ public class MainActivity extends BaseActivity
         }
     }
 
-    public void onSectionAttached(Series series) {
-        if (!TextUtils.isEmpty(series.getTag3())) {
-            mTitle = series.getTitle() + "-" + series.getTag3();
-        } else {
-            mTitle = series.getTitle();
+    private void handleNivigationForGaoXiao(int position) {
+        Map<String, List<Series>> map = SeriesHelper.getInstance().getSeriesMap();
+        if (position < 0 || position > map.size() - 1) {
+            return;
         }
 
-        if (AppRuntime.APP_WALL_TYPE_LIST.contains(mSeries.getType())) {
-            mTitle = mTitle + " HOT";
+        List<String> keys = new ArrayList<String>();
+        for (String key : map.keySet()) {
+            keys.add(key);
         }
+        Collections.reverse(keys);
+        String title = keys.get(position);
+        mTitle = title;
+        if ("我的收藏".equals(title)) {
+            Series series = map.get(title).get(0);
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            String tag = String.valueOf(series.getType());
+            Fragment fragment = fragmentManager.findFragmentByTag(tag);
+            if (fragment == null) {
+                fragment = AppRuntime.useStaggerGridView()
+                               ? StaggerPhotoStreamFragment.newInstance(series)
+                               : PhotoStreamFragment.newInstance(series);
+            }
+            fragmentManager.beginTransaction().replace(R.id.container, fragment, tag).commit();
+        } else {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            String tag = String.valueOf(Math.abs(title.hashCode()));
+            Fragment fragment = fragmentManager.findFragmentByTag(tag);
+            if (fragment == null) {
+                fragment = SlideFragment.newInstance(title);
+            }
+            fragmentManager.beginTransaction().replace(R.id.container, fragment, tag).commit();
+        }
+
+        getActionBar().setTitle(mTitle);
+    }
+
+    public void onSectionAttached(Series series) {
+//        if (!TextUtils.isEmpty(series.getTag3())) {
+//            mTitle = series.getTitle() + "-" + series.getTag3();
+//        } else {
+//            mTitle = series.getTitle();
+//        }
+//
+//        if (AppRuntime.APP_WALL_TYPE_LIST.contains(mSeries.getType())) {
+//            mTitle = mTitle + " HOT";
+//        }
     }
 
 
@@ -253,8 +296,14 @@ public class MainActivity extends BaseActivity
             RelativeLayout layout = (RelativeLayout) findViewById(R.id.ad_content);
             layout.addView(adview, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
                                                                       RelativeLayout.LayoutParams.WRAP_CONTENT));
-            mAdViewShow = true;
+        } else if (AppConfig.YOUMI_AD_ENABLE) {
+            AdView adView = new AdView(this, AdSize.FIT_SCREEN);
+            RelativeLayout layout = (RelativeLayout) findViewById(R.id.ad_content);
+            layout.addView(adView, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
+                                                                      RelativeLayout.LayoutParams.WRAP_CONTENT));
         }
+
+        mAdViewShow = true;
     }
 
     private void initInterstitialAd() {
@@ -307,7 +356,9 @@ public class MainActivity extends BaseActivity
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
-
+    public void onFragmentInteraction(String data) {
+        Jess.LOGD("[[onFragmentInteraction]] title : " + data);
+        mTitle = data;
+        getActionBar().setTitle(mTitle);
     }
 }
