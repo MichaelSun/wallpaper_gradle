@@ -29,12 +29,12 @@ public class AppConfig {
     public static final String BAIDU_WALLPAPER_PACKAGE_NAMMME = "com.michael.baidu.wallpaper";
     public static final String GAOXIAO_WALLPAPER_PACKAGE_NAMMME = "com.michael.gaoxiao";
 
-    public static final String YOUMI_APIKEY = "859ff840b668c633";
-    public static final String YOUMI_SECRETKEY = "87ed892bb7f8c34a";
+    public static final String YOUMI_APIKEY = "b1fde653e13f65fd";
+    public static final String YOUMI_SECRETKEY = "a9fdf37a2f3cc930";
 
-    public static final String DOMOD_PUBLISH_KEY = "56OJwdKYuNBxYMSZ84";
-    public static final String DOMOD_PLACEMENT_KEY = "16TLuqyaApjpsNUE2ljOxxds";
-    public static final String DOMOD_INSTER_KEY = "16TLuqyaApjpsNUE6s-l6czz";
+    public static final String DOMOD_PUBLISH_KEY = "";
+    public static final String DOMOD_PLACEMENT_KEY = "";
+    public static final String DOMOD_INSTER_KEY = "";
     public static final String DOMOD_PUBLISH_ID = "96ZJ34ggzeG5vwTBEs";
 
     public static final String WANDOUJIA_APP_ID = "100009721";
