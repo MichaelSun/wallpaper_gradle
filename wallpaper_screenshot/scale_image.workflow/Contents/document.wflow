@@ -52,9 +52,11 @@
 				<dict>
 					<key>fileNames</key>
 					<array>
-						<string>~/github/Wallpaper_gradle/wallpaper_screenshot/高清壁纸/1080/device-2014-07-16-161758.png</string>
-						<string>~/github/Wallpaper_gradle/wallpaper_screenshot/高清壁纸/1080/device-2014-07-16-161824.png</string>
-						<string>~/github/Wallpaper_gradle/wallpaper_screenshot/美女天天看/1080/device-2014-07-21-113635.png</string>
+						<string>~/github/Wallpaper_gradle/wallpaper_screenshot/邪恶小漫画/1080/device-2014-09-02-205419.png</string>
+						<string>~/github/Wallpaper_gradle/wallpaper_screenshot/邪恶小漫画/1080/device-2014-09-02-205514.png</string>
+						<string>~/github/Wallpaper_gradle/wallpaper_screenshot/邪恶小漫画/1080/device-2014-09-02-205524.png</string>
+						<string>~/github/Wallpaper_gradle/wallpaper_screenshot/邪恶小漫画/1080/device-2014-09-02-205546.png</string>
+						<string>~/github/Wallpaper_gradle/wallpaper_screenshot/邪恶小漫画/1080/device-2014-09-02-205920.png</string>
 					</array>
 				</dict>
 				<key>BundleIdentifier</key>
@@ -410,8 +412,6 @@
 						<string>5</string>
 					</dict>
 				</dict>
-				<key>conversionLabel</key>
-				<integer>0</integer>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
@@ -502,8 +502,6 @@
 				</array>
 				<key>OutputUUID</key>
 				<string>DA87AA07-F0E1-4A5A-A9AD-0A2116FA8FA5</string>
-				<key>StartAction</key>
-				<false/>
 				<key>UUID</key>
 				<string>1C868FD3-7917-43F6-A28C-E70CB246C474</string>
 				<key>UnlocalizedApplications</key>
@@ -578,26 +576,26 @@
 	</array>
 	<key>connectors</key>
 	<dict>
-		<key>07EE1A34-FB89-4E63-B4C6-B7A9A3E47E3F</key>
-		<dict>
-			<key>from</key>
-			<string>36C458CF-1851-43A3-815A-31B4ACE3F543 - 36C458CF-1851-43A3-815A-31B4ACE3F543</string>
-			<key>to</key>
-			<string>EDB7FFCC-AE00-4D66-9EEC-51BC03D0E1BA - EDB7FFCC-AE00-4D66-9EEC-51BC03D0E1BA</string>
-		</dict>
-		<key>7CE455EC-1425-4A57-B93D-D8DAC43FDE77</key>
-		<dict>
-			<key>from</key>
-			<string>7C855797-06F8-4760-9DD4-6EC8876289D0 - 7C855797-06F8-4760-9DD4-6EC8876289D0</string>
-			<key>to</key>
-			<string>36C458CF-1851-43A3-815A-31B4ACE3F543 - 36C458CF-1851-43A3-815A-31B4ACE3F543</string>
-		</dict>
-		<key>B2D7BA91-97FD-4038-86D4-0B2BDCB18677</key>
+		<key>5E7D7752-F72D-4B49-9426-2787B89EFB79</key>
 		<dict>
 			<key>from</key>
 			<string>EDB7FFCC-AE00-4D66-9EEC-51BC03D0E1BA - EDB7FFCC-AE00-4D66-9EEC-51BC03D0E1BA</string>
 			<key>to</key>
 			<string>1C868FD3-7917-43F6-A28C-E70CB246C474 - 1C868FD3-7917-43F6-A28C-E70CB246C474</string>
+		</dict>
+		<key>AC7EDDDB-5957-4884-B9A5-B7CF92575475</key>
+		<dict>
+			<key>from</key>
+			<string>36C458CF-1851-43A3-815A-31B4ACE3F543 - 36C458CF-1851-43A3-815A-31B4ACE3F543</string>
+			<key>to</key>
+			<string>EDB7FFCC-AE00-4D66-9EEC-51BC03D0E1BA - EDB7FFCC-AE00-4D66-9EEC-51BC03D0E1BA</string>
+		</dict>
+		<key>DC12702C-58C5-4CC8-9A4E-9E52D9A76CD6</key>
+		<dict>
+			<key>from</key>
+			<string>7C855797-06F8-4760-9DD4-6EC8876289D0 - 7C855797-06F8-4760-9DD4-6EC8876289D0</string>
+			<key>to</key>
+			<string>36C458CF-1851-43A3-815A-31B4ACE3F543 - 36C458CF-1851-43A3-815A-31B4ACE3F543</string>
 		</dict>
 	</dict>
 	<key>workflowMetaData</key>
