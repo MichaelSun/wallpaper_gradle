@@ -19,7 +19,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
-import cn.domob.android.ads.DomobAdView;
+//import cn.domob.android.ads.DomobAdView;
 import com.github.johnpersano.supertoasts.SuperActivityToast;
 import com.jesson.android.widget.Toaster;
 import com.loopj.android.http.AsyncHttpClient;
@@ -216,10 +216,10 @@ public class GalleryActivity extends BaseActivity {
     private void initBanner() {
         if (AppConfig.GOOLE_AD_ENABLE) {
         } else if (AppConfig.DOMOD_AD_ENABLE) {
-            DomobAdView adview = new DomobAdView(this, AppConfig.DOMOD_PUBLISH_KEY, AppConfig.DOMOD_PLACEMENT_KEY);
-            RelativeLayout layout = (RelativeLayout) findViewById(R.id.ad_content);
-            layout.addView(adview, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
-                                                                      RelativeLayout.LayoutParams.WRAP_CONTENT));
+//            DomobAdView adview = new DomobAdView(this, AppConfig.DOMOD_PUBLISH_KEY, AppConfig.DOMOD_PLACEMENT_KEY);
+//            RelativeLayout layout = (RelativeLayout) findViewById(R.id.ad_content);
+//            layout.addView(adview, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
+//                                                                      RelativeLayout.LayoutParams.WRAP_CONTENT));
         }  else if (AppConfig.YOUMI_AD_ENABLE) {
             AdView adView = new AdView(this, AdSize.FIT_SCREEN);
             RelativeLayout layout = (RelativeLayout) findViewById(R.id.ad_content);

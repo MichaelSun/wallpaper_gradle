@@ -16,11 +16,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import cn.dm.android.DMOfferWall;
-import cn.dm.android.data.listener.CheckPointListener;
-import cn.dm.android.model.ErrorInfo;
-import cn.dm.android.model.Point;
-import cn.domob.android.ads.DomobAdView;
 import com.jesson.android.Jess;
 import com.jesson.android.widget.Toaster;
 import com.michael.wallpaper.AppConfig;
@@ -42,6 +37,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+
+//import com.michael.wallpaper.R;
+
+//import cn.dm.android.DMOfferWall;
+//import cn.dm.android.data.listener.CheckPointListener;
+//import cn.dm.android.model.ErrorInfo;
+//import cn.dm.android.model.Point;
 
 public class MainActivity extends BaseActivity
     implements NavigationDrawerFragment.NavigationDrawerCallbacks,
@@ -94,7 +96,7 @@ public class MainActivity extends BaseActivity
             }
         }
 
-        DMOfferWall.getInstance().init(this, AppConfig.DOMOD_PUBLISH_ID, "1005661");
+//        DMOfferWall.getInstance().init(this, AppConfig.DOMOD_PUBLISH_ID, "1005661");
 
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setMessage("玩命加载中~~~");
@@ -152,32 +154,32 @@ public class MainActivity extends BaseActivity
                 }
                 mProgressDialog.show();
                 //需要提示积分墙
-                DMOfferWall.getInstance().checkPoints(new CheckPointListener() {
-                    @Override
-                    public void onError(ErrorInfo errorInfo) {
-                        mProgressDialog.dismiss();
-                        Toaster.show(getApplicationContext(), "哎呀，网络出问题了，找个网好的地方在试试~~~~");
-                    }
-
-                    @Override
-                    public void onResponse(Point data) {
-                        mProgressDialog.dismiss();
-                        int currentPoint = data.point - data.consumed;
-                        if (currentPoint < 100) {
-                            showWallInfoDialog(currentPoint);
-                        } else {
-//                            FragmentManager fragmentManager = getFragmentManager();
-//                            String tag = String.valueOf(mSeries.getType());
-//                            Fragment fragment = fragmentManager.findFragmentByTag(tag);
-//                            if (fragment == null) {
-//                                fragment = AppRuntime.useStaggerGridView()
-//                                               ? StaggerPhotoStreamFragment.newInstance(mSeries)
-//                                               : PhotoStreamFragment.newInstance(mSeries);
-//                            }
-//                            fragmentManager.beginTransaction().replace(R.id.container, fragment, tag).commit();
-                        }
-                    }
-                });
+//                DMOfferWall.getInstance().checkPoints(new CheckPointListener() {
+//                    @Override
+//                    public void onError(ErrorInfo errorInfo) {
+//                        mProgressDialog.dismiss();
+//                        Toaster.show(getApplicationContext(), "哎呀，网络出问题了，找个网好的地方在试试~~~~");
+//                    }
+//
+//                    @Override
+//                    public void onResponse(Point data) {
+//                        mProgressDialog.dismiss();
+//                        int currentPoint = data.point - data.consumed;
+//                        if (currentPoint < 100) {
+//                            showWallInfoDialog(currentPoint);
+//                        } else {
+////                            FragmentManager fragmentManager = getFragmentManager();
+////                            String tag = String.valueOf(mSeries.getType());
+////                            Fragment fragment = fragmentManager.findFragmentByTag(tag);
+////                            if (fragment == null) {
+////                                fragment = AppRuntime.useStaggerGridView()
+////                                               ? StaggerPhotoStreamFragment.newInstance(mSeries)
+////                                               : PhotoStreamFragment.newInstance(mSeries);
+////                            }
+////                            fragmentManager.beginTransaction().replace(R.id.container, fragment, tag).commit();
+//                        }
+//                    }
+//                });
             } else {
                 // update the main content by replacing fragments
                 FragmentManager fragmentManager = getSupportFragmentManager();
@@ -292,10 +294,10 @@ public class MainActivity extends BaseActivity
 
         if (AppConfig.GOOLE_AD_ENABLE) {
         } else if (AppConfig.DOMOD_AD_ENABLE) {
-            DomobAdView adview = new DomobAdView(this, AppConfig.DOMOD_PUBLISH_KEY, AppConfig.DOMOD_PLACEMENT_KEY);
-            RelativeLayout layout = (RelativeLayout) findViewById(R.id.ad_content);
-            layout.addView(adview, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
-                                                                      RelativeLayout.LayoutParams.WRAP_CONTENT));
+//            DomobAdView adview = new DomobAdView(this, AppConfig.DOMOD_PUBLISH_KEY, AppConfig.DOMOD_PLACEMENT_KEY);
+//            RelativeLayout layout = (RelativeLayout) findViewById(R.id.ad_content);
+//            layout.addView(adview, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
+//                                                                      RelativeLayout.LayoutParams.WRAP_CONTENT));
         } else if (AppConfig.YOUMI_AD_ENABLE) {
             AdView adView = new AdView(this, AdSize.FIT_SCREEN);
             RelativeLayout layout = (RelativeLayout) findViewById(R.id.ad_content);
@@ -342,7 +344,7 @@ public class MainActivity extends BaseActivity
 
                                      @Override
                                      public void onClick(DialogInterface dialog, int which) {
-                                         DMOfferWall.getInstance().showOfferWall();
+//                                         DMOfferWall.getInstance().showOfferWall();
                                      }
                                  })
                                  .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
