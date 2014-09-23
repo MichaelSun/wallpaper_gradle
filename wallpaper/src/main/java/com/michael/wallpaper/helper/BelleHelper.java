@@ -163,7 +163,8 @@ public class BelleHelper {
 
     private void getBaiduItems(int pageNum, int pageCount, String category, String title, String tag3) {
         try {
-            BaiduListRequest request = new BaiduListRequest(pageNum, pageCount, category, title, tag3);
+//            BaiduListRequest request = new BaiduListRequest(pageNum, pageCount, category, title, tag3);
+            BaiduListRequest request = new BaiduListRequest(pageNum, pageCount, category, title, 0, "channel", 1);
             BaiduListResponse response = InternetUtils.request(mContext, request);
             if (response != null) {
 
@@ -177,16 +178,17 @@ public class BelleHelper {
                 event.hasMore = response.totalNum > (response.start_index + response.return_number);
                 event.pageCount = response.return_number;
                 event.startIndex = response.start_index;
+                event.totalNum = response.totalNum;
                 event.contentType = Math.abs(title.hashCode());
                 event.type = GetBelleListEvent.TYPE_SERVER_RANDOM;
                 // update local database
                 LocalBelleDao dao = mSession.getLocalBelleDao();
                 // delete old
-//                dao.queryBuilder().where(LocalBelleDao.Properties.Type.eq(2000)).buildDelete().forCurrentThread().executeDeleteWithoutDetachingEntities();
-                if (pageNum == 0) {
-                    dao.queryBuilder().where(LocalBelleDao.Properties.Type.eq(Math.abs(title.hashCode())))
-                        .buildDelete().forCurrentThread().executeDeleteWithoutDetachingEntities();
-                }
+                dao.queryBuilder().where(LocalBelleDao.Properties.Type.eq(2000)).buildDelete().forCurrentThread().executeDeleteWithoutDetachingEntities();
+//                if (pageNum == 0) {
+//                    dao.queryBuilder().where(LocalBelleDao.Properties.Type.eq(Math.abs(title.hashCode())))
+//                        .buildDelete().forCurrentThread().executeDeleteWithoutDetachingEntities();
+//                }
 
                 // insert new
                 if (event.belles != null) {
@@ -212,7 +214,6 @@ public class BelleHelper {
                 EventBus.getDefault().post(event);
             } else {
                 EventBus.getDefault().post(new ServerErrorEvent());
-//                Log.d("BellWallpaper", "data response = null");
             }
         } catch (NetWorkException e) {
             e.printStackTrace();

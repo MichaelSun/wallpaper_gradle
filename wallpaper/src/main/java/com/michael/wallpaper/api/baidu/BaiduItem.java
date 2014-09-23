@@ -13,28 +13,28 @@ public class BaiduItem {
     @JsonProperty("desc")
     public String desc;
 
-    @JsonProperty("image_url")
+    @JsonProperty("imageUrl")
     public String image_url;
 
-    @JsonProperty("thumbnail_url")
+    @JsonProperty("thumbnailUrl")
     public String thumbnail_url;
 
-    @JsonProperty("thumb_large_url")
+    @JsonProperty("thumbLargeUrl")
     public String thumb_large_url;
 
     @JsonProperty("isAdapted")
     public int isAdapted;
 
-    @JsonProperty("image_width")
+    @JsonProperty("imageWidth")
     public int image_width;
 
-    @JsonProperty("image_height")
+    @JsonProperty("imageHeight")
     public int image_height;
 
-    @JsonProperty("thumb_large_width")
+    @JsonProperty("thumbLargeWidth")
     public int thumb_large_width;
 
-    @JsonProperty("thumb_large_height")
+    @JsonProperty("thumbLargeHeight")
     public int thumb_large_height;
 
     @Override

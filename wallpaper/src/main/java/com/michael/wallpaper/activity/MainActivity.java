@@ -38,13 +38,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-//import com.michael.wallpaper.R;
-
-//import cn.dm.android.DMOfferWall;
-//import cn.dm.android.data.listener.CheckPointListener;
-//import cn.dm.android.model.ErrorInfo;
-//import cn.dm.android.model.Point;
-
 public class MainActivity extends BaseActivity
     implements NavigationDrawerFragment.NavigationDrawerCallbacks,
                    SlideFragment.OnFragmentInteractionListener,
@@ -87,7 +80,7 @@ public class MainActivity extends BaseActivity
         mTitle = getTitle();
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
 
-        if (AppConfig.SERVER_BANNER) {
+        if (AppConfig.SERVER_BANNER_CONTROL) {
             String data = MobclickAgent.getConfigParams(this.getApplicationContext(), "show_banner");
             if (!TextUtils.isEmpty(data) && data.equals("true")) {
                 AppRuntime.SHOW_BANNER = true;
@@ -95,8 +88,6 @@ public class MainActivity extends BaseActivity
                 AppRuntime.SHOW_BANNER = false;
             }
         }
-
-//        DMOfferWall.getInstance().init(this, AppConfig.DOMOD_PUBLISH_ID, "1005661");
 
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setMessage("玩命加载中~~~");
@@ -106,7 +97,7 @@ public class MainActivity extends BaseActivity
     public void onResume() {
         super.onResume();
 
-        if (AppConfig.SERVER_BANNER) {
+        if (AppConfig.SERVER_BANNER_CONTROL) {
             String data = MobclickAgent.getConfigParams(this.getApplicationContext(), "show_banner");
             if (!TextUtils.isEmpty(data) && data.equals("true")) {
                 AppRuntime.SHOW_BANNER = true;
@@ -123,7 +114,6 @@ public class MainActivity extends BaseActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        OffersManager.getInstance(getApplicationContext()).onAppExit();
     }
 
     @Override
@@ -142,11 +132,11 @@ public class MainActivity extends BaseActivity
         if (mSeries.getType() == -3) {
         } else if (mSeries.getType() == -2) {
             if (Setting.getInstace().getMode() != AppConfig.SERIES_MODE) {
-                Toaster.show(getApplicationContext(), "已经开启");
+                Toaster.show(this, "已经开启");
                 return;
             }
             Setting.getInstace().setMode(1);
-            Toaster.show(getApplicationContext(), "开启隐藏成功，请退出应用重新进入");
+            Toaster.show(this, "开启隐藏成功，请退出应用重新进入");
         } else {
             if (AppRuntime.APP_WALL_TYPE_LIST.contains(mSeries.getType())) {
                 if (mProgressDialog.isShowing()) {
@@ -262,7 +252,7 @@ public class MainActivity extends BaseActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (!mNavigationDrawerFragment.isDrawerOpen()) {
+        if (mNavigationDrawerFragment != null && !mNavigationDrawerFragment.isDrawerOpen()) {
             getMenuInflater().inflate(R.menu.main, menu);
             MenuItem item = menu.findItem(R.id.action_refresh);
             if (mSeries != null && mSeries.getType() < 0) {
@@ -292,18 +282,10 @@ public class MainActivity extends BaseActivity
             return;
         }
 
-        if (AppConfig.GOOLE_AD_ENABLE) {
-        } else if (AppConfig.DOMOD_AD_ENABLE) {
-//            DomobAdView adview = new DomobAdView(this, AppConfig.DOMOD_PUBLISH_KEY, AppConfig.DOMOD_PLACEMENT_KEY);
-//            RelativeLayout layout = (RelativeLayout) findViewById(R.id.ad_content);
-//            layout.addView(adview, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
-//                                                                      RelativeLayout.LayoutParams.WRAP_CONTENT));
-        } else if (AppConfig.YOUMI_AD_ENABLE) {
-            AdView adView = new AdView(this, AdSize.FIT_SCREEN);
-            RelativeLayout layout = (RelativeLayout) findViewById(R.id.ad_content);
-            layout.addView(adView, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
-                                                                      RelativeLayout.LayoutParams.WRAP_CONTENT));
-        }
+        AdView adView = new AdView(this, AdSize.FIT_SCREEN);
+        RelativeLayout layout = (RelativeLayout) findViewById(R.id.ad_content);
+        layout.addView(adView, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
+                                                                  RelativeLayout.LayoutParams.WRAP_CONTENT));
 
         mAdViewShow = true;
     }

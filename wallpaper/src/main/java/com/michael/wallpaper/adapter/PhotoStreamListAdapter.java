@@ -30,14 +30,13 @@ public class PhotoStreamListAdapter extends BaseAdapter {
 
     public PhotoStreamListAdapter(Context context, List<Belle> belles) {
         mContext = context;
-
         mBelles.addAll(belles);
     }
 
     public void notifyDataChanged(List<Belle> belles) {
         synchronized (this) {
+            mBelles.clear();
             mBelles.addAll(belles);
-
             notifyDataSetChanged();
         }
     }

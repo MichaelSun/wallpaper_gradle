@@ -14,22 +14,22 @@ import java.util.List;
  */
 public class BaiduListResponse extends ResponseBase {
 
-    @JsonProperty("tag1")
+    @JsonProperty("col")
     public String category;
 
-    @JsonProperty("tag2")
+    @JsonProperty("tag")
     public String title;
 
     @JsonProperty("totalNum")
     public int totalNum;
 
-    @JsonProperty("start_index")
+    @JsonProperty("startIndex")
     public int start_index;
 
-    @JsonProperty("return_number")
+    @JsonProperty("returnNumber")
     public int return_number;
 
-    @JsonProperty("data")
+    @JsonProperty("imgs")
     public List<BaiduItem> baiduItems;
 
     @Override

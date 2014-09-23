@@ -162,24 +162,34 @@ public class ContentListFragment extends Fragment implements OnRefreshListener {
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                if ((totalItemCount - 5) < 0) return;
+                if (totalItemCount == 0) {
+                    return;
+                }
 
-                if (firstVisibleItem >= (totalItemCount - 5)) {
-                    if (mGetBelleListEvent != null && mGetBelleListEvent.hasMore) {
-                        if (!mLoadingMore) {
-                            synchronized (this) {
-                                mPageStartIndex = mPageStartIndex + PAGE_COUNT;
-                                mBelleHelper.randomGetBelleListFromServer(mSeries.getType(), mPageStartIndex, PAGE_COUNT,
-                                                                             mSeries.getCategory(), mSeries.getTitle(), mSeries.getTag3());
-                                mLoadingMore = true;
-                            }
-                        }
-
-                        Toaster.show(getActivity(), getActivity().getString(R.string.loading_more));
-                    } else {
-                        Toaster.show(getActivity(), getActivity().getString(R.string.no_more));
+                if ((firstVisibleItem + visibleItemCount) >= (totalItemCount - 2)) {
+                    if (getActivity() != null) {
+                        Toaster.show(getActivity(), "已经到底啦，刷新换换内容吧~~，双击通知栏回到顶部哦~~");
                     }
                 }
+
+//                if ((totalItemCount - 5) < 0) return;
+//
+//                if (firstVisibleItem >= (totalItemCount - 5)) {
+//                    if (mGetBelleListEvent != null && mGetBelleListEvent.hasMore) {
+//                        if (!mLoadingMore) {
+//                            synchronized (this) {
+//                                mPageStartIndex = mPageStartIndex + PAGE_COUNT;
+//                                mBelleHelper.randomGetBelleListFromServer(mSeries.getType(), mPageStartIndex, PAGE_COUNT,
+//                                                                             mSeries.getCategory(), mSeries.getTitle(), mSeries.getTag3());
+//                                mLoadingMore = true;
+//                            }
+//                        }
+//
+//                        Toaster.show(getActivity(), getActivity().getString(R.string.loading_more));
+//                    } else {
+//                        Toaster.show(getActivity(), getActivity().getString(R.string.no_more));
+//                    }
+//                }
             }
         });
 
@@ -239,7 +249,16 @@ public class ContentListFragment extends Fragment implements OnRefreshListener {
     @Override
     public void onRefreshStarted(View view) {
         if (mGetBelleListEvent != null && mGetBelleListEvent.hasMore) {
-            mPageStartIndex = mPageStartIndex + PAGE_COUNT;
+//            mPageStartIndex = mPageStartIndex + PAGE_COUNT;
+            if (mGetBelleListEvent.totalNum > PAGE_COUNT) {
+//                int pageTotalNum = mGetBelleListEvent.totalNum / PAGE_COUNT;
+//                int startPage = new Random(pageTotalNum).nextInt();
+//                mPageStartIndex = startPage * PAGE_COUNT;
+                mPageStartIndex = mPageStartIndex + PAGE_COUNT;
+            } else {
+                mPageStartIndex = 0;
+            }
+
         } else {
             mPageStartIndex = 0;
         }
@@ -295,11 +314,12 @@ public class ContentListFragment extends Fragment implements OnRefreshListener {
         mLoadingMore = false;
         mGetBelleListEvent = event;
         if (event.type == GetBelleListEvent.TYPE_SERVER_RANDOM) {
-            if (event.startIndex == 0) {
-                mBelles.clear();
-            }
+//            if (event.startIndex == 0) {
+//                mBelles.clear();
+//            }
 
             if (event.belles != null) {
+                mBelles.clear();
                 mBelles.addAll(event.belles);
             }
             if (mPhotoStreamListAdapter == null || event.startIndex == 0) {
@@ -312,6 +332,7 @@ public class ContentListFragment extends Fragment implements OnRefreshListener {
             } else {
                 mPhotoStreamListAdapter.notifyDataChanged(event.belles);
             }
+            mListView.setSelection(0);
             mPullToRefreshLayout.setRefreshComplete();
 
             Setting.getInstace().setLastRefreshTime(System.currentTimeMillis());
@@ -334,6 +355,7 @@ public class ContentListFragment extends Fragment implements OnRefreshListener {
                     ((MainActivity) getActivity()).onRefresh();
                 }
             }
+            mListView.setSelection(0);
         }
     }
 

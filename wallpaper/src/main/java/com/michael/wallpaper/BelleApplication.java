@@ -123,10 +123,10 @@ public class BelleApplication extends Application {
             if (intent == null) return;
 
             if (InternetUtils.ACTION_INTERNET_ERROR.equals(intent.getAction())) {
-                Toaster.show(context, R.string.api_server_error);
+                Toaster.showNative(context, R.string.api_server_error);
             } else if (InternetUtils.ACTION_INTERNET_ERROR_LOCAL.equals(intent.getAction())) {
                 String msg = intent.getStringExtra("msg");
-                Toaster.show(context, msg);
+                Toaster.showNative(context, msg);
             }
         }
     };

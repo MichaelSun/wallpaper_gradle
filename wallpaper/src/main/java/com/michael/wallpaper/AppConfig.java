@@ -7,18 +7,11 @@ public class AppConfig {
 
     public static final boolean DEBUG = false;
 
-    public static final boolean SERVER_BANNER = false;
+    public static final boolean SERVER_BANNER_CONTROL = false;
 
     public static int SERIES_MODE = 1000;
 
-    public static final boolean GOOLE_AD_ENABLE = false;
-
-    public static final boolean DOMOD_AD_ENABLE = false;
-    public static final boolean DOMOD_INSTER_ENABLE = false;
-
     public static final boolean YOUMI_AD_ENABLE = true;
-
-    public static final boolean WANDOUJIA_INSTER_ENABLE = false;
 
     public static final long MAX_IMAGE_MEMORY = ((long) 720) * 720 * 4 / 1024;
 
