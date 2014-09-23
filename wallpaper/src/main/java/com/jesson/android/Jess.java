@@ -9,7 +9,7 @@ import com.jesson.android.utils.Logger;
  */
 public class Jess {
 
-    public static boolean DEBUG = true;
+    public static boolean DEBUG = false;
 
     public static void init(Context context) {
         DeviceInfo.init(context);
