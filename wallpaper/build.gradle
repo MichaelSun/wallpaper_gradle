@@ -19,8 +19,8 @@ android {
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 19
-        versionCode 1041
-        versionName '4.1'
+        versionCode 1042
+        versionName '4.2'
         applicationId 'com.michael.gaoxiao'
     }
 

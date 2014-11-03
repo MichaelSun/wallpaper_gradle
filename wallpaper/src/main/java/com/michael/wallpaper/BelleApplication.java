@@ -21,7 +21,6 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import net.youmi.android.AdManager;
 
 import java.io.File;
 
@@ -57,7 +56,6 @@ public class BelleApplication extends Application {
         registerInternetError();
 
         AppRuntime.updateStat(getApplicationContext());
-        initYoumi();
         initWandoujia();
 
         Setting.getInstace().init(getApplicationContext());
@@ -71,10 +69,6 @@ public class BelleApplication extends Application {
 //            e.printStackTrace();
 //        }
 
-    }
-
-    private void initYoumi() {
-        AdManager.getInstance(this).init(AppConfig.YOUMI_APIKEY, AppConfig.YOUMI_SECRETKEY, false);
     }
 
     private String getMetaData(String key) {

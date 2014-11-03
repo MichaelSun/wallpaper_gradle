@@ -29,9 +29,11 @@ import com.michael.wallpaper.fragment_list.SlideFragment;
 import com.michael.wallpaper.helper.SeriesHelper;
 import com.michael.wallpaper.setting.Setting;
 import com.michael.wallpaper.utils.AppRuntime;
+import com.qq.e.ads.AdListener;
+import com.qq.e.ads.AdRequest;
+import com.qq.e.ads.AdSize;
+import com.qq.e.ads.AdView;
 import com.umeng.analytics.MobclickAgent;
-import net.youmi.android.banner.AdSize;
-import net.youmi.android.banner.AdView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -282,10 +284,39 @@ public class MainActivity extends BaseActivity
             return;
         }
 
-        AdView adView = new AdView(this, AdSize.FIT_SCREEN);
-        RelativeLayout layout = (RelativeLayout) findViewById(R.id.ad_content);
-        layout.addView(adView, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,
-                                                                  RelativeLayout.LayoutParams.WRAP_CONTENT));
+        RelativeLayout l = (RelativeLayout) findViewById(R.id.ad_content);
+        AdView adv = new AdView(this, AdSize.BANNER, "1103422641", "1000009055409201");
+        l.addView(adv);
+        AdRequest adr = new AdRequest();
+        adr.setRefresh(10);
+        adr.setShowCloseBtn(true);
+        adv.setAdListener(new AdListener() {
+            @Override
+            public void onNoAd() {
+
+            }
+
+            @Override
+            public void onAdReceiv() {
+
+            }
+
+            @Override
+            public void onAdExposure() {
+
+            }
+
+            @Override
+            public void onBannerClosed() {
+
+            }
+
+            @Override
+            public void onAdClicked() {
+
+            }
+        });
+        adv.fetchAd(adr);
 
         mAdViewShow = true;
     }
