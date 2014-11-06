@@ -289,7 +289,7 @@ public class MainActivity extends BaseActivity
         l.addView(adv);
         AdRequest adr = new AdRequest();
         adr.setRefresh(10);
-        adr.setShowCloseBtn(true);
+        adr.setShowCloseBtn(false);
         adv.setAdListener(new AdListener() {
             @Override
             public void onNoAd() {
